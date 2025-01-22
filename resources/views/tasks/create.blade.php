@@ -20,7 +20,7 @@
 
                     <div class="mb-6">
                         <div class="flex">
-                            <select id="chemical_id" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="chemical_id">
+                            <select id="project_id" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="project_id">
                                 <option value="0">プロジェクトを選択してください。</option>
                                 @foreach ($projects as $project)
                                 <option value="{{$project -> id}}"
