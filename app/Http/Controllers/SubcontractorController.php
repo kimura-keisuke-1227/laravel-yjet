@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSubcontractorRequest;
 use App\Http\Requests\UpdateSubcontractorRequest;
 use App\Models\Subcontractor;
+use App\Models\Work;
 
 use Illuminate\Support\Facades\Log;
 
@@ -59,8 +60,15 @@ class SubcontractorController extends Controller
     public function show(Subcontractor $subcontractor)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $works = Work::query()
+            ->where(Work::CLM_NAME_OF_OUT_SOURCE_ID,$subcontractor->id)
+            ->orderBy(Work::CLM_NAME_OF_WORK_DATE,'desc')
+            ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return view('subcontractor.show');
+        return view('subcontractor.show',[
+            'subcontractor' => $subcontractor,
+            'works' => $works
+        ]);
     }
 
     /**
