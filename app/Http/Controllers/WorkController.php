@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreWorkRequest;
 use App\Http\Requests\UpdateWorkRequest;
 use App\Models\Work;
+use App\Models\Task;
 
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -26,11 +27,23 @@ class WorkController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Task $task)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $work = new Work;
+        $work[Work::CLM_NAME_OF_TASK_ID] = $task->id;
+        $work[Work::CLM_NAME_OF_OUT_SOURCE_ID] = 0;
+        $work[Work::CLM_NAME_OF_WORK_DATE] = '2025-01-01';
+        $work[Work::CLM_NAME_OF_SCHEDULED_TIME] = 0;
+        $work[Work::CLM_NAME_OF_ACTUAL_TIME] = 0;
+        $work[Work::CLM_NAME_OF_CANCELED] = null;
+
+        $work->save();
+        $project = $task->project;
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return view('work.create');
+        return view('project.edit',[
+            'project' => $project
+        ]);
     }
 
     /**
