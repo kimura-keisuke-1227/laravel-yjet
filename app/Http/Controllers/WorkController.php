@@ -163,14 +163,15 @@ class WorkController extends Controller
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         $weekly = DB::table('works')
-            ->join('subcontractors', 'works.subcontractor_id', '=', 'subcontractors.id') // worksテーブルとsubcontractorsテーブルを結合
-            ->select(
-                'subcontractors.subcontractor_name as subcontractor_name', // subcontractorsテーブルのnameを取得
-                DB::raw('SUM(works.actual_time) as total_actual_time'), // actual_timeの合計
-                DB::raw('SUM(works.scheduled_time) as total_scheduled_time') // scheduled_timeの合計
-            )
-            ->whereBetween('works.date', [Carbon::now()->subDays(7)->toDateString(), Carbon::now()->toDateString()]) // 過去7日間のデータを取得
-            ->groupBy('subcontractor_name'); // subcontractors.nameでグループ化
+    ->join('subcontractors', 'works.subcontractor_id', '=', 'subcontractors.id')
+    ->select(
+        'subcontractors.id as subcontractor_id',
+        'subcontractors.subcontractor_name as subcontractor_name',
+        DB::raw('SUM(works.actual_time) as total_actual_time'),
+        DB::raw('SUM(works.scheduled_time) as total_scheduled_time')
+    )
+    ->whereBetween('works.date', [Carbon::now()->subDays(7)->toDateString(), Carbon::now()->toDateString()])
+    ->groupBy('subcontractors.id', 'subcontractors.subcontractor_name'); // idとnameでグループ化
         Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $weekly->toSql());
         $weekly = $weekly ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
