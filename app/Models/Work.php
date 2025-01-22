@@ -28,4 +28,8 @@ class Work extends Model
         self::CLM_NAME_OF_ACTUAL_TIME,
         self::CLM_NAME_OF_CANCELED,
     ];
+
+    public function project(){
+        return $this -> belongsTo('App\Models\Task');
+    }
 }
