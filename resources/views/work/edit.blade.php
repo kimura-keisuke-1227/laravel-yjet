@@ -4,7 +4,7 @@
 <section class="py-8">
     <div class="container px-4 mx-auto">
         <div class="py-4 bg-white rounded">
-            <form action="{{Route('work.store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{Route('work.update',['work' => $work])}}" method="post" enctype="multipart/form-data">
                 <h3>{{$work->task->project->project_name}}</h3>
                 <h4>{{$work->task->task_name}}</h4>
                 <hr>
