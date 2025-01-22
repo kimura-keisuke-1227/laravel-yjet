@@ -19,4 +19,8 @@ class Task extends Model
         self::CLM_NAME_OF_PROJECT_ID,
         self::CLM_NAME_OF_TASK_NAME,
     ];
+
+    public function project(){
+        return $this -> belongsTo('App\Models\Project');
+    }
 }
