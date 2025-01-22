@@ -19,7 +19,7 @@
                         </div>
                     @endif
                     <!-- ▲▲▲▲エラーメッセージ▲▲▲▲　-->
-                    
+
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title">プロジェクト名</label>
                         <input id="project_name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
@@ -50,7 +50,7 @@
         </div>
         <hr>
         <h2>[タスク]</h2>
-        <a href="{{Route('task.create',[ 'project' => $project ])}}">タスク追加</a>
+        <a href="{{ Route('task.create', ['project' => $project]) }}">タスク追加</a>
         <div class="container px-4 mx-auto">
             <div class="py-4 bg-white rounded">
                 <form action="{{ Route('work.update', ['project' => $project]) }}" method="POST"
@@ -70,8 +70,10 @@
                     <!-- ▲▲▲▲エラーメッセージ▲▲▲▲　-->
 
                     @foreach ($project->tasks as $task)
-                        <h3> < {{ $task->task_name }} ></h3>
-                        <p><a href="{{Route('work.create',[ 'task' => $task -> id])}}">作業追加</a></p>
+                        <h3>
+                            < {{ $task->task_name }}>
+                        </h3>
+                        <p><a href="{{ Route('work.create', ['task' => $task->id]) }}">作業追加</a></p>
                         <hr>
                         <table class='table table-striped'>
                             <tr>
@@ -82,38 +84,46 @@
                                 <th>実際時間(分)</th>
                                 <th>メモ</th>
                             </tr>
-                        @foreach ($task->works as $work)
-                            <tr>
-                                <td>{{ $work -> id}}</td>
-                                <td>
-                                    <select id="subcontractor" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="subcontractor_id_{{ $work->id }}">
-                                        <option value="0">
-                                            未選択
-                                        </option>
-                                        @foreach($subcontractors as $subcontractor)
-                                        <option value="{{$subcontractor -> id}}"
-                                            @if ($subcontractor -> id == $work->out_source_id)
-                                                selected
+                            @foreach ($task->works as $work)
+                                <tr>
+                                    <td>{{ $work->id }}</td>
+                                    <td>
+                                        <select id="subcontractor"
+                                            class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded"
+                                            name="subcontractor_id_{{ $work->id }}">
+                                            <option value="0">
+                                                未選択
+                                            </option>
+                                            @foreach ($subcontractors as $subcontractor)
+                                                <option value="{{ $subcontractor->id }}"
+                                                    @if ($subcontractor->id == $work->out_source_id) selected @endif>
+                                                    {{ $subcontractor->subcontractor_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td><input id="date"
+                                            class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
+                                            type="date" name="date_{{ $work->id }}" value="{{ $work->date }}">
+                                    </td>
+                                    <td><input id="actual_time"
+                                            class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
+                                            type="number" name="scheduled_time_{{ $work->id }}"
+                                            value="{{ $work->scheduled_time }}"></td>
+                                    <td><input id="actual_time"
+                                            class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
+                                            type="number" name="actual_time_{{ $work->id }}"
+                                            value="{{ $work->actual_time }}"></td>
+                                    <td>
+                                        <a href="{{ Route('work.edit', ['work' => $work]) }}">
+                                            @if (empty($work->remark))
+                                                [編集]
+                                            @else
+                                                {{ mb_substr($work->remark, 0, 20) }}
                                             @endif
-                                            >{{$subcontractor -> subcontractor_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                <td><input id="date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="date" name="date_{{ $work->id }}" value="{{$work->date}}"></td>
-                                <td><input id="actual_time" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="scheduled_time_{{ $work->id }}" value="{{$work->scheduled_time}}"></td>
-                                <td><input id="actual_time" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="actual_time_{{ $work->id }}" value="{{$work->actual_time}}"></td>
-                                <td>
-                                    <a href="">
-                                        @if ($work->remark =='')
-                                            [編集]
-                                        @else
-                                            {{$work->remark}}
-                                        @endif
-
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </table>
                     @endforeach
                     <br>
