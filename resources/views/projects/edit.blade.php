@@ -71,6 +71,7 @@
 
                     @foreach ($project->tasks as $task)
                         <h3> < {{ $task->task_name }} ></h3>
+                        <p><a href="{{Route('work.create',[ 'task' => $task -> id])}}">作業追加</a></p>
                     @endforeach
                     <br>
                     <div class="flex px-6 pb-4 border-b">

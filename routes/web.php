@@ -15,7 +15,7 @@ Route::resource('project', ProjectController::class);
 Route::resource('task', TaskController::class);
 Route::resource('subcontractor', SubcontractorController::class);
 Route::get('task/create/{project}',[TaskController::class,'createTaskForProject'])->name('task.create');
-
+Route::get('task_create/{task}',[WorkController::class,'create'])->name('work.create');
 
 Route::get('/weekly',[WorkController::class,'weekly'])
 ->name('/weekly');
