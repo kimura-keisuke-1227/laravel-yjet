@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId(Work::CLM_NAME_OF_TASK_ID);
             $table->foreignId(Work::CLM_NAME_OF_OUT_SOURCE_ID);
+            $table->foreignId(Work::CLM_NAME_OF_ORDER_BY);
             $table->date(Work::CLM_NAME_OF_WORK_DATE);
             $table->integer(Work::CLM_NAME_OF_SCHEDULED_TIME);
             $table->integer(Work::CLM_NAME_OF_ACTUAL_TIME)->nullable();
