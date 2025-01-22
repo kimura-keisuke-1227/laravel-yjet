@@ -4,7 +4,9 @@
     <section class="py-8">
         <div class="container px-4 mx-auto">
             <div class="py-4 bg-white rounded">
-                <form action="{{ Route('project.update') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ Route('project.update',[ 'project' => $project]) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
                     <!-- ▼▼▼▼エラーメッセージ▼▼▼▼　-->
                     @if ($errors->any())
                         <div class="mb-8 py-4 px-6 border border-red-300 bg-red-50 rounded">
@@ -16,7 +18,7 @@
                         </div>
                     @endif
                     <!-- ▲▲▲▲エラーメッセージ▲▲▲▲　-->
-                    @csrf
+
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title">プロジェクト名</label>
                         <input id="project_name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"

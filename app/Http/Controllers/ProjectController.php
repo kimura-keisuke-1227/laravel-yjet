@@ -80,9 +80,7 @@ class ProjectController extends Controller
         $project ->update($validated);
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return view('projects.edit',[
-            'project' => $project
-        ]);
+        return redirect(Route('project.index'));
     }
 
     /**
