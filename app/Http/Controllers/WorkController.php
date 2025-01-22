@@ -84,7 +84,7 @@ class WorkController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateWorkRequest $request, Project $project)
+    public function update($request, Project $project)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         Log::debug(__METHOD__ . '(' . __LINE__ . ')' . "request");
@@ -108,7 +108,14 @@ class WorkController extends Controller
         }
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('project.edit',[ 'project' => $project -> id]));return redirect(Route('project.edit',[ 'project' => $project -> id]));
+        return redirect(Route('project.edit',[ 'project' => $project -> id]));
+    }
+
+    public function singleUpdate(UpdateWorkRequest $request, Work $work){
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return redirect(Route('project.edit',[ 'project' => $work->task->project -> id]));
+
     }
 
     /**
