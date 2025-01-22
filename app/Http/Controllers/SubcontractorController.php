@@ -31,7 +31,9 @@ class SubcontractorController extends Controller
      */
     public function create()
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('subcontractor.create');
     }
 
     /**
