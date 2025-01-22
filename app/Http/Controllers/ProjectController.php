@@ -6,6 +6,8 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 
+use Illuminate\Support\Facades\Log;
+
 class ProjectController extends Controller
 {
     /**
@@ -21,7 +23,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('projects.create');
     }
 
     /**
