@@ -4,7 +4,7 @@
 <section class="py-8">
     <div class="container px-4 mx-auto">
         <div class="py-4 bg-white rounded">
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="{{Route("user.store")}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="flex px-6 pb-4 border-b">
                     <h3 class="text-xl font-bold">ユーザ登録</h3>
@@ -46,18 +46,6 @@
                         <input id="password_confirmation" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="password" name="password_confirmation">
                     </div>
 
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium mb-2" for="image">画像</label>
-                        <div class="flex items-end">
-                            <img id="previewImage" src="/images/admin/noimage.jpg" data-noimage="/images/admin/noimage.jpg" alt="" class="rounded-full shadow-md w-32">
-                            <input id="image" class="block w-full px-4 py-3 mb-2" type="file" accept='image/*' name="image">
-                        </div>
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium mb-2" for="introduction">自己紹介文</label>
-                        <textarea id="introduction" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" name="introduction" rows="2">{{ old('introduction') }}</textarea>
-                    </div>
                 </div>
             </form>
         </div>

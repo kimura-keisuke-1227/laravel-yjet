@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -11,7 +14,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $users = User::query()
+            ->get();
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('admin.users.index',[
+            'users' => $users
+        ]);
     }
 
     /**
@@ -19,16 +28,35 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('admin.users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+    // Validate the incoming request data
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        // 'password' => 'required|string|min:8|confirmed', // Use 'password_confirmation' for confirmation
+    ]);
+
+    // // Add the hashed password to the validated data
+    // $validatedData['password'] = bcrypt($validatedData['password']);
+
+    // Create the user
+    User::create($validatedData);
+
+    Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+
+    return redirect()->route('user.index');
+}
 
     /**
      * Display the specified resource.
