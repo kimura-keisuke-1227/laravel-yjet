@@ -33,14 +33,15 @@ class TaskController extends Controller
         ]);
     }
 
-    public function createTaskForProject(Project $seproject)
+    public function createTaskForProject(Project $project)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         $projects = Project::query()
             ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('tasks.create',[
-            'projects' => $projects
+            'projects' => $projects,
+            'parentProject' => $project
         ]);
     }
 

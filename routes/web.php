@@ -12,7 +12,7 @@ Route::get('/', function () {
 Route::resource('work', WorkController::class);
 Route::resource('project', ProjectController::class);
 Route::resource('task', TaskController::class);
-Route::get('create/{project_id}',[WorkController::class,'createTaskForProject']);
+Route::get('task/create/{project}',[TaskController::class,'createTaskForProject']);
 
 
 Route::get('/weekly',[WorkController::class,'weekly'])

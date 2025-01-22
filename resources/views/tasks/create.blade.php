@@ -23,7 +23,11 @@
                             <select id="chemical_id" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="chemical_id">
                                 <option value="0">プロジェクトを選択してください。</option>
                                 @foreach ($projects as $project)
-                                <option value="{{$project -> id}}">
+                                <option value="{{$project -> id}}"
+                                    @if ($parentProject->id == $project -> id)
+                                        selected
+                                    @endif
+                                    >
                                     {{$project->project_name}}
                                 </option>
                                 @endforeach
