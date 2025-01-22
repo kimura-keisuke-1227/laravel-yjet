@@ -11,7 +11,7 @@ class UpdateWorkRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class UpdateWorkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'task_id' => '',
+            'date' => '',
+            'scheduled_time' => '',
+            'actual_time' => '',
+            'canceled_at' => '',
+            'out_source_id' => '',
+
         ];
     }
 }

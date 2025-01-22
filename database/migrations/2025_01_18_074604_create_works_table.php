@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date(Work::CLM_NAME_OF_WORK_DATE);
             $table->integer(Work::CLM_NAME_OF_SCHEDULED_TIME);
             $table->integer(Work::CLM_NAME_OF_ACTUAL_TIME)->nullable();
+            $table->text(Work::CLM_NAME_OF_REMARK)->nullable();
             $table->timestamp(Work::CLM_NAME_OF_CANCELED)->nullable();
             $table->timestamps();
         });

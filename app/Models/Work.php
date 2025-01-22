@@ -14,11 +14,12 @@ class Work extends Model
 
     const CLM_NAME_OF_ID = 'id';
     const CLM_NAME_OF_TASK_ID = 'task_id';
-    const CLM_NAME_OF_OUT_SOURCE_ID = 'out_source_id';
+    const CLM_NAME_OF_OUT_SOURCE_ID = 'subcontractor_id';
     const CLM_NAME_OF_WORK_DATE = 'date';
     const CLM_NAME_OF_SCHEDULED_TIME = 'scheduled_time';
     const CLM_NAME_OF_ACTUAL_TIME = 'actual_time';
     const CLM_NAME_OF_CANCELED = 'canceled_at';
+    const CLM_NAME_OF_REMARK = 'remark';
 
     protected $fillable = [
         self::CLM_NAME_OF_TASK_ID,
@@ -27,6 +28,7 @@ class Work extends Model
         self::CLM_NAME_OF_SCHEDULED_TIME,
         self::CLM_NAME_OF_ACTUAL_TIME,
         self::CLM_NAME_OF_CANCELED,
+        self::CLM_NAME_OF_REMARK,
     ];
 
     public function project(){

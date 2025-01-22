@@ -19,7 +19,7 @@
                         </div>
                     @endif
                     <!-- ▲▲▲▲エラーメッセージ▲▲▲▲　-->
-
+                    
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title">プロジェクト名</label>
                         <input id="project_name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
@@ -53,10 +53,10 @@
         <a href="{{Route('task.create',[ 'project' => $project ])}}">タスク追加</a>
         <div class="container px-4 mx-auto">
             <div class="py-4 bg-white rounded">
-                <form action="{{ Route('project.update', ['project' => $project]) }}" method="POST"
+                <form action="{{ Route('work.update', ['project' => $project]) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
+                    @method('POST')
                     <!-- ▼▼▼▼エラーメッセージ▼▼▼▼　-->
                     @if ($errors->any())
                         <div class="mb-8 py-4 px-6 border border-red-300 bg-red-50 rounded">
@@ -80,13 +80,13 @@
                                 <th>日付</th>
                                 <th>予定時間(分)</th>
                                 <th>実際時間(分)</th>
-                                <th></th>
+                                <th>メモ</th>
                             </tr>
                         @foreach ($task->works as $work)
                             <tr>
                                 <td>{{ $work -> id}}</td>
                                 <td>
-                                    <select id="subcontractor" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="subcontractor_id">
+                                    <select id="subcontractor" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="subcontractor_id_{{ $work->id }}">
                                         <option value="0">
                                             未選択
                                         </option>
@@ -99,10 +99,19 @@
                                         @endforeach
                                     </select>
                                 </td>
-                                <td><input id="date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="date" name="date" value="{{$work->date}}"></td>
-                                <td><input id="actual_time" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="actual_time" value="{{$work->scheduled_time}}"></td>
-                                <td><input id="actual_time" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="actual_time" value="{{$work->actual_time}}"></td>
+                                <td><input id="date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="date" name="date_{{ $work->id }}" value="{{$work->date}}"></td>
+                                <td><input id="actual_time" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="scheduled_time_{{ $work->id }}" value="{{$work->scheduled_time}}"></td>
+                                <td><input id="actual_time" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="actual_time_{{ $work->id }}" value="{{$work->actual_time}}"></td>
+                                <td>
+                                    <a href="">
+                                        @if ($work->remark =='')
+                                            [編集]
+                                        @else
+                                            {{$work->remark}}
+                                        @endif
 
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                         </table>

@@ -12,10 +12,14 @@ Route::get('/', function () {
 
 Route::resource('work', WorkController::class);
 Route::resource('project', ProjectController::class);
+
 Route::resource('task', TaskController::class);
 Route::resource('subcontractor', SubcontractorController::class);
 Route::get('task/create/{project}',[TaskController::class,'createTaskForProject'])->name('task.create');
 Route::get('task_create/{task}',[WorkController::class,'create'])->name('work.create');
+
+
+Route::post('project/workUpdate/{project}', [WorkController::class,'update'])->name('work.update');
 
 Route::get('/weekly',[WorkController::class,'weekly'])
 ->name('/weekly');

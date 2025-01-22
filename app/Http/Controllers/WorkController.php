@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreWorkRequest;
 use App\Http\Requests\UpdateWorkRequest;
+use App\Models\Project;
 use App\Models\Work;
 use App\Models\Task;
 
@@ -75,9 +76,31 @@ class WorkController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateWorkRequest $request, Work $work)
+    public function update(UpdateWorkRequest $request, Project $project)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')' . "request");
+        Log::debug($request);
+
+        $clm_list_of_work = [
+            Work::CLM_NAME_OF_OUT_SOURCE_ID,
+            Work::CLM_NAME_OF_WORK_DATE,
+            Work::CLM_NAME_OF_SCHEDULED_TIME,
+            Work::CLM_NAME_OF_ACTUAL_TIME,
+        ];
+
+        foreach($project->tasks as $task){
+            foreach($task->works as $work){
+                foreach($clm_list_of_work as $clm){
+                    Log::debug(__METHOD__ . '(' . __LINE__ . ') work(' . $work['id'] . ')' . $clm  .'=> ' . $request[$clm.'_'.$work->id]);
+                    $work[$clm] = $request[$clm.'_'.$work->id];
+                }
+                $work->save();
+            }
+        }
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return redirect(Route('project.edit',[ 'project' => $project -> id]));return redirect(Route('project.edit',[ 'project' => $project -> id]));
     }
 
     /**
