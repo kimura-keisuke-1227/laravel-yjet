@@ -12,7 +12,7 @@
                 <tr>
                     <td>{{ $data -> subcontractor_name }}</td>
                     <td>{{ $data -> total_scheduled_time}}</td>
-                    <td>{{ $data -> total_scheduled_time}}</td>
+                    <td>{{ $data -> total_actual_time}}</td>
                 </tr>
             @endforeach
         </table>

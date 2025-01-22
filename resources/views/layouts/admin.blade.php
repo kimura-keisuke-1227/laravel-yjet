@@ -91,7 +91,7 @@
                         </li>
                         <li>
                             <a class="flex items-center pl-3 py-3 pr-4 text-gray-50 hover:bg-gray-900 rounded"
-                                href="/admin/contacts">
+                                href="{{Route('weekly')}}">
                                 <span class="inline-block mr-3">
                                     <svg class="text-gray-600 w-5 h-5" viewbox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -100,7 +100,7 @@
                                             fill="currentColor"></path>
                                     </svg>
                                 </span>
-                                <span>お問い合わせ管理</span>
+                                <span>週次集計</span>
                             </a>
                         </li>
                         <li>
