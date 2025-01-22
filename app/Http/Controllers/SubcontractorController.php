@@ -41,7 +41,12 @@ class SubcontractorController extends Controller
      */
     public function store(StoreSubcontractorRequest $request)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+        $validated = $request->validated();
+        Subcontractor::create($validated);
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return redirect('subcontractor.create');
     }
 
     /**

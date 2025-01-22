@@ -4,7 +4,7 @@
     <section class="py-8">
         <div class="container px-4 mx-auto">
             <div class="py-4 bg-white rounded">
-                <form action="{{ Route('task.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ Route('subcontractor.store') }}" method="post" enctype="multipart/form-data">
                     <!-- ▼▼▼▼エラーメッセージ▼▼▼▼　-->
                     @if ($errors->any())
                         <div class="mb-8 py-4 px-6 border border-red-300 bg-red-50 rounded">
