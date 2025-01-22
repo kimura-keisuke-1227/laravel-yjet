@@ -19,7 +19,7 @@ Route::get('task/create/{project}',[TaskController::class,'createTaskForProject'
 Route::get('task_create/{task}',[WorkController::class,'create'])->name('work.create');
 
 
-Route::put('project/multipleWorkUpdate/{project}', [WorkController::class,'multipleUpdate'])->name('work.update');
+Route::put('project/multipleWorkUpdate/{project}', [WorkController::class,'multipleUpdate'])->name('work.multipleUpdate');
 
 Route::get('/weekly',[WorkController::class,'weekly'])
 ->name('/weekly');
