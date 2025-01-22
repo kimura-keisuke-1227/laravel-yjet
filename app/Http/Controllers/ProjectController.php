@@ -33,7 +33,13 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+        $validated = $request->validated();
+        Project::create($validated);
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return redirect(Route('project.create'));
     }
 
     /**
