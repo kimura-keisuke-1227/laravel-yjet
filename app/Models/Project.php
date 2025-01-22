@@ -23,6 +23,7 @@ class Project extends Model
         self::CLM_NAME_OF_START_DATE,
         self::CLM_NAME_OF_END_DATE,
         self::CLM_NAME_OF_PROJECT_NAME,
+        self::CLM_NAME_OF_USER_ID,
     ];
 
     public function tasks()
