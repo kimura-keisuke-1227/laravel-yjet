@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
+use App\Models\Project;
+
+use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
@@ -21,7 +24,13 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $projects = Project::query()
+            ->get();
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('tasks.create',[
+            'projects' => $projects
+        ]);
     }
 
     /**
