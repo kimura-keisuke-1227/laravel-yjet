@@ -9,7 +9,7 @@ use App\Models\Project;
 use App\Models\Work;
 use App\Models\Task;
 use App\Models\Subcontractor;
-
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -97,10 +97,13 @@ class WorkController extends Controller
         $work->update($validated);
         $subcontractors = Subcontractor::query()
             ->get();
+        $users = User::query()
+            ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('projects.edit', [
             'project' => $work->task->project,
-            'subcontractors' => $subcontractors
+            'subcontractors' => $subcontractors,
+            'users' => $users
         ]);
     }
 
@@ -139,8 +142,13 @@ class WorkController extends Controller
     public function singleUpdate(UpdateWorkRequest $request, Work $work)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $users = User::query()
+            ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('project.edit', ['project' => $work->task->project->id]));
+        return redirect(Route('project.edit', [
+            'project' => $work->task->project->id,
+            'users' => $users
+        ]));
     }
 
     /**
