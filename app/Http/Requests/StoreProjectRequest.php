@@ -25,8 +25,8 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             Project::CLM_NAME_OF_PROJECT_NAME => "required",
-            Project::CLM_NAME_OF_START_DATE => "required",
-            Project::CLM_NAME_OF_END_DATE => "required:date",
+            Project::CLM_NAME_OF_START_DATE => "required::date",
+            Project::CLM_NAME_OF_END_DATE => "",
         ];
     }
 }
