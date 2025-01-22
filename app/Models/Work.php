@@ -31,7 +31,7 @@ class Work extends Model
         self::CLM_NAME_OF_REMARK,
     ];
 
-    public function project(){
+    public function task(){
         return $this -> belongsTo('App\Models\Task');
     }
 }
