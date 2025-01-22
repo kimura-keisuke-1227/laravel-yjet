@@ -22,7 +22,15 @@
                         <input id="project_name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
                             type="text" name="project_name">
                     </div>
-
+                    <label class="block text-sm font-medium mb-2" for="title">担当者</label>
+                    <select id="user_id" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="user_id">
+                        <option value="0">未選択</option>
+                        @foreach ($users as $user)
+                        <option value="{{$user -> id}}">
+                            {{$user->name}}
+                        </option>
+                        @endforeach
+                    </select>
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title"> 開始日</label>
                         <input id="start_date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"

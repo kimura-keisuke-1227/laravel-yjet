@@ -14,7 +14,7 @@ class Work extends Model
 
     const CLM_NAME_OF_ID = 'id';
     const CLM_NAME_OF_TASK_ID = 'task_id';
-    const CLM_NAME_OF_ORDER_BY = 'order_by';
+    const CLM_NAME_OF_ORDER_BY = 'user_id';
     const CLM_NAME_OF_OUT_SOURCE_ID = 'subcontractor_id';
     const CLM_NAME_OF_WORK_DATE = 'date';
     const CLM_NAME_OF_SCHEDULED_TIME = 'scheduled_time';

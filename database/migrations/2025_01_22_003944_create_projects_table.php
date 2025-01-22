@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create(Project::TABLE_NAME_OF_PROJECTS, function (Blueprint $table) {
             $table->id();
             $table->string(Project::CLM_NAME_OF_PROJECT_NAME);
+            $table->foreignId(Project::CLM_NAME_OF_USER_ID);
             $table->date(Project::CLM_NAME_OF_START_DATE);
             $table->date(Project::CLM_NAME_OF_END_DATE)->nullable();
             $table->timestamps();

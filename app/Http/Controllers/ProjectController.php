@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\USer;
 use App\Models\Subcontractor;
 
 use Illuminate\Support\Facades\Log;
@@ -31,8 +32,10 @@ class ProjectController extends Controller
     public function create()
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $users = User::query()
+            ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return view('projects.create');
+        return view('projects.create',['users' => $users]);
     }
 
     /**
