@@ -6,6 +6,8 @@ use App\Http\Requests\StoreSubcontractorRequest;
 use App\Http\Requests\UpdateSubcontractorRequest;
 use App\Models\Subcontractor;
 
+use Illuminate\Support\Facades\Log;
+
 class SubcontractorController extends Controller
 {
     /**
@@ -14,6 +16,14 @@ class SubcontractorController extends Controller
     public function index()
     {
         //
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $subcontractor = Subcontractor::query()
+            ->get();
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('subcontractor.index',[
+            'subcontractor' => $subcontractor
+        ]);
     }
 
     /**
