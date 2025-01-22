@@ -73,7 +73,16 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+        $validated = $request -> validated();
+        $project ->update($validated);
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('projects.edit',[
+            'project' => $project
+        ]);
     }
 
     /**
