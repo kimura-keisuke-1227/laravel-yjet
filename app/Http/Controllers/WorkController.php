@@ -84,6 +84,21 @@ class WorkController extends Controller
     /**
      * Update the specified resource in storage.
      */
+     public function update(UpdateWorkRequest $request, Work $work)
+     {
+
+         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+         $validated = $request -> validated();
+         $work ->update($validated);
+
+         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+         return view('projects.edit',[
+            'project' => $work->task->project
+        ]);
+     }
+
+
     public function multipleUpdate(Request $request, Project $project)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
