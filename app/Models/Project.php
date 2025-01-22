@@ -23,4 +23,9 @@ class Project extends Model
         self::CLM_NAME_OF_END_DATE,
         self::CLM_NAME_OF_PROJECT_NAME,
     ];
+
+    public function tasks()
+    {
+        return $this->hasMany('App\Models\Tasks');
+    }
 }
