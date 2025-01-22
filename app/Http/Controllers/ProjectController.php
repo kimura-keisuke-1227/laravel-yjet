@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
-use App\Models\USer;
+use App\Models\User;
 use App\Models\Subcontractor;
 
 use Illuminate\Support\Facades\Log;
@@ -66,12 +66,15 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $users = User::query()
+            ->get();
         $subcontractors = Subcontractor::query()
             ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('projects.edit',[
             'project' => $project,
-            'subcontractors' => $subcontractors
+            'subcontractors' => $subcontractors,
+            'users' => $users
         ]);
     }
 

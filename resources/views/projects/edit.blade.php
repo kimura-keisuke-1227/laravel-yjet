@@ -21,9 +21,23 @@
                     <!-- ▲▲▲▲エラーメッセージ▲▲▲▲　-->
 
                     <div class="mb-6">
-                        <label class="block text-sm font-medium mb-2" for="title">プロジェクト名</label>
+                        <label class="block text-sm font-medium mb-2" for="project_name">プロジェクト名</label>
                         <input id="project_name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
                             type="text" name="project_name" value="{{ $project->project_name }}">
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2" for="user_id">担当者</label>
+                        <select id="user_id" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="user_id">
+                            <option value="0">未選択</option>
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}"
+                                    @if ($user->id == $project->user_id)
+                                        selected
+                                    @endif
+                                >{{ $user->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="mb-6">
@@ -83,6 +97,7 @@
         <table class='table table-striped'>
             <tr>
                 <th>ID</th>
+                <th>発注者</th>
                 <th>作業者</th>
                 <th>日付</th>
                 <th>予定時間(分)</th>
@@ -93,11 +108,23 @@
                 <tr>
                     <td>{{ $work->id }}</td>
                     <td>
-                        <select id="subcontractor" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="subcontractor_id_{{ $work->id }}">
+                        <select id="user_id_{{ $work->id }}" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="user_id_{{ $work->id }}">
+                            <option value="0">未選択</option>
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}"
+                                    @if ($user->id == $work->user_id)
+                                        selected
+                                    @endif
+                                >{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <select id="subcontractor_id_{{ $work->id }}" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="subcontractor_id_{{ $work->id }}">
                             <option value="0">未選択</option>
                             @foreach($subcontractors as $subcontractor)
                                 <option value="{{ $subcontractor->id }}"
-                                    @if ($subcontractor->id == $work->out_source_id)
+                                    @if ($subcontractor->id == $work->subcontractor_id)
                                         selected
                                     @endif
                                 >{{ $subcontractor->subcontractor_name }}</option>

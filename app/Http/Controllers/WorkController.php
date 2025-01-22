@@ -35,9 +35,9 @@ class WorkController extends Controller
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         $work = new Work();
         $work[Work::CLM_NAME_OF_TASK_ID] = $task->id;
-        $work[Work::CLM_NAME_OF_ORDER_BY] = $task->id;
+        $work[Work::CLM_NAME_OF_USER_ID] = $task->project->user_id;
         $work[Work::CLM_NAME_OF_OUT_SOURCE_ID] = 0;
-        $work[Work::CLM_NAME_OF_WORK_DATE] = '2025-01-01';
+        $work[Work::CLM_NAME_OF_WORK_DATE] = date('Y-m-d');
         $work[Work::CLM_NAME_OF_SCHEDULED_TIME] = 0;
         $work[Work::CLM_NAME_OF_ACTUAL_TIME] = 0;
         $work[Work::CLM_NAME_OF_CANCELED] = null;
@@ -113,6 +113,7 @@ class WorkController extends Controller
 
         $clm_list_of_work = [
             Work::CLM_NAME_OF_OUT_SOURCE_ID,
+            Work::CLM_NAME_OF_USER_ID,
             Work::CLM_NAME_OF_WORK_DATE,
             Work::CLM_NAME_OF_SCHEDULED_TIME,
             Work::CLM_NAME_OF_ACTUAL_TIME,
@@ -121,9 +122,12 @@ class WorkController extends Controller
         foreach ($project->tasks as $task) {
             foreach ($task->works as $work) {
                 foreach ($clm_list_of_work as $clm) {
-                    Log::debug(__METHOD__ . '(' . __LINE__ . ') work(' . $work['id'] . ')' . $clm  . '=> ' . $request[$clm . '_' . $work->id]);
-                    $work[$clm] = $request[$clm . '_' . $work->id];
+                    $set_val = $request[$clm . '_' . $work->id];
+                    Log::debug(__METHOD__ . '(' . __LINE__ . ') work(' . $work['id'] . ')' . $clm  . '=> ' . $set_val);
+                    Log::debug($request[$clm . '_' . $work->id]);
+                    $work[$clm] = $set_val;
                 }
+                Log::debug($work);
                 $work->save();
             }
         }
