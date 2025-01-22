@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreWorkRequest;
 use App\Http\Requests\UpdateWorkRequest;
 use App\Models\Project;
@@ -84,7 +84,7 @@ class WorkController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update($request, Project $project)
+    public function multipleUpdate(Request $request, Project $project)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         Log::debug(__METHOD__ . '(' . __LINE__ . ')' . "request");

@@ -56,7 +56,7 @@
                 <form action="{{ Route('work.update', ['project' => $project]) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
-                    @method('POST')
+                    @method('PUT')
                     <!-- ▼▼▼▼エラーメッセージ▼▼▼▼　-->
                     @if ($errors->any())
                         <div class="mb-8 py-4 px-6 border border-red-300 bg-red-50 rounded">
