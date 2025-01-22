@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreWorkRequest;
 use App\Http\Requests\UpdateWorkRequest;
@@ -43,7 +44,7 @@ class WorkController extends Controller
         $work->save();
         $project = $task->project;
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('project.edit',[ 'project' => $project -> id]));
+        return redirect(Route('project.edit', ['project' => $project->id]));
     }
 
     /**
@@ -75,7 +76,7 @@ class WorkController extends Controller
         $subcontractors = Subcontractor::query()
             ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return view('work.edit',[
+        return view('work.edit', [
             'work' => $work,
             'subcontractors' => $subcontractors
         ]);
@@ -84,19 +85,21 @@ class WorkController extends Controller
     /**
      * Update the specified resource in storage.
      */
-     public function update(UpdateWorkRequest $request, Work $work)
-     {
+    public function update(UpdateWorkRequest $request, Work $work)
+    {
 
-         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
-         $validated = $request -> validated();
-         $work ->update($validated);
-
-         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-         return view('projects.edit',[
-            'project' => $work->task->project
+        $validated = $request->validated();
+        $work->update($validated);
+        $subcontractors = Subcontractor::query()
+            ->get();
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('projects.edit', [
+            'project' => $work->task->project,
+            'subcontractors' => $subcontractors
         ]);
-     }
+    }
 
 
     public function multipleUpdate(Request $request, Project $project)
@@ -112,25 +115,25 @@ class WorkController extends Controller
             Work::CLM_NAME_OF_ACTUAL_TIME,
         ];
 
-        foreach($project->tasks as $task){
-            foreach($task->works as $work){
-                foreach($clm_list_of_work as $clm){
-                    Log::debug(__METHOD__ . '(' . __LINE__ . ') work(' . $work['id'] . ')' . $clm  .'=> ' . $request[$clm.'_'.$work->id]);
-                    $work[$clm] = $request[$clm.'_'.$work->id];
+        foreach ($project->tasks as $task) {
+            foreach ($task->works as $work) {
+                foreach ($clm_list_of_work as $clm) {
+                    Log::debug(__METHOD__ . '(' . __LINE__ . ') work(' . $work['id'] . ')' . $clm  . '=> ' . $request[$clm . '_' . $work->id]);
+                    $work[$clm] = $request[$clm . '_' . $work->id];
                 }
                 $work->save();
             }
         }
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('project.edit',[ 'project' => $project -> id]));
+        return redirect(Route('project.edit', ['project' => $project->id]));
     }
 
-    public function singleUpdate(UpdateWorkRequest $request, Work $work){
+    public function singleUpdate(UpdateWorkRequest $request, Work $work)
+    {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('project.edit',[ 'project' => $work->task->project -> id]));
-
+        return redirect(Route('project.edit', ['project' => $work->task->project->id]));
     }
 
     /**
@@ -145,14 +148,16 @@ class WorkController extends Controller
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         $weekly = DB::table('works')
-        ->select('out_source_id',
-                 DB::raw('SUM(actual_time) as total_actual_time'),
-                 DB::raw('SUM(scheduled_time) as total_scheduled_time'))
-        ->whereBetween('date', [Carbon::now()->subDays(7)->toDateString(), Carbon::now()->toDateString()])
-        ->groupBy('out_source_id')
-        ->get();
+            ->select(
+                'out_source_id',
+                DB::raw('SUM(actual_time) as total_actual_time'),
+                DB::raw('SUM(scheduled_time) as total_scheduled_time')
+            )
+            ->whereBetween('date', [Carbon::now()->subDays(7)->toDateString(), Carbon::now()->toDateString()])
+            ->groupBy('out_source_id')
+            ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return view('work.weekly',[
+        return view('work.weekly', [
             'weekly' => $weekly,
         ]);
     }

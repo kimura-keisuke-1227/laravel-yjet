@@ -28,7 +28,7 @@ class UpdateWorkRequest extends FormRequest
             'actual_time' => '',
             'canceled_at' => '',
             'out_source_id' => '',
-
+            'remark' => ''
         ];
     }
 }

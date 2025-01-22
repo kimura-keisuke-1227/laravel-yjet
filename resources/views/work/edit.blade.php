@@ -9,6 +9,7 @@
                 <h4>{{$work->task->task_name}}</h4>
                 <hr>
                 @csrf
+                @method('PUT')
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="category">担当者</label>
                         <div class="flex">
