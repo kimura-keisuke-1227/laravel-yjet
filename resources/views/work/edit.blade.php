@@ -37,11 +37,15 @@
 
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title">予定時間(分)</label>
-                        <input id="scheduled_time" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="scheduled_time" value="7value="{{$work->actual_time}}">
+                        <input id="scheduled_time" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="scheduled_time" value="{{$work->scheduled_time}}">
                     </div>
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title">実績時間(分)</label>
                         <input id="actual_time" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="actual_time" value="{{$work->actual_time}}">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2" for="title">メモ</label>
+                        <textarea  rea id="remark" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" name="remark" rows=10>{{$work->remark}}</textarea>
                     </div>
 
                     <div class="flex px-6 pb-4 border-b">
