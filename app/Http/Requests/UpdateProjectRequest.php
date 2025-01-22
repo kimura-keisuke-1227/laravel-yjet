@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use App\Models\Project as Project;
+
 class UpdateProjectRequest extends FormRequest
 {
     /**
@@ -11,7 +13,7 @@ class UpdateProjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,9 @@ class UpdateProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            Project::CLM_NAME_OF_PROJECT_NAME => "required",
+            Project::CLM_NAME_OF_START_DATE => "required::date",
+            Project::CLM_NAME_OF_END_DATE => "",
         ];
     }
 }
