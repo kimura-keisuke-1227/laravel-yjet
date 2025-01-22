@@ -45,8 +45,12 @@ class SubcontractorController extends Controller
 
         $validated = $request->validated();
         Subcontractor::create($validated);
+        $subcontractors = Subcontractor::query()
+            ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect('subcontractor.create');
+        return view('subcontractor.index',[
+            'subcontractors' => $subcontractors
+        ]);
     }
 
     /**

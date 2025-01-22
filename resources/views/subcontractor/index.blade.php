@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-
+        <a href="{{Route('subcontractor.create')}}">外注先登録</a>
         <table class='table table-striped'>
             <tr>
                 <th>ID</th>

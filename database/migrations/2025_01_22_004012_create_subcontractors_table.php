@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string(Subcontractor::CLM_NAME_OF_SUBCONTRACTOR_CODE);
             $table->string(Subcontractor::CLM_NAME_OF_SUBCONTRACTOR_NAME);
             $table->string(Subcontractor::CLM_NAME_OF_SUBCONTRACTOR_ABBREVIATION)->nullable();
-            $table->boolean(Subcontractor::CLM_NAME_OF_IS_ACTIVE);
+            $table->boolean(Subcontractor::CLM_NAME_OF_IS_ACTIVE)->default(True);
             $table->timestamps();
         });
     }
