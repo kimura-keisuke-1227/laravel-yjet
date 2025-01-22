@@ -70,7 +70,11 @@ class WorkController extends Controller
      */
     public function edit(Work $work)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('work.edit',[
+            'work' => $work
+        ]);
     }
 
     /**
