@@ -16,9 +16,9 @@
                 <tr>
                     <td>{{ $subcontractor -> id}}</td>
                     <td>{{ $subcontractor -> subcontractor_name }}</td>
-                    {{--
-                        <td><td><a href="{{Route('project.edit',[ 'project' => $project -> id])}}">詳細・修正</a></td></td>
-                    --}}
+
+                        <td><td><a href="{{Route('subcontractor.edit',[ 'subcontractor' => $subcontractor])}}">詳細・修正</a></td></td>
+
                 </tr>
             @endforeach
         </table>
