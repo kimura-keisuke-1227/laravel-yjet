@@ -5,6 +5,9 @@
     <div class="container px-4 mx-auto">
         <div class="py-4 bg-white rounded">
             <form action="{{Route('work.store')}}" method="post" enctype="multipart/form-data">
+                <h3>{{$work->task->project->project_name}}</h3>
+                <h4>{{$work->task->task_name}}</h4>
+                <hr>
                 @csrf
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="category">担当者</label>
