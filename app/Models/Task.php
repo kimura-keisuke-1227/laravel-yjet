@@ -9,4 +9,14 @@ class Task extends Model
 {
     /** @use HasFactory<\Database\Factories\TaskFactory> */
     use HasFactory;
+
+    const TABLE_NAME_OF_TASKS = 'tasks';
+
+    const CLM_NAME_OF_PROJECT_ID = 'project_id';
+    const CLM_NAME_OF_TASK_NAME = 'task_name';
+
+    protected $fillable = [
+        self::CLM_NAME_OF_PROJECT_ID,
+        self::CLM_NAME_OF_TASK_NAME,
+    ];
 }

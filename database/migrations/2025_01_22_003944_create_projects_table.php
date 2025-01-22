@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Models\Project as Project;
+
 return new class extends Migration
 {
     /**
@@ -11,8 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create(Project::TABLE_NAME_OF_PROJECTS, function (Blueprint $table) {
             $table->id();
+            $table->string(Project::CLM_NAME_OF_PROJECT_NAME);
+            $table->date(Project::CLM_NAME_OF_START_DATE);
+            $table->date(Project::CLM_NAME_OF_END_DATE);
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists(Project::TABLE_NAME_OF_PROJECTS);
     }
 };

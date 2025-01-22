@@ -9,4 +9,18 @@ class Project extends Model
 {
     /** @use HasFactory<\Database\Factories\ProjectFactory> */
     use HasFactory;
+
+    const TABLE_NAME_OF_PROJECTS = 'projects';
+
+    const CLM_NAME_OF_ID = 'id';
+    const CLM_NAME_OF_START_DATE = 'start_date';
+    const CLM_NAME_OF_END_DATE = 'end_date';
+    const CLM_NAME_OF_PROJECT_NAME = 'project_name';
+
+
+    protected $fillable = [
+        self::CLM_NAME_OF_START_DATE,
+        self::CLM_NAME_OF_END_DATE,
+        self::CLM_NAME_OF_PROJECT_NAME,
+    ];
 }
