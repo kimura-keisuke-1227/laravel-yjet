@@ -61,7 +61,11 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('projects.edit',[
+            'project' => $project
+        ]);
     }
 
     /**
