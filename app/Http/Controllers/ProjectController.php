@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\Subcontractor;
 
 use Illuminate\Support\Facades\Log;
+use PHPUnit\Runner\DeprecationCollector\Subscriber;
 
 class ProjectController extends Controller
 {
@@ -62,9 +64,12 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $subcontractors = Subcontractor::query()
+            ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('projects.edit',[
-            'project' => $project
+            'project' => $project,
+            'subcontractors' => $subcontractors
         ]);
     }
 

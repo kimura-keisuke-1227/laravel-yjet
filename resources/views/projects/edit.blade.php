@@ -72,6 +72,40 @@
                     @foreach ($project->tasks as $task)
                         <h3> < {{ $task->task_name }} ></h3>
                         <p><a href="{{Route('work.create',[ 'task' => $task -> id])}}">作業追加</a></p>
+                        <hr>
+                        <table class='table table-striped'>
+                            <tr>
+                                <th>ID</th>
+                                <th>作業者</th>
+                                <th>日付</th>
+                                <th>予定時間(分)</th>
+                                <th>実際時間(分)</th>
+                                <th></th>
+                            </tr>
+                        @foreach ($task->works as $work)
+                            <tr>
+                                <td>{{ $work -> id}}</td>
+                                <td>
+                                    <select id="subcontractor" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="subcontractor_id">
+                                        <option value="0">
+                                            未選択
+                                        </option>
+                                        @foreach($subcontractors as $subcontractor)
+                                        <option value="{{$subcontractor -> id}}"
+                                            @if ($subcontractor -> id == $work->out_source_id)
+                                                selected
+                                            @endif
+                                            >{{$subcontractor -> subcontractor_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td><input id="date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="date" name="date" value="{{$work->date}}"></td>
+                                <td><input id="actual_time" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="actual_time" value="{{$work->scheduled_time}}"></td>
+                                <td><input id="actual_time" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="actual_time" value="{{$work->actual_time}}"></td>
+
+                            </tr>
+                        @endforeach
+                        </table>
                     @endforeach
                     <br>
                     <div class="flex px-6 pb-4 border-b">
