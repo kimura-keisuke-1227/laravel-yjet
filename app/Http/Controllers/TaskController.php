@@ -22,7 +22,18 @@ class TaskController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Project $seproject)
+    {
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $projects = Project::query()
+            ->get();
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('tasks.create',[
+            'projects' => $projects
+        ]);
+    }
+
+    public function createTaskForProject(Project $seproject)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         $projects = Project::query()
