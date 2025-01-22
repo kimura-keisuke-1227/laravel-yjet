@@ -58,7 +58,9 @@ class SubcontractorController extends Controller
      */
     public function show(Subcontractor $subcontractor)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('subcontractor.show');
     }
 
     /**
