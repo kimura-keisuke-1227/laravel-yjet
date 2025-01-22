@@ -41,9 +41,7 @@ class WorkController extends Controller
         $work->save();
         $project = $task->project;
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return view('project.edit',[
-            'project' => $project
-        ]);
+        return redirect(Route('project.edit',[ 'project' => $project -> id]));
     }
 
     /**
