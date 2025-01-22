@@ -10,7 +10,7 @@
             </tr>
             @foreach ($weekly as $data)
                 <tr>
-                    <td>{{ $data -> out_source_id }}</td>
+                    <td>{{ $data -> subcontractor_name }}</td>
                     <td>{{ $data -> total_scheduled_time}}</td>
                     <td>{{ $data -> total_scheduled_time}}</td>
                 </tr>
