@@ -53,7 +53,7 @@
         <a href="{{Route('task.create',[ 'project' => $project ])}}">タスク追加</a>
         <div class="container px-4 mx-auto">
             <div class="py-4 bg-white rounded">
-                <form action="{{ Route('work.update', ['project' => $project]) }}" method="POST"
+                <form action="{{ Route('work.multipleUpdate', ['project' => $project]) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
