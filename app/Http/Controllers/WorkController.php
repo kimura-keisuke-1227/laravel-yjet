@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateWorkRequest;
 use App\Models\Project;
 use App\Models\Work;
 use App\Models\Task;
+use App\Models\Subcontractor;
 
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -71,9 +72,12 @@ class WorkController extends Controller
     public function edit(Work $work)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $subcontractors = Subcontractor::query()
+            ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('work.edit',[
-            'work' => $work
+            'work' => $work,
+            'subcontractors' => $subcontractors
         ]);
     }
 
