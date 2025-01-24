@@ -128,7 +128,7 @@
                                     @if ($subcontractor->id == $work->subcontractor_id)
                                         selected
                                     @endif
-                                >{{ $subcontractor->subcontractor_name }}</option>
+                                >{{ $subcontractor->subcontractor_code . '_'  . $subcontractor->subcontractor_name }}</option>
                             @endforeach
                         </select>
                     </td>
