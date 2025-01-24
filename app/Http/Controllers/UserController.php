@@ -69,17 +69,28 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('admin.users.edit',[
+            'user' => $user
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $user['name'] = $request['name'];
+        $user['email'] = $request['email'];
+        $user->save();
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('admin.users.edit',[
+            'user' => $user
+        ]);
     }
 
     /**
