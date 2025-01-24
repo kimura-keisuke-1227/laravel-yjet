@@ -25,6 +25,6 @@ class Task extends Model
     }
 
     public function works(){
-        return $this -> hasMany('App\Models\Work')->orderBy('date', 'desc');
+        return $this -> hasMany('App\Models\Work')->orderBy('date', 'desc')->orderBy('created_at', 'desc');
     }
 }
