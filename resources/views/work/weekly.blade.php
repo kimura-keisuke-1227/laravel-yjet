@@ -1,6 +1,16 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
+    <table class='table table-striped'>
+        <tr>
+            <td>
+                <input id="date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="date" name="date" ></td>
+            </td>
+            <td>
+                <input id="scheduled_time" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="scheduled_time" value="">
+            </td>
+        </tr>
+    </table>
 
         <table class='table table-striped'>
             <tr>
