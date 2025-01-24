@@ -103,6 +103,7 @@
                 <th>予定時間(分)</th>
                 <th>実際時間(分)</th>
                 <th>メモ</th>
+                <th></th>
             </tr>
             @foreach ($task->works as $work)
                 <tr>
@@ -137,12 +138,13 @@
                     <td>
                         <a href="{{ Route('work.edit', ['work' => $work]) }}">
                             @if ($work->remark == '')
-                                [編集]
+                            [編集]
                             @else
-                                {{ $work->remark }}
+                            {{ $work->remark }}
                             @endif
                         </a>
                     </td>
+                    <td><a href="{{Route('work.copy',['work' => $work->id])}}">コピー</a></td>
                 </tr>
             @endforeach
         </table>

@@ -19,8 +19,8 @@ Route::resource('user', UserController::class);
 
 
 Route::get('task/create/{project}',[TaskController::class,'createTaskForProject'])->name('task.create');
-Route::get('task_create/{task}',[WorkController::class,'create'])->name('work.create');
-
+Route::get('work_create/{task}',[WorkController::class,'create'])->name('work.create');
+Route::get('work_copy/{work}',[WorkController::class,'copy_work'])->name('work.copy');
 
 Route::put('project/multipleWorkUpdate/{project}', [WorkController::class,'multipleUpdate'])->name('work.multipleUpdate');
 

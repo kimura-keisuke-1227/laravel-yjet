@@ -179,4 +179,23 @@ class WorkController extends Controller
             'weekly' => $weekly,
         ]);
     }
+
+    public function copy_work(Work $work)
+    {
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $new_work = new Work();
+        $task = $work->task;
+        $new_work[Work::CLM_NAME_OF_TASK_ID] = $task->id;
+        $new_work[Work::CLM_NAME_OF_USER_ID] = $task->project->user_id;
+        $new_work[Work::CLM_NAME_OF_OUT_SOURCE_ID] = $work->subcontractor_id;
+        $new_work[Work::CLM_NAME_OF_WORK_DATE] = date('Y-m-d');
+        $new_work[Work::CLM_NAME_OF_SCHEDULED_TIME] = $work->scheduled_time;
+        $new_work[Work::CLM_NAME_OF_ACTUAL_TIME] = $work->actual_time;
+        $new_work[Work::CLM_NAME_OF_CANCELED] = null;
+
+        $new_work->save();
+        $project = $task->project;
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return redirect(Route('project.edit', ['project' => $project->id]));
+    }
 }
