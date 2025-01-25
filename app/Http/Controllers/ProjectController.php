@@ -69,6 +69,7 @@ class ProjectController extends Controller
         $users = User::query()
             ->get();
         $subcontractors = Subcontractor::query()
+            ->orderBy(Subcontractor::CLM_NAME_OF_SUBCONTRACTOR_CODE)
             ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('projects.edit',[
