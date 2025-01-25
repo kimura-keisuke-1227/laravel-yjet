@@ -6,6 +6,8 @@ use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use App\Models\Project;
+use App\Models\User;
+use App\Models\Subcontractor;
 
 use Illuminate\Support\Facades\Log;
 
@@ -53,9 +55,14 @@ class TaskController extends Controller
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
         $validated = $request->validated();
-        Task::create($validated);
+        $task = Task::create($validated);
+        $users = User::query()
+            ->get();
+        $subcontractors = Subcontractor::query()
+            ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('project.index'));
+        return redirect()->route('project.edit', ['project' => $task->project->id])
+        ->with('success', 'タスクを登録しました。');
     }
 
     /**

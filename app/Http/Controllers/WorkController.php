@@ -45,7 +45,7 @@ class WorkController extends Controller
         $work->save();
         $project = $task->project;
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('project.edit', ['project' => $project->id]));
+        return redirect(Route('project.edit', ['project' => $project->id]))-> with('success',$task->task_name.'　に作業データを追加しました。');
     }
 
     /**
@@ -57,7 +57,7 @@ class WorkController extends Controller
         $validated = $request->validated();
         Work::create($validated);
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('work.create'));
+        return redirect(Route('work.create'))-> with('success','作業データを登録しました。');
     }
 
     /**
@@ -98,11 +98,7 @@ class WorkController extends Controller
         $users = User::query()
             ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return view('projects.edit', [
-            'project' => $work->task->project,
-            'subcontractors' => $subcontractors,
-            'users' => $users
-        ]);
+        return redirect(Route('project.edit',['project' => $work->task->project]))-> with('success','作業データを更新しました。');
     }
 
 
@@ -134,7 +130,7 @@ class WorkController extends Controller
         }
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('project.edit', ['project' => $project->id]));
+        return redirect(Route('project.edit', ['project' => $project->id]))-> with('success','プロジェクト内の作業データを一括更新しました。');
     }
 
     public function singleUpdate(UpdateWorkRequest $request, Work $work)
@@ -235,6 +231,6 @@ class WorkController extends Controller
         $new_work->save();
         $project = $task->project;
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('project.edit', ['project' => $project->id]));
+        return redirect(Route('project.edit', ['project' => $project->id]))-> with('success','作業データを複製しました。');
     }
 }

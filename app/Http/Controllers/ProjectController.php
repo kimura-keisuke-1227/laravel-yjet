@@ -49,7 +49,7 @@ class ProjectController extends Controller
         Project::create($validated);
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('project.create'));
+        return redirect(Route('project.create'))-> with('success','プロジェクトを登録しました。');
     }
 
     /**
@@ -90,7 +90,7 @@ class ProjectController extends Controller
         $project ->update($validated);
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('project.index'));
+        return redirect(Route('project.index'))-> with('success','プロジェクトを更新しました。');
     }
 
     /**
