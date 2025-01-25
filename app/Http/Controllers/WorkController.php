@@ -162,18 +162,12 @@ class WorkController extends Controller
     public function weekly()
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
-        $weekly = DB::table('works')
-            ->join('subcontractors', 'works.subcontractor_id', '=', 'subcontractors.id')
-            ->select(
-                'subcontractors.id as subcontractor_id',
-                'subcontractors.subcontractor_name as subcontractor_name',
-                DB::raw('SUM(works.actual_time) as total_actual_time'),
-                DB::raw('SUM(works.scheduled_time) as total_scheduled_time')
-            )
-            ->whereBetween('works.date', [Carbon::now()->subDays(7)->toDateString(), Carbon::now()->toDateString()])
-            ->groupBy('subcontractors.id', 'subcontractors.subcontractor_name'); // idとnameでグループ化
-        Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $weekly->toSql());
-        $weekly = $weekly->get();
+
+        $start_date = Carbon::now()->subDays(7)->toDateString();
+        $end_date   = Carbon::now()->toDateString();
+
+        $weekly =  $weekly = self::get_weekly_data_by_sdate_edate($start_date, $end_date);
+
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
 
         return self::get_weekly_view($weekly,date("Y-m-d"),7);
@@ -192,6 +186,15 @@ class WorkController extends Controller
 
         Log::debug(__METHOD__ . '(' . __LINE__ . ') data between' . $start_date . "~" . $end_date);
 
+        $weekly = self::get_weekly_data_by_sdate_edate($start_date, $end_date);
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+
+        return self::get_weekly_view($weekly,$end_date,$days);
+    }
+
+    private function get_weekly_data_by_sdate_edate($start_date, $end_date){
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         $weekly = DB::table('works')
             ->join('subcontractors', 'works.subcontractor_id', '=', 'subcontractors.id')
             ->select(
@@ -203,12 +206,11 @@ class WorkController extends Controller
             ->whereBetween('works.date', [$start_date, $end_date]) // $start_date と $end_date を条件に使用
             ->groupBy('subcontractors.id', 'subcontractors.subcontractor_name'); // id と name でグループ化
 
-        Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $weekly->toSql());
-        $weekly = $weekly->get();
-        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $base_date . ' ' . $days . 'days');
+            Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $weekly->toSql());
+            $weekly = $weekly->get();
 
-        return self::get_weekly_view($weekly,$end_date,$days);
+            Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+            return $weekly;
     }
 
     private function get_weekly_view($weekly, $base_date, $days){
