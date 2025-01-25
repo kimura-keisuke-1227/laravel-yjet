@@ -177,8 +177,45 @@ class WorkController extends Controller
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('work.weekly', [
             'weekly' => $weekly,
+            'base_date' => date("Y-m-d"),
+            'days' => 7
         ]);
     }
+
+    public function weekly_with_base_date(Request $request)
+{
+    Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+    // リクエストから base_date と days を取得
+    $base_date = Carbon::parse($request['base_date']); // Carbon で日付をパース
+    $days = (int) $request['days_before'];
+
+    $start_date = $base_date->copy()->subDays($days - 1)->toDateString();
+    $end_date = $base_date->toDateString(); // $base_date を最終日とする
+
+    Log::debug(__METHOD__ . '(' . __LINE__ . ') data between' . $start_date . "~" .$end_date);
+
+    $weekly = DB::table('works')
+        ->join('subcontractors', 'works.subcontractor_id', '=', 'subcontractors.id')
+        ->select(
+            'subcontractors.id as subcontractor_id',
+            'subcontractors.subcontractor_name as subcontractor_name',
+            DB::raw('SUM(works.actual_time) as total_actual_time'),
+            DB::raw('SUM(works.scheduled_time) as total_scheduled_time')
+        )
+        ->whereBetween('works.date', [$start_date, $end_date]) // $start_date と $end_date を条件に使用
+        ->groupBy('subcontractors.id', 'subcontractors.subcontractor_name'); // id と name でグループ化
+
+    Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $weekly->toSql());
+    $weekly = $weekly->get();
+    Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+    Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $base_date .' '.$days.'days');
+    return view('work.weekly', [
+        'weekly' => $weekly,
+        'base_date' => $end_date,
+        'days' => $days,
+    ]);
+}
 
     public function copy_work(Work $work)
     {
