@@ -111,6 +111,7 @@
                                     <th>実際時間(分)</th>
                                     <th>メモ</th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                                 @foreach ($task->works as $work)
                                     <tr>
@@ -162,6 +163,13 @@
                                             </a>
                                         </td>
                                         <td><a href="{{ Route('work.copy', ['work' => $work->id]) }}">コピー</a></td>
+                                        <td>
+                                            <form action="{{ route('work.destroy', ['work' => $work->id]) }}" method="POST" onsubmit="return confirm('本当に削除しますか？');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">削除</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </table>

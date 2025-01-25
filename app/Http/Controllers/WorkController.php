@@ -150,7 +150,16 @@ class WorkController extends Controller
      */
     public function destroy(Work $work)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $project = $work->task->project;
+        $work->delete();
+        $users = User::query()
+            ->get();
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return redirect(Route('project.edit', [
+            'project' => $project->id,
+            'users' => $users
+        ]))-> with('success','作業データを削除しました。');
     }
 
     public function weekly()
