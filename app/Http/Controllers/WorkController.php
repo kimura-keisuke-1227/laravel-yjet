@@ -175,11 +175,8 @@ class WorkController extends Controller
         Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $weekly->toSql());
         $weekly = $weekly->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return view('work.weekly', [
-            'weekly' => $weekly,
-            'base_date' => date("Y-m-d"),
-            'days' => 7
-        ]);
+
+        return self::get_weekly_view($weekly,date("Y-m-d"),7);
     }
 
     public function weekly_with_base_date(Request $request)
@@ -210,9 +207,14 @@ class WorkController extends Controller
         $weekly = $weekly->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $base_date . ' ' . $days . 'days');
+
+        return self::get_weekly_view($weekly,$end_date,$days);
+    }
+
+    private function get_weekly_view($weekly, $base_date, $days){
         return view('work.weekly', [
             'weekly' => $weekly,
-            'base_date' => $end_date,
+            'base_date' => $base_date,
             'days' => $days,
         ]);
     }
