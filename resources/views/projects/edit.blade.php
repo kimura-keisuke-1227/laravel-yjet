@@ -29,14 +29,13 @@
 
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="user_id">担当者</label>
-                        <select id="user_id" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="user_id">
+                        <select id="user_id"
+                            class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded"
+                            name="user_id">
                             <option value="0">未選択</option>
-                            @foreach($users as $user)
-                                <option value="{{ $user->id }}"
-                                    @if ($user->id == $project->user_id)
-                                        selected
-                                    @endif
-                                >{{ $user->name }}</option>
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}" @if ($user->id == $project->user_id) selected @endif>
+                                    {{ $user->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -57,7 +56,7 @@
                     <div class="flex px-6 pb-4 border-b">
                         <div class="ml-auto">
                             <button type="submit"
-                                class="py-2 px-3 text-xs text-white font-semibold bg-indigo-500 rounded-md">保存</button>
+                                class="py-2 px-3 text-xs text-white font-semibold bg-indigo-500 rounded-md">プロジェクトデータ保存</button>
                         </div>
                     </div>
                 </form>
@@ -67,7 +66,7 @@
         <div class="container px-4 mx-auto">
             <h2>[タスク]</h2>
             <p>タスク名をクリックで詳細</p>
-            <a href="{{Route('task.create',[ 'project' => $project ])}}">タスク追加</a>
+            <a href="{{ Route('task.create', ['project' => $project]) }}">タスク追加</a>
         </div>
         <div class="container px-4 mx-auto">
             <div class="py-4 bg-white rounded">
@@ -86,97 +85,114 @@
                         </div>
                     @endif
                     <!-- ▲▲▲▲エラーメッセージ▲▲▲▲　-->
-
+                    <div class="flex px-6 pb-4 border-b">
+                        <div class="ml-auto">
+                            <button type="submit"
+                                class="py-2 px-3 text-xs text-white font-semibold bg-indigo-500 rounded-md">作業データ保存</button>
+                        </div>
+                    </div>
                     @foreach ($project->tasks as $task)
-    <!-- Accordion Header -->
-    <h3 class="accordion-header" style="cursor: pointer;"> < {{ $task->task_name }} ></h3>
+                        <!-- Accordion Header -->
+                        <h3 class="accordion-header" style="cursor: pointer;">
+                            < {{ $task->task_name }}>
+                        </h3>
 
-    <!-- Accordion Content (Initially Hidden) -->
-    <div class="accordion-content" style="display: none;">
-        <p><a href="{{ Route('work.create', ['task' => $task->id]) }}">作業追加</a></p>
-        <hr>
-        <table class='table table-striped'>
-            <tr>
-                <th>ID</th>
-                <th>発注者</th>
-                <th>作業者</th>
-                <th>日付</th>
-                <th>予定時間(分)</th>
-                <th>実際時間(分)</th>
-                <th>メモ</th>
-                <th></th>
-            </tr>
-            @foreach ($task->works as $work)
-                <tr>
-                    <td>{{ $work->id }}</td>
-                    <td>
-                        <select id="user_id_{{ $work->id }}" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="user_id_{{ $work->id }}">
-                            <option value="0">未選択</option>
-                            @foreach($users as $user)
-                                <option value="{{ $user->id }}"
-                                    @if ($user->id == $work->user_id)
-                                        selected
-                                    @endif
-                                >{{ $user->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <select id="subcontractor_id_{{ $work->id }}" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="subcontractor_id_{{ $work->id }}">
-                            <option value="0">未選択</option>
-                            @foreach($subcontractors as $subcontractor)
-                                <option value="{{ $subcontractor->id }}"
-                                    @if ($subcontractor->id == $work->subcontractor_id)
-                                        selected
-                                    @endif
-                                >{{ $subcontractor->subcontractor_code . '_'  . $subcontractor->subcontractor_name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td><input id="date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="date" name="date_{{ $work->id }}" value="{{ $work->date }}"></td>
-                    <td><input id="scheduled_time" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="scheduled_time_{{ $work->id }}" value="{{ $work->scheduled_time }}"></td>
-                    <td><input id="actual_time_{{ $work->id }}" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="actual_time_{{ $work->id }}" value="{{ $work->actual_time }}"></td>
-                    <td>
-                        <a href="{{ Route('work.edit', ['work' => $work]) }}">
-                            @if ($work->remark == '')
-                            [編集]
-                            @else
-                            {{ $work->remark }}
-                            @endif
-                        </a>
-                    </td>
-                    <td><a href="{{Route('work.copy',['work' => $work->id])}}">コピー</a></td>
-                </tr>
-            @endforeach
-        </table>
-    </div>
-@endforeach
+                        <!-- Accordion Content (Initially Hidden) -->
+                        <div class="accordion-content" style="display: none;">
+                            <p><a href="{{ Route('work.create', ['task' => $task->id]) }}">作業追加</a></p>
+                            <hr>
+                            <table class='table table-striped'>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>発注者</th>
+                                    <th>作業者</th>
+                                    <th>日付</th>
+                                    <th>予定時間(分)</th>
+                                    <th>実際時間(分)</th>
+                                    <th>メモ</th>
+                                    <th></th>
+                                </tr>
+                                @foreach ($task->works as $work)
+                                    <tr>
+                                        <td>{{ $work->id }}</td>
+                                        <td>
+                                            <select id="user_id_{{ $work->id }}"
+                                                class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded"
+                                                name="user_id_{{ $work->id }}">
+                                                <option value="0">未選択</option>
+                                                @foreach ($users as $user)
+                                                    <option value="{{ $user->id }}"
+                                                        @if ($user->id == $work->user_id) selected @endif>
+                                                        {{ $user->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select id="subcontractor_id_{{ $work->id }}"
+                                                class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded"
+                                                name="subcontractor_id_{{ $work->id }}">
+                                                <option value="0">未選択</option>
+                                                @foreach ($subcontractors as $subcontractor)
+                                                    <option value="{{ $subcontractor->id }}"
+                                                        @if ($subcontractor->id == $work->subcontractor_id) selected @endif>
+                                                        {{ $subcontractor->subcontractor_code . '_' . $subcontractor->subcontractor_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td><input id="date"
+                                                class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
+                                                type="date" name="date_{{ $work->id }}"
+                                                value="{{ $work->date }}"></td>
+                                        <td><input id="scheduled_time"
+                                                class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
+                                                type="number" name="scheduled_time_{{ $work->id }}"
+                                                value="{{ $work->scheduled_time }}"></td>
+                                        <td><input id="actual_time_{{ $work->id }}"
+                                                class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
+                                                type="number" name="actual_time_{{ $work->id }}"
+                                                value="{{ $work->actual_time }}"></td>
+                                        <td>
+                                            <a href="{{ Route('work.edit', ['work' => $work]) }}">
+                                                @if ($work->remark == '')
+                                                    [編集]
+                                                @else
+                                                    {{ $work->remark }}
+                                                @endif
+                                            </a>
+                                        </td>
+                                        <td><a href="{{ Route('work.copy', ['work' => $work->id]) }}">コピー</a></td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                    @endforeach
 
-<!-- Add JavaScript to handle the accordion behavior -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get all accordion headers
-        const headers = document.querySelectorAll('.accordion-header');
+                    <!-- Add JavaScript to handle the accordion behavior -->
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            // Get all accordion headers
+                            const headers = document.querySelectorAll('.accordion-header');
 
-        headers.forEach(header => {
-            header.addEventListener('click', function() {
-                // Toggle the visibility of the corresponding accordion content
-                const content = header.nextElementSibling;
-                if (content.style.display === 'none' || content.style.display === '') {
-                    content.style.display = 'block';
-                } else {
-                    content.style.display = 'none';
-                }
-            });
-        });
-    });
-</script>
+                            headers.forEach(header => {
+                                header.addEventListener('click', function() {
+                                    // Toggle the visibility of the corresponding accordion content
+                                    const content = header.nextElementSibling;
+                                    if (content.style.display === 'none' || content.style.display === '') {
+                                        content.style.display = 'block';
+                                    } else {
+                                        content.style.display = 'none';
+                                    }
+                                });
+                            });
+                        });
+                    </script>
 
                     <br>
                     <div class="flex px-6 pb-4 border-b">
                         <div class="ml-auto">
                             <button type="submit"
-                                class="py-2 px-3 text-xs text-white font-semibold bg-indigo-500 rounded-md">保存</button>
+                                class="py-2 px-3 text-xs text-white font-semibold bg-indigo-500 rounded-md">作業データ保存</button>
                         </div>
                     </div>
                 </form>
