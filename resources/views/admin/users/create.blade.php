@@ -2,6 +2,7 @@
 
 @section('content')
 <section class="py-8">
+    <h2>ユーザー登録</h2>
     <div class="container px-4 mx-auto">
         <div class="py-4 bg-white rounded">
             <form action="{{Route("user.store")}}" method="post" enctype="multipart/form-data">

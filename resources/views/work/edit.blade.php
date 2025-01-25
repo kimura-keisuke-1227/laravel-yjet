@@ -2,6 +2,7 @@
 
 @section('content')
 <section class="py-8">
+    <h2>作業編集</h2>
     <div class="container px-4 mx-auto">
         <div class="py-4 bg-white rounded">
             <form action="{{Route('work.update',['work' => $work])}}" method="post" enctype="multipart/form-data">

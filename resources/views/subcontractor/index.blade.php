@@ -3,6 +3,7 @@
 @section('title', 'プロジェクト')
 
 @section('content')
+<h2>外注先一覧</h2>
     <div class="container">
         <a href="{{Route('subcontractor.create')}}">外注先登録</a>
         <table class='table table-striped'>

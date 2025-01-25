@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+<h2>外注先登録</h2>
     <section class="py-8">
         <div class="container px-4 mx-auto">
             <div class="py-4 bg-white rounded">

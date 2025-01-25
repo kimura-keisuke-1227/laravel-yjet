@@ -3,6 +3,7 @@
 @section('title', 'プロジェクト')
 
 @section('content')
+    <h2>プロジェクト一覧</h2>
     <div class="container">
         <a href="{{Route('project.create')}}">プロジェクト作成</a>
         <table class='table table-striped'>

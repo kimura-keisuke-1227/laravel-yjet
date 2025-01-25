@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
+    <h2>週次集計</h2>
     <table class='table table-striped'>
     <form action="{{ Route('weekly.with_date')}}" method="POST"
     enctype="multipart/form-data">
