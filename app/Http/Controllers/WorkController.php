@@ -157,14 +157,14 @@ class WorkController extends Controller
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
-        $start_date = Carbon::now()->subDays(7)->toDateString();
+        $start_date = Carbon::now()->subDays(6)->toDateString();
         $end_date   = Carbon::now()->toDateString();
 
         $weekly =  $weekly = self::get_weekly_data_by_sdate_edate($start_date, $end_date);
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
 
-        return self::get_weekly_view($weekly,date("Y-m-d"),7);
+        return self::get_weekly_view($weekly,date("Y-m-d"),7,$start_date);
     }
 
     public function weekly_with_base_date(Request $request)
@@ -184,7 +184,7 @@ class WorkController extends Controller
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
 
-        return self::get_weekly_view($weekly,$end_date,$days);
+        return self::get_weekly_view($weekly,$end_date,$days,$start_date);
     }
 
     private function get_weekly_data_by_sdate_edate($start_date, $end_date){
@@ -207,11 +207,12 @@ class WorkController extends Controller
             return $weekly;
     }
 
-    private function get_weekly_view($weekly, $base_date, $days){
+    private function get_weekly_view($weekly, $base_date, $days,$start_date){
         return view('work.weekly', [
             'weekly' => $weekly,
             'base_date' => $base_date,
             'days' => $days,
+            'start_date' => $start_date
         ]);
     }
 

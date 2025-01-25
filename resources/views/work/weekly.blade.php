@@ -26,6 +26,7 @@
     </table>
         <br>
         <br>
+        <h3>{{$start_date}}から{{$base_date}}までの{{$days}}日間の集計</h3>
         <table class='table table-striped'>
             <tr>
                 <th>発注先</th>
