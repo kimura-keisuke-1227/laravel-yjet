@@ -42,8 +42,6 @@ class WorkController extends Controller
         $work[Work::CLM_NAME_OF_ACTUAL_TIME] = 0;
         $work[Work::CLM_NAME_OF_CANCELED] = null;
 
-
-
         $work->save();
         $project = $task->project;
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
