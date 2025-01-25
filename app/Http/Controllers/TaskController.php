@@ -79,7 +79,15 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $projects = Project::query()
+            ->get();
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('tasks.edit',[
+            'task' => $task,
+            'projects' => $projects,
+            'parentProject' => $task->project
+        ]);
     }
 
     /**
@@ -87,18 +95,22 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+        $validated = $request -> validated();
+        $task ->update($validated);
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return redirect()->route('project.edit', ['project' => $task->project->id])
+        ->with('success', 'タスクと配下の作業を削除しました。');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
-    {
-        //
-    }
 
-    public function delete(Task $task)
+
+    public function destroy(Task $task)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         $project = $task->project;

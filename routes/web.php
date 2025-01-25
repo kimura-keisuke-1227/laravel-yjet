@@ -19,7 +19,7 @@ Route::resource('user', UserController::class);
 
 
 Route::get('task/create/{project}',[TaskController::class,'createTaskForProject'])->name('task.create');
-Route::get('task/delete/{task}',[TaskController::class,'delete'])->name('task.delete');
+Route::delete('task/delete/{task}',[TaskController::class,'delete'])->name('task.delete');
 
 Route::get('work_create/{task}',[WorkController::class,'create'])->name('work.create');
 Route::get('work_copy/{work}',[WorkController::class,'copy_work'])->name('work.copy');
@@ -29,5 +29,5 @@ Route::put('project/multipleWorkUpdate/{project}', [WorkController::class,'multi
 Route::get('/weekly',[WorkController::class,'weekly'])->name('weekly');;
 Route::post('/weekly_with_base_date',[WorkController::class,'weekly_with_base_date'])->name('weekly.with_date');
 
-Route::get('/work/delete/{work}',[WorkController::class,'work_delete'])->name('work.delete');;
+Route::post('/work/delete/{work}',[WorkController::class,'work_delete'])->name('work.delete');;
 

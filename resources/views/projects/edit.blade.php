@@ -93,8 +93,14 @@
                     </div>
                     @foreach ($project->tasks as $task)
                         <!-- Accordion Header -->
-                        <h3 class="accordion-header" style="cursor: pointer;">
-                            < {{ $task->task_name }}><a href="{{Route("task.edit",['task' => $task->id])}}">[編集]</a> <a href="{{Route("task.delete",['task' => $task->id])}}">[削除]</a>
+                        <h3 class="accordion-header" style="cursor: pointer; display: flex; align-items: center;">
+                            <span>{{ $task->task_name }}</span>
+                            <a href="{{ Route('task.edit', ['task' => $task->id]) }}" style="margin-left: 10px;">[編集]</a>
+                            {{-- <form action="{{ route('task.destroy', ['task' => $task->id]) }}" method="POST" onsubmit="return confirm('本当に削除しますか？');" style="display: inline-block; margin-left: 10px;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">[削除]</button>
+                            </form> --}}
                         </h3>
 
                         <!-- Accordion Content (Initially Hidden) -->
