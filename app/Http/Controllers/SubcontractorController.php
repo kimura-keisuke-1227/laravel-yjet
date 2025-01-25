@@ -47,7 +47,7 @@ class SubcontractorController extends Controller
         $subcontractors = Subcontractor::query()
             ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('subcontractor.index'))-> with('success','外注先データを登録しました。');
+        return redirect(Route('subcontractor.index'))-> with('success','発注先データを登録しました。');
     }
 
     /**
@@ -90,7 +90,7 @@ class SubcontractorController extends Controller
         $subcontractor ->update($validated);
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('subcontractor.index'))-> with('success','外注先データを更新しました。');
+        return redirect(Route('subcontractor.index'))-> with('success','発注先データを更新しました。');
     }
 
     /**

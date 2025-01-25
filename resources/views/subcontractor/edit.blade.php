@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<h2>外注先編集</h2>
+<h2>発注先編集</h2>
     <section class="py-8">
         <div class="container px-4 mx-auto">
             <div class="py-4 bg-white rounded">
@@ -20,20 +20,20 @@
                     @csrf
                     @method('PUT')
                     <div class="mb-6">
-                        <label class="block text-sm font-medium mb-2" for="title">外注先名称</label>
+                        <label class="block text-sm font-medium mb-2" for="title">発注先名称</label>
                         <input id="subcontractor_name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
                             type="text" name="subcontractor_name" value="{{$subcontractor->subcontractor_name}}">
                     </div>
 
 
                     <div class="mb-6">
-                        <label class="block text-sm font-medium mb-2" for="title">外注先コード</label>
+                        <label class="block text-sm font-medium mb-2" for="title">発注先コード</label>
                         <input id="subcontractor_code" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
                             type="text" name="subcontractor_code" value="{{$subcontractor->subcontractor_code}}">
                     </div>
 
                     <div class="mb-6">
-                        <label class="block text-sm font-medium mb-2" for="title">外注先略称</label>
+                        <label class="block text-sm font-medium mb-2" for="title">発注先略称</label>
                         <input id="subcontractor_abbreviation" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
                             type="text" name="subcontractor_abbreviation" value="{{$subcontractor->subcontractor_abbreviation}}">
                     </div>

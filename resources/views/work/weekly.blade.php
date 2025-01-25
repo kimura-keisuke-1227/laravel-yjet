@@ -28,7 +28,7 @@
         <br>
         <table class='table table-striped'>
             <tr>
-                <th>外注先</th>
+                <th>発注先</th>
                 <th>予定時間</th>
                 <th>実際時間</th>
             </tr>
