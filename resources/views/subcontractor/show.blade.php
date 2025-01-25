@@ -55,6 +55,7 @@
                         <th>日付</th>
                         <th>予定時間</th>
                         <th>実時間</th>
+                        <th></th>
                     </tr>
                     @foreach ($works as $work)
                         <tr>
@@ -64,6 +65,7 @@
                             <td>{{ $work -> date  }}</td>
                             <td>{{ $work -> scheduled_time }}</td>
                             <td>{{ $work -> actual_time }}</td>
+                            <td> <a href="{{Route('work.edit',['work' => $work->id])}}">[データ修正]</a></td>
                         </tr>
                     @endforeach
                 </table>
