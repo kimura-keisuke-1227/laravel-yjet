@@ -36,4 +36,8 @@ class Work extends Model
     public function task(){
         return $this -> belongsTo('App\Models\Task');
     }
+
+    public function user(){
+        return $this -> belongsTo('App\Models\User');
+    }
 }
