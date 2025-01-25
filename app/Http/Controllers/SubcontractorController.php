@@ -16,8 +16,6 @@ class SubcontractorController extends Controller
      */
     public function index()
     {
-        //
-
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         $subcontractors = Subcontractor::query()
             ->get();
