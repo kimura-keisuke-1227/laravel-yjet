@@ -37,12 +37,12 @@
                         <input id="subcontractor_abbreviation" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
                             type="text" name="subcontractor_abbreviation"  value="{{$subcontractor->subcontractor_abbreviation}}">
                     </div>
-                    <div class="flex px-6 pb-4 border-b">
+                    {{-- <div class="flex px-6 pb-4 border-b">
                         <div class="ml-auto">
                             <button type="submit"
                                 class="py-2 px-3 text-xs text-white font-semibold bg-indigo-500 rounded-md">保存</button>
                         </div>
-                    </div>
+                    </div> --}}
                 </form>
             </div>
             <div class="py-4 bg-white rounded">
