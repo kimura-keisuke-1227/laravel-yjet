@@ -251,6 +251,7 @@ class WorkController extends Controller
         $new_work[Work::CLM_NAME_OF_SCHEDULED_TIME] = $work->scheduled_time;
         $new_work[Work::CLM_NAME_OF_ACTUAL_TIME] = $work->actual_time;
         $new_work[Work::CLM_NAME_OF_CANCELED] = null;
+        $new_work[Work::CLM_NAME_OF_REMARK] = $work->remark;
 
         $new_work->save();
         $project = $task->project;
