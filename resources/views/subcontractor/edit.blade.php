@@ -4,7 +4,7 @@
     <section class="py-8">
         <div class="container px-4 mx-auto">
             <div class="py-4 bg-white rounded">
-                <form action="{{ Route('subcontractor.update') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ Route('subcontractor.update',['subcontractor' => $subcontractor->id]) }}" method="post" enctype="multipart/form-data">
                     <!-- ▼▼▼▼エラーメッセージ▼▼▼▼　-->
                     @if ($errors->any())
                         <div class="mb-8 py-4 px-6 border border-red-300 bg-red-50 rounded">
@@ -17,7 +17,7 @@
                     @endif
                     <!-- ▲▲▲▲エラーメッセージ▲▲▲▲　-->
                     @csrf
-
+                    @method('PUT')
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title">外注先名称</label>
                         <input id="subcontractor_name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"

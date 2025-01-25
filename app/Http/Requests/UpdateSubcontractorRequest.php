@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use App\Models\Subcontractor as Subcontractor;
+
 class UpdateSubcontractorRequest extends FormRequest
 {
     /**
@@ -11,7 +13,7 @@ class UpdateSubcontractorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,9 @@ class UpdateSubcontractorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            Subcontractor::CLM_NAME_OF_SUBCONTRACTOR_NAME  => "required",
+            Subcontractor::CLM_NAME_OF_SUBCONTRACTOR_CODE => "required",
+            Subcontractor::CLM_NAME_OF_SUBCONTRACTOR_ABBREVIATION => "",
         ];
     }
 }

@@ -88,7 +88,9 @@ class SubcontractorController extends Controller
      */
     public function update(UpdateSubcontractorRequest $request, Subcontractor $subcontractor)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('subcontractor.index');
     }
 
     /**
