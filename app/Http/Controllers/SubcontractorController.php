@@ -47,9 +47,7 @@ class SubcontractorController extends Controller
         $subcontractors = Subcontractor::query()
             ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return view('subcontractor.index',[
-            'subcontractors' => $subcontractors
-        ]);
+        return self::index();
     }
 
     /**
