@@ -24,5 +24,6 @@ Route::get('work_copy/{work}',[WorkController::class,'copy_work'])->name('work.c
 
 Route::put('project/multipleWorkUpdate/{project}', [WorkController::class,'multipleUpdate'])->name('work.multipleUpdate');
 
-Route::get('/weekly',[WorkController::class,'weekly'])
-->name('weekly');
+Route::get('/weekly',[WorkController::class,'weekly'])->name('weekly');;
+Route::post('/weekly_with_base_date',[WorkController::class,'weekly_with_base_date'])->name('weekly.with_date');;
+
