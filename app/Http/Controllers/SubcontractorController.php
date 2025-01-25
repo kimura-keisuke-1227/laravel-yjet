@@ -89,8 +89,12 @@ class SubcontractorController extends Controller
     public function update(UpdateSubcontractorRequest $request, Subcontractor $subcontractor)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+        $validated = $request -> validated();
+        $subcontractor ->update($validated);
+
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return view('subcontractor.index');
+        return self::index();
     }
 
     /**
