@@ -76,7 +76,11 @@ class SubcontractorController extends Controller
      */
     public function edit(Subcontractor $subcontractor)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('subcontractor.edit',[
+            'subcontractor' => $subcontractor
+        ]);
     }
 
     /**
