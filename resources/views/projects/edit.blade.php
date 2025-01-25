@@ -149,7 +149,7 @@
                                         </td>
                                         <td><input id="date"
                                                 class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
-                                                type="date" name="date_{{ $work->id }}  max="2382-12-31""
+                                                type="date" name="date_{{ $work->id }}"  max="2382-12-31"
                                                 value="{{ $work->date }}"></td>
                                         <td><input id="scheduled_time"
                                                 class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
