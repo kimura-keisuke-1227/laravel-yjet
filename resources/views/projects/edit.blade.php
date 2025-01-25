@@ -43,14 +43,14 @@
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title"> 開始日</label>
                         <input id="start_date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
-                            type="date" name="start_date" value="{{ $project->start_date }}">
+                            type="date" name="start_date" value="{{ $project->start_date }}"  max="2382-12-31">
                     </div>
 
 
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title"> 終了日</label>
                         <input id="end_date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
-                            type="date" name="end_date" value="{{ $project->end_date }}">
+                            type="date" name="end_date" value="{{ $project->end_date }}"  max="2382-12-31">
                     </div>
 
                     <div class="flex px-6 pb-4 border-b">
@@ -149,7 +149,7 @@
                                         </td>
                                         <td><input id="date"
                                                 class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
-                                                type="date" name="date_{{ $work->id }}"
+                                                type="date" name="date_{{ $work->id }}  max="2382-12-31""
                                                 value="{{ $work->date }}"></td>
                                         <td><input id="scheduled_time"
                                                 class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"

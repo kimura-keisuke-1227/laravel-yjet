@@ -8,7 +8,7 @@
             @csrf
             <tr>
                 <td>
-                    <input id="base_date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="date" name="base_date" value="{{$base_date}}"></td>
+                    <input id="base_date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="date" name="base_date" value="{{$base_date}}  max="2382-12-31""></td>
                 </td>
                 <td>
                     <input id="days_before" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="days_before" value="{{$days}}">日間
