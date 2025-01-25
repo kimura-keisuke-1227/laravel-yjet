@@ -51,6 +51,7 @@
                     <tr>
                         <th>プロジェクト</th>
                         <th>タスク</th>
+                        <th>発注者</th>
                         <th>日付</th>
                         <th>予定時間</th>
                         <th>実時間</th>
@@ -59,6 +60,7 @@
                         <tr>
                             <td>{{ $work -> task-> project -> project_name}}</td>
                             <td>{{ $work -> task-> task_name }}</td>
+                            <td>{{ $work->user ? $work->user->name : '未選択' }}</td>
                             <td>{{ $work -> date  }}</td>
                             <td>{{ $work -> scheduled_time }}</td>
                             <td>{{ $work -> actual_time }}</td>
