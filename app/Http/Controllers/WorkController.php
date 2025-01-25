@@ -148,8 +148,21 @@ class WorkController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Work $work)
-    {
+    // public function destroy(Work $work)
+    // {
+    //     Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+    //     $project = $work->task->project;
+    //     $work->delete();
+    //     $users = User::query()
+    //         ->get();
+    //     Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+    //     return redirect(Route('project.edit', [
+    //         'project' => $project->id,
+    //         'users' => $users
+    //     ]))-> with('success','作業データを削除しました。');
+    // }
+
+    public function work_delete(Work $work){
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         $project = $work->task->project;
         $work->delete();
@@ -160,6 +173,7 @@ class WorkController extends Controller
             'project' => $project->id,
             'users' => $users
         ]))-> with('success','作業データを削除しました。');
+
     }
 
     public function weekly()

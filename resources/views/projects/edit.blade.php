@@ -164,11 +164,7 @@
                                         </td>
                                         <td><a href="{{ Route('work.copy', ['work' => $work->id]) }}">コピー</a></td>
                                         <td>
-                                            <form action="{{ route('work.destroy', ['work' => $work->id]) }}" method="POST" onsubmit="return confirm('本当に削除しますか？');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">削除</button>
-                                            </form>
+                                            <a href="{{Route('work.delete',['work' => $work->id])}}">[削除]</a>
                                         </td>
                                     </tr>
                                 @endforeach
