@@ -94,7 +94,7 @@
                     @foreach ($project->tasks as $task)
                         <!-- Accordion Header -->
                         <h3 class="accordion-header" style="cursor: pointer;">
-                            < {{ $task->task_name }}>
+                            < {{ $task->task_name }}><a href="{{Route("task.edit",['task' => $task->id])}}">[編集]</a> <a href="{{Route("task.delete",['task' => $task->id])}}">[削除]</a>
                         </h3>
 
                         <!-- Accordion Content (Initially Hidden) -->

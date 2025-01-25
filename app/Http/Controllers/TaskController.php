@@ -8,7 +8,8 @@ use App\Models\Task;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\Subcontractor;
-
+use App\Models\Work;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
@@ -95,5 +96,21 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         //
+    }
+
+    public function delete(Task $task)
+    {
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $project = $task->project;
+
+        DB::transaction(function () use ($task) {
+            Work::query()
+                ->where(Work::CLM_NAME_OF_TASK_ID, $task->id)
+                ->delete();
+            $task->delete();
+        });
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return redirect()->route('project.edit', ['project' => $project->id])
+        ->with('success', 'タスクと配下の作業を削除しました。');
     }
 }
