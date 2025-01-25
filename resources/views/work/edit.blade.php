@@ -36,7 +36,7 @@
 
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title">作業日</label>
-                        <input id="date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="date" name="date" value="value="{{$work->date}}">
+                        <input id="date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="date" name="date" value="{{$work->date}}">
                     </div>
 
 
@@ -63,14 +63,5 @@
         </div>
     </div>
 </section>
-
-<script>
-    // 現在の日付を取得してフォーマット
-    const today = new Date();
-    const formattedDate = today.toISOString().split('T')[0]; // YYYY-MM-DD形式に変換
-
-    // input要素に設定
-    document.getElementById('date').value = formattedDate;
-</script>
 
 @endsection
