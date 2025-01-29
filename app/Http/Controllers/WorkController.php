@@ -333,7 +333,7 @@ class WorkController extends Controller
             'subcontractors' => $subcontractors,
             'user_id' => $user_id,
             'subcontractor_id' => $subcontractor_id,
-            'order_by' => 2
+            'order_by' => $order_by
         ]);
     }
 
@@ -367,8 +367,11 @@ class WorkController extends Controller
             ->when($end_date !== null, function ($query) use ($end_date) {
                 Log::debug(__METHOD__ . '(' . __LINE__ . ') end_date:' . $end_date);
                 return $query->where('date', '<=', $end_date);
-            })
-            ->get();
+            });
+
+        $weekly = $weekly->orderBy(self::get_order_column($order_by));
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $weekly->toSql());
+        $weekly = $weekly ->get();
 
         Log::debug(__METHOD__ . '(' . __LINE__ . ')' . ' Weekly Data:', $weekly->toArray());
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end! get from Database.');
@@ -378,13 +381,16 @@ class WorkController extends Controller
 
     private function get_order_column($order_by){
         switch ($order_by) {
-            case 0:
+            case 1:
                 $order_column = Work::CLM_NAME_OF_USER_ID;
                 break;
-            case 1:
+            case 2:
                 $order_column =  Work::CLM_NAME_OF_OUT_SOURCE_ID;
                 break;
-            case 2:
+            case 3:
+                $order_column =  Work::CLM_NAME_OF_TASK_ID;
+                break;
+            case 4:
                 $order_column =  Work::CLM_NAME_OF_WORK_DATE;
                 break;
         }
