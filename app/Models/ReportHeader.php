@@ -21,6 +21,7 @@ class ReportHeader extends Model
     protected $fillable = [
         self::CLM_NAME_OF_REPORT_CODE,
         self::CLM_NAME_OF_REPORT_NAME,
+        self::CLM_NAME_OF_REPORT_REMARK,
         self::CLM_NAME_OF_IS_ACTIVE,
     ];
 
