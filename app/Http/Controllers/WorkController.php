@@ -265,12 +265,44 @@ class WorkController extends Controller
         $start_date = Carbon::now()->subDays(6)->toDateString();
         $end_date   = Carbon::now()->toDateString();
 
+        $user_id = 0;
+        $subcontractors_id = 0;
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return self::show_compute_detailed_summary_form_with_summary($start_date,$end_date,$user_id,$subcontractors_id);
+    }
+
+    public function compute_detailed_summary_form(Request $request){
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+        $start_date        = $request['start_date'];
+        $end_date          = $request['end_date'];
+        $user_id           = $request['user_id'];
+        $subcontractor_id = $request['subcontractor_id'];
+
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return self::show_compute_detailed_summary_form_with_summary($start_date,$end_date,$user_id,$subcontractor_id);
+    }
+
+    private function show_compute_detailed_summary_form_with_summary($start_date,$end_date,$user_id,$subcontractor_id){
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+        // パラメータをまとめて配列形式でログに記録
+        Log::debug(__METHOD__ . '(' . __LINE__ . ') パラメータ:', [
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'user_id' => $user_id,
+            'subcontractor_id' => $subcontractor_id,
+        ]);
+
+        //発注者と外注先を取得
         $users = User::query()
             ->get();
         $subcontractors = Subcontractor::query()
             ->get();
-
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+
         return view('work.compute_detailed_summary',[
             'start_date' => $start_date,
             'end_date' => $end_date,

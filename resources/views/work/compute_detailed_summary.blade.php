@@ -4,7 +4,7 @@
         <h2 class="mb-4">詳細</h2>
 
         <div class="card p-4 mb-4">
-            <form action="{{ Route('weekly.with_date') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ Route('compute_detailed_summary_form') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group mb-3">
@@ -35,11 +35,11 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="base_date" class="form-label">開始日</label>
-                    <input id="base_date" class="form-control" type="date" name="base_date" value="{{ $start_date }}" max="2382-12-31">
+                    <input id="base_date" class="form-control" type="date" name="start_date" value="{{ $start_date }}" max="2382-12-31">
                 </div>
                 <div class="form-group mb-3">
                     <label for="base_date" class="form-label">終了日</label>
-                    <input id="base_date" class="form-control" type="date" name="base_date" value="{{ $end_date }}" max="2382-12-31">
+                    <input id="base_date" class="form-control" type="date" name="end_date" value="{{ $end_date }}" max="2382-12-31">
                 </div>
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">表示</button>
