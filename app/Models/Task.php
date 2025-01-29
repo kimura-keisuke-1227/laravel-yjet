@@ -20,6 +20,8 @@ class Task extends Model
     protected $fillable = [
         self::CLM_NAME_OF_PROJECT_ID,
         self::CLM_NAME_OF_TASK_NAME,
+        self::CLM_NAME_OF_REMARK,
+        self::CLM_NAME_OF_IS_EXPIRE,
     ];
 
     public function project(){
