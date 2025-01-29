@@ -60,8 +60,13 @@
                     @foreach ($works as $work)
                         <tr>
                             <td><a href="{{Route('project.edit',['project' => $work->task->project->id])}}">{{ $work ->task-> project-> project_name }}</td>
-                            <td>{{ $work -> task-> task_name }}</td>
-                            <td>{{ $work->user ? $work->user->name : '未選択' }}</td>
+                            <td><a href="{{Route('task.edit',['task' => $work->task->id])}}">{{ $work ->task-> task_name }}</td>
+                                <td>@if ($work->user)
+                                    <a href="{{Route('user.edit',['user'=>$work->user->id])}}">{{$work->user->name}}</a>
+
+                                @else
+                                    未選択
+                                @endif</td>
                             <td>{{ $work -> date  }}</td>
                             <td>{{ $work -> scheduled_time }}</td>
                             <td>{{ $work -> actual_time }}</td>
