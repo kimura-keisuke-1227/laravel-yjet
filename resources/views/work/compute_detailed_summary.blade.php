@@ -102,7 +102,7 @@
                         <td>{{ $work ->subcontractor-> subcontractor_code }}</td>
                         <td><a href="{{Route('subcontractor.show',['subcontractor' => $work->subcontractor_id])}}">{{ $work ->subcontractor-> subcontractor_name }}</a></td>
                         <td><a href="{{Route('project.edit',['project' => $work->task->project->id])}}">{{ $work ->task-> project-> project_name }}</td>
-                        <td>{{ $work->task->task_name }}</td>
+                        <td><a href="{{Route('task.edit',['task' => $work->task->id])}}">{{ $work ->task-> task_name }}</td>
                         <td>{{ $work->date }}</td>
                         <td>{{ $work->scheduled_time }}</td>
                         <td>{{ $work->actual_time }}</td>
