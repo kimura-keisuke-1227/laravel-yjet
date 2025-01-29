@@ -98,9 +98,21 @@
                 </tr>
                 @foreach ($weekly as $work)
                     <tr>
-                        <td><a href="{{Route('user.edit',['user'=>$work->user->id])}}">{{ $work->user->name }}</a></td>
+                        <td>
+                            @if ($work->user_id==0)
+                                未選択
+                            @else
+                                <a href="{{Route('user.edit',['user'=>$work->user->id])}}">{{ $work->user->name }}</a>
+                            @endif
+                        </td>
                         <td>{{ $work ->subcontractor-> subcontractor_code }}</td>
-                        <td><a href="{{Route('subcontractor.show',['subcontractor' => $work->subcontractor_id])}}">{{ $work ->subcontractor-> subcontractor_name }}</a></td>
+                        <td>
+                            @if ($work->subcontractor_id==0)
+                                未選択
+                            @else
+                            <a href="{{Route('subcontractor.show',['subcontractor' => $work->subcontractor_id])}}">{{ $work ->subcontractor-> subcontractor_name }}</a>
+                            @endif
+                        </td>
                         <td><a href="{{Route('project.edit',['project' => $work->task->project->id])}}">{{ $work ->task-> project-> project_name }}</td>
                         <td><a href="{{Route('task.edit',['task' => $work->task->id])}}">{{ $work ->task-> task_name }}</td>
                         <td>{{ $work->date }}</td>

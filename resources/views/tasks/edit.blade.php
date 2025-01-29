@@ -66,6 +66,45 @@
                     </div>
                 </form>
             </div>
+            <div class="py-4 bg-white rounded">
+                <h3>関連作業一覧</h3>
+                <table class='table table-striped'>
+                    <tr>
+                        <th>ID</th>
+                        <th>発注者</th>
+                        <th>発注先</th>
+                        <th>作業日</th>
+                        <th>明細</th>
+                    </tr>
+                    @foreach ($works as $work)
+                        <tr>
+                            <td>{{ $work -> id}}</td>
+                            <td>
+                                @if ($work -> user_id == 0)
+                                    未選択
+                                @else
+                                    <a href="{{Route('user.edit',[ 'user' => $work -> user -> id])}}">{{ $work -> user-> name }}</a>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($work -> subcontractor_id == 0)
+                                    未選択
+                                @else
+                                <a href="{{Route('subcontractor.show',[ 'subcontractor' => $work -> subcontractor -> id])}}">{{ $work -> subcontractor -> subcontractor_name }}</a>
+                                @endif
+                            </td>
+                            <td>{{ $work -> date }}</td>
+                            <td><a href="{{Route('work.edit',[ 'work' => $work -> id])}}">
+                                @if ($work->remark == '')
+                                [編集]
+                            @else
+                                {{ $work->remark }}
+                            @endif
+                            </a></td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
         </div>
     </section>
 
