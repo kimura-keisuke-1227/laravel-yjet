@@ -1,9 +1,10 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
-        <h2 class="mb-4">詳細</h2>
+        <h2 class="mb-4">作業検索(条件指定)</h2>
 
         <div class="card p-4 mb-4">
+            <h3>検索条件</h3> 最低１つは指定が必要
             <form action="{{ Route('compute_detailed_summary') }}" method="POST" enctype="multipart/form-work">
                 @csrf
 
@@ -97,9 +98,7 @@
                 </tr>
                 @foreach ($weekly as $work)
                     <tr>
-                        <td>
-                            {{ $work->user->name }}
-                        </td>
+                        <td><a href="{{Route('user.edit',['user'=>$work->user->id])}}">{{ $work->user->name }}</a></td>
                         <td>{{ $work ->subcontractor-> subcontractor_code }}</td>
                         <td><a href="{{Route('subcontractor.show',['subcontractor' => $work->subcontractor_id])}}">{{ $work ->subcontractor-> subcontractor_name }}</a></td>
                         <td><a href="{{Route('project.edit',['project' => $work->task->project->id])}}">{{ $work ->task-> project-> project_name }}</td>
