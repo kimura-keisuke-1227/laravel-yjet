@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
-    <h2>発注先別</h2>
+    <h2>発注先別週次集計</h2>
     <hr>
     <h3>検索条件</h3>
     <table class='table table-striped'>
