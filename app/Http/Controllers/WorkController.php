@@ -365,6 +365,8 @@ class WorkController extends Controller
             })
             ->get();
 
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')' . ' Weekly Data:', $weekly->toArray());
+
         return $weekly;
     }
 }
