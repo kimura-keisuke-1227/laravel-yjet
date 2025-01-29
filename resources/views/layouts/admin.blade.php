@@ -104,7 +104,7 @@
                                             fill="currentColor"></path>
                                     </svg>
                                 </span>
-                                <span>週次集計</span>
+                                <span>発注先別</span>
                             </a>
                         </li>
                         <li>
