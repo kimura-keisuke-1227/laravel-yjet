@@ -351,8 +351,6 @@ class WorkController extends Controller
             return null;
         }
 
-        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end! get from Database.');
-
         $weekly = Work::query()
             ->when($user_id != 0, function ($query) use ($user_id) {
                 Log::debug(__METHOD__ . '(' . __LINE__ . ') user_id:' . $user_id);
@@ -373,7 +371,24 @@ class WorkController extends Controller
             ->get();
 
         Log::debug(__METHOD__ . '(' . __LINE__ . ')' . ' Weekly Data:', $weekly->toArray());
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end! get from Database.');
 
         return $weekly;
+    }
+
+    private function get_order_column($order_by){
+        switch ($order_by) {
+            case 0:
+                $order_column = Work::CLM_NAME_OF_USER_ID;
+                break;
+            case 1:
+                $order_column =  Work::CLM_NAME_OF_OUT_SOURCE_ID;
+                break;
+            case 2:
+                $order_column =  Work::CLM_NAME_OF_WORK_DATE;
+                break;
+        }
+
+        return $order_column;
     }
 }
