@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table(Project::TABLE_NAME_OF_PROJECTS, function (Blueprint $table) {
             $table->text(Project::CLM_NAME_OF_REMARK)->comment('メモ')->after(Project::CLM_NAME_OF_PROJECT_NAME)->nullable();          // 構文
-            $table->boolean(Project::CLM_NAME_OF_IS_EXPIRE)->comment('完了')->after(Project::CLM_NAME_OF_REMARK)->nullable();          // 構文
+            $table->boolean(Project::CLM_NAME_OF_IS_EXPIRE)->comment('完了')->after(Project::CLM_NAME_OF_REMARK)->default(false);          // 構文
         });
     }
 
