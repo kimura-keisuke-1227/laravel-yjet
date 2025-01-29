@@ -327,6 +327,7 @@ class WorkController extends Controller
             'subcontractors' => $subcontractors,
             'user_id' => $user_id,
             'subcontractor_id' => $subcontractor_id,
+            'order_by' => 2
         ]);
     }
 
