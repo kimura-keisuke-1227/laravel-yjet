@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Models\ReportHeader as ReportHeader;
+
 return new class extends Migration
 {
     /**
@@ -11,8 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('report_headers', function (Blueprint $table) {
+        Schema::create(ReportHeader::TABLE_NAME_OF_REPORT, function (Blueprint $table) {
             $table->id();
+            $table->string(ReportHeader::CLM_NAME_OF_REPORT_CODE);
+            $table->string(ReportHeader::CLM_NAME_OF_REPORT_NAME);
+            $table->string(ReportHeader::CLM_NAME_OF_IS_ACTIVE);
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('report_headers');
+        Schema::dropIfExists(ReportHeader::TABLE_NAME_OF_REPORT);
     }
 };
