@@ -4,7 +4,7 @@
         <h2 class="mb-4">詳細</h2>
 
         <div class="card p-4 mb-4">
-            <form action="{{ Route('compute_detailed_summary_form') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ Route('compute_detailed_summary_form') }}" method="POST" enctype="multipart/form-work">
                 @csrf
 
                 <div class="form-group mb-3">
@@ -59,23 +59,31 @@
                 <tr>
                     <th>発注者</th>
                     <th>発注先</th>
+                    <th>プロジェクト</th>
+                    <th>タスク</th>
+                    <th>日付</th>
                     <th>予定時間</th>
                     <th>実際時間</th>
+                    <th>明細</th>
                 </tr>
-                @foreach ($weekly as $data)
+                @foreach ($weekly as $work)
                     <tr>
                         <td>
-                            <a href="{{ Route('subcontractor.show', ['subcontractor' => $data->subcontractor_id]) }}">
-                                {{ $data->subcontractor_name }}
-                            </a>
+                            {{ $work->user->name }}
                         </td>
-                        <td>
-                            <a href="{{ Route('subcontractor.show', ['subcontractor' => $data->subcontractor_id]) }}">
-                                {{ $data->subcontractor_name }}
-                            </a>
-                        </td>
-                        <td>{{ $data->total_scheduled_time }}</td>
-                        <td>{{ $data->total_actual_time }}</td>
+                        <td><a href="{{Route('subcontractor.show',['subcontractor' => $work->subcontractor_id])}}">{{ $work ->subcontractor-> subcontractor_name }}</a></td>
+                        <td>{{ $work->task->project->project_name }}</td>
+                        <td>{{ $work->task->task_name }}</td>
+                        <td>{{ $work->date }}</td>
+                        <td>{{ $work->scheduled_time }}</td>
+                        <td>{{ $work->actual_time }}</td>
+                        <td><a href="{{ Route('work.edit', ['work' => $work]) }}">
+                            @if ($work->remark == '')
+                                [編集]
+                            @else
+                                {{ $work->remark }}
+                            @endif
+                        </a></td>
                     </tr>
                 @endforeach
             </table>
