@@ -47,6 +47,6 @@ class User extends Authenticatable
     }
 
     public function works(){
-        return $this -> hasMany('App\Models\Task');
+        return $this -> hasMany('App\Models\Work');
     }
 }
