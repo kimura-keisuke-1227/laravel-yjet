@@ -82,11 +82,18 @@ class TaskController extends Controller
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         $projects = Project::query()
             ->get();
+
+        $works = Work::query()
+            ->where(Work::CLM_NAME_OF_TASK_ID,$task->id)
+            ->orderBy(Work::CLM_NAME_OF_WORK_DATE,'desc');
+
+        $works = $works->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('tasks.edit',[
             'task' => $task,
             'projects' => $projects,
-            'parentProject' => $task->project
+            'parentProject' => $task->project,
+            'works' => $works,
         ]);
     }
 
