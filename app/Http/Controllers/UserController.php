@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Project;
 
 use Illuminate\Support\Facades\Log;
 
@@ -72,9 +73,18 @@ class UserController extends Controller
     public function edit(User $user)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+        $projects = Project::query()
+            ->where(Project::CLM_NAME_OF_USER_ID,$user->id);
+        $projects = $projects->orderBy(Project::CLM_NAME_OF_IS_EXPIRE);
+        $projects = $projects->orderBy(Project::CLM_NAME_OF_START_DATE,'desc');
+
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $projects->toSql());
+        $projects = $projects->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('admin.users.edit',[
-            'user' => $user
+            'user' => $user,
+            'projects' => $projects,
         ]);
     }
 
