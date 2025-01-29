@@ -6,6 +6,8 @@ use App\Http\Requests\StoreReportHeaderRequest;
 use App\Http\Requests\UpdateReportHeaderRequest;
 use App\Models\ReportHeader;
 
+use Illuminate\Support\Facades\Log;
+
 class ReportHeaderController extends Controller
 {
     /**
@@ -13,7 +15,9 @@ class ReportHeaderController extends Controller
      */
     public function index()
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return 'hoge';
     }
 
     /**
