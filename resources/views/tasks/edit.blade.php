@@ -48,7 +48,14 @@
                     </div>
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title">メモ</label>
-                        <textarea  rea id="remark" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" name="remark" rows=10>{{$task->remark}}</textarea>
+                        <textarea  id="remark" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" name="remark" rows=10>{{$task->remark}}</textarea>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="inline-flex items-center">
+                            <input it="is_expire" type="checkbox" name="is_expire" class="form-checkbox" value="1" @if ($task->is_expire) checked @endif>
+                            <span class="ml-2 text-sm">非表示にする</span>
+                        </label>
                     </div>
 
                     <div class="flex px-6 pb-4 border-b">
