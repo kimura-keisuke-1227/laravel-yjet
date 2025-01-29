@@ -118,7 +118,7 @@
                                             fill="currentColor"></path>
                                     </svg>
                                 </span>
-                                <span>詳細集計</span>
+                                <span>作業データ検索</span>
                             </a>
                         </li>
                     </ul>
