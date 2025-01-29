@@ -258,4 +258,8 @@ class WorkController extends Controller
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return redirect(Route('project.edit', ['project' => $project->id]))-> with('success','作業データを複製しました。');
     }
+
+    public function compute_detailed_summary(Request $request){
+
+    }
 }
