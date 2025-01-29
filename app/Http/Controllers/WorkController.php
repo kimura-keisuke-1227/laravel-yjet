@@ -265,11 +265,18 @@ class WorkController extends Controller
         $start_date = Carbon::now()->subDays(6)->toDateString();
         $end_date   = Carbon::now()->toDateString();
 
+        $users = User::query()
+            ->get();
+        $subcontractors = Subcontractor::query()
+            ->get();
+
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('work.compute_detailed_summary',[
             'start_date' => $start_date,
             'end_date' => $end_date,
             'weekly' => [],
+            'users' => $users,
+            'subcontractors' => $subcontractors,
         ]);
     }
 }

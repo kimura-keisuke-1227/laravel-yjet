@@ -6,6 +6,33 @@
         <div class="card p-4 mb-4">
             <form action="{{ Route('weekly.with_date') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+
+                <div class="form-group mb-3">
+                    <label for="base_date" class="form-label">発注者</label>
+                    <select id="user" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="user_id">
+                        <option value="0">
+                            未選択
+                        </option>
+                        @foreach($users as $user)
+                        <option value="{{$user -> id}}"
+
+                            >{{ $user->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="base_date" class="form-label">外注先</label>
+                    <select id="subcontractor" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="subcontractor_id">
+                        <option value="0">
+                            未選択
+                        </option>
+                        @foreach($subcontractors as $subcontractor)
+                        <option value="{{$subcontractor -> id}}"
+
+                            >{{ $subcontractor->subcontractor_code . '_' . $subcontractor->subcontractor_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="form-group mb-3">
                     <label for="base_date" class="form-label">開始日</label>
                     <input id="base_date" class="form-control" type="date" name="base_date" value="{{ $start_date }}" max="2382-12-31">
@@ -22,12 +49,16 @@
 
         <table class='table table-striped'>
             <tr>
+                <th>発注者</th>
                 <th>発注先</th>
                 <th>予定時間</th>
                 <th>実際時間</th>
             </tr>
             @foreach ($weekly as $data)
                 <tr>
+                    <td><a
+                            href="{{ Route('subcontractor.show', ['subcontractor' => $data->subcontractor_id]) }}">{{ $data->subcontractor_name }}</a>
+                    </td>
                     <td><a
                             href="{{ Route('subcontractor.show', ['subcontractor' => $data->subcontractor_id]) }}">{{ $data->subcontractor_name }}</a>
                     </td>
