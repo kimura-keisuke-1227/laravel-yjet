@@ -316,7 +316,7 @@ class WorkController extends Controller
             'subcontractor_id' => $subcontractor_id,
         ]);
 
-        // 発注者と外注先を取得
+        // 発注者と発注先を取得
         $users = User::all();
         $subcontractors = Subcontractor::all();
 

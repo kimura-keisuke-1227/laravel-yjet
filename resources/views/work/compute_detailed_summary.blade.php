@@ -25,7 +25,7 @@
 
                         <td>
                             <div class="form-group mb-3">
-                                <label for="subcontractor" class="form-label">外注先</label>
+                                <label for="subcontractor" class="form-label">発注先</label>
                                 <select id="subcontractor"
                                     class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded"
                                     name="subcontractor_id">
