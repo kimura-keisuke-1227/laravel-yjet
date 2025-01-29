@@ -29,6 +29,7 @@ class UpdateProjectRequest extends FormRequest
             Project::CLM_NAME_OF_END_DATE => "",
             Project::CLM_NAME_OF_USER_ID => "",
             Project::CLM_NAME_OF_REMARK => "",
+            Project::CLM_NAME_OF_IS_EXPIRE=> "",
         ];
     }
 }

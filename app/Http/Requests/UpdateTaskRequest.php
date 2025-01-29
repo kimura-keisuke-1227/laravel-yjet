@@ -26,6 +26,7 @@ class UpdateTaskRequest extends FormRequest
             Task::CLM_NAME_OF_PROJECT_ID => 'required',
             Task::CLM_NAME_OF_TASK_NAME => 'required:string',
             Task::CLM_NAME_OF_REMARK => '',
+            Task::CLM_NAME_OF_IS_EXPIRE=> "",
         ];
     }
 }
