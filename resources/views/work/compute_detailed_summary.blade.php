@@ -122,7 +122,7 @@
                             @if ($work->remark == '')
                                 [編集]
                             @else
-                                {{ $work->remark }}
+                                {{ \Illuminate\Support\Str::limit($work->remark, 20) }}
                             @endif
                         </a></td>
                     </tr>
