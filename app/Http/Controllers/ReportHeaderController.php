@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateReportHeaderRequest;
 use App\Models\ReportHeader;
 
 use Illuminate\Support\Facades\Log;
+use SebastianBergmann\CodeCoverage\Report\Xml\Report;
 
 class ReportHeaderController extends Controller
 {
@@ -16,8 +17,14 @@ class ReportHeaderController extends Controller
     public function index()
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $report_headers = ReportHeader::query();
+
+        $report_headers = $report_headers->get();
+
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return 'hoge';
+        return view('report_headers.index',[
+            'report_headers' => $report_headers
+        ]);
     }
 
     /**

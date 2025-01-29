@@ -5,30 +5,23 @@
 @section('content')
     <h2>プロジェクト一覧</h2>
     <div class="container">
-        <a href="{{Route('project.create')}}">プロジェクト作成</a>
+        <a href="{{Route('report.create')}}">レポート作成</a>
         <table class='table table-striped'>
             <tr>
                 <th>ID</th>
-                <th>プロジェクト名</th>
-                <th>担当者</th>
-                <th>開始日</th>
-                <th>終了日</th>
-                <th></th>
+                <th>レポートコード</th>
+                <th>レポート名</th>
+                <th>レポートメモ</th>
                 <th></th>
             </tr>
-            @foreach ($projects as $project)
+            @foreach ($report_headers as $report_header)
                 <tr>
-                    <td>{{ $project -> id}}</td>
-                    <td>{{ $project -> project_name }}</td>
-                    <td>@if ($project->user)
-                        <a href="{{Route('user.edit',['user'=>$project->user->id])}}">{{$project->user->name}}</a>
+                    <td>{{ $report_header -> id}}</td>
+                    <td>{{ $report_header -> report_code }}</td>
+                    <td>{{ $report_header -> report_name }}</td>
+                    <td>{{ $report_header -> remark }}</td>
 
-                    @else
-                        未選択
-                    @endif</td>
-                    <td>{{ $project -> start_date }}</td>
-                    <td>{{ $project -> end_date }}</td>
-                    <td><td><a href="{{Route('project.edit',[ 'project' => $project -> id])}}">詳細・修正</a></td></td>
+                    <td><a href="{{Route('report.edit',[ 'report' => $report_header -> id])}}">詳細・修正</a></td>
                 </tr>
             @endforeach
         </table>
