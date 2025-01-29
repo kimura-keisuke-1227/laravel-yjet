@@ -17,7 +17,7 @@ Route::resource('project', ProjectController::class);
 Route::resource('task', TaskController::class);
 Route::resource('subcontractor', SubcontractorController::class);
 Route::resource('user', UserController::class);
-Route::resource('report', ReportHeaderController::class);
+Route::resource('report_headers', ReportHeaderController::class);
 
 
 Route::get('task/create/{project}',[TaskController::class,'createTaskForProject'])->name('task.create');

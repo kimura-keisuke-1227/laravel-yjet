@@ -7,7 +7,6 @@ use App\Http\Requests\UpdateReportHeaderRequest;
 use App\Models\ReportHeader;
 
 use Illuminate\Support\Facades\Log;
-use SebastianBergmann\CodeCoverage\Report\Xml\Report;
 
 class ReportHeaderController extends Controller
 {
@@ -32,7 +31,9 @@ class ReportHeaderController extends Controller
      */
     public function create()
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('report_headers.create');
     }
 
     /**
@@ -40,7 +41,13 @@ class ReportHeaderController extends Controller
      */
     public function store(StoreReportHeaderRequest $request)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+        $validated = $request->validated();
+        ReportHeader::create($validated);
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return redirect(Route('report.index'))-> with('success','レポートヘッダーを登録しました。');
     }
 
     /**
@@ -56,7 +63,10 @@ class ReportHeaderController extends Controller
      */
     public function edit(ReportHeader $reportHeader)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('report_headers.edit', ['report_header' => $reportHeader]);
     }
 
     /**

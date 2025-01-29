@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use App\Models\ReportHeader;
+
 class StoreReportHeaderRequest extends FormRequest
 {
     /**
@@ -11,7 +13,7 @@ class StoreReportHeaderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,9 @@ class StoreReportHeaderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            ReportHeader::CLM_NAME_OF_REPORT_CODE => 'required',
+            ReportHeader::CLM_NAME_OF_REPORT_NAME => 'required',
+            ReportHeader::CLM_NAME_OF_REPORT_REMARK => '',
         ];
     }
 }

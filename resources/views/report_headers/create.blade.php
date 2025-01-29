@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h2>プロジェクト作成</h2>
+    <h2>レポート作成</h2>
     <section class="py-8">
         <div class="container px-4 mx-auto">
             <div class="py-4 bg-white rounded">
-                <form action="{{ Route('project.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ Route('report.store') }}" method="post" enctype="multipart/form-data">
                     <!-- ▼▼▼▼エラーメッセージ▼▼▼▼　-->
                     @if ($errors->any())
                         <div class="mb-8 py-4 px-6 border border-red-300 bg-red-50 rounded">
@@ -19,24 +19,16 @@
                     <!-- ▲▲▲▲エラーメッセージ▲▲▲▲　-->
                     @csrf
                     <div class="mb-6">
-                        <label class="block text-sm font-medium mb-2" for="title">プロジェクト名</label>
-                        <input id="project_name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
-                            type="text" name="project_name">
+                        <label class="block text-sm font-medium mb-2" for="report_name">レポートコード</label>
+                        <input id="report_name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
+                            type="text" name="report_name">
                     </div>
-                    <label class="block text-sm font-medium mb-2" for="title">担当者</label>
-                    <select id="user_id" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="user_id">
-                        <option value="0">未選択</option>
-                        @foreach ($users as $user)
-                        <option value="{{$user -> id}}">
-                            {{$user->name}}
-                        </option>
-                        @endforeach
-                    </select>
                     <div class="mb-6">
-                        <label class="block text-sm font-medium mb-2" for="title"> 開始日</label>
-                        <input id="start_date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
-                            type="date" name="start_date"  max="2382-12-31">
+                        <label class="block text-sm font-medium mb-2" for="report_code">レポート名</label>
+                        <input id="report_code" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
+                            type="text" name="report_code">
                     </div>
+
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title">メモ</label>
                         <textarea  rea id="remark" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" name="remark" rows=10></textarea>
