@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ReportDetailTableConectorSeeder extends Seeder
+class ReportDetailTableConnectorSeeder extends Seeder
 {
     /**
      * Run the database seeds.

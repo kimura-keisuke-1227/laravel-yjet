@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreReportDetailTableConectorRequest;
-use App\Http\Requests\UpdateReportDetailTableConectorRequest;
-use App\Models\ReportDetailTableConector;
+use App\Http\Requests\StoreReportDetailTableConnectorRequest;
+use App\Http\Requests\UpdateReportDetailTableConnectorRequest;
+use App\Models\ReportDetailTableConnector;
 
-class ReportDetailTableConectorController extends Controller
+class ReportDetailTableConnectorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class ReportDetailTableConectorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreReportDetailTableConectorRequest $request)
+    public function store(StoreReportDetailTableConnectorRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class ReportDetailTableConectorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ReportDetailTableConector $reportDetailTableConector)
+    public function show(ReportDetailTableConnector $ReportDetailTableConnector)
     {
         //
     }
@@ -43,7 +43,7 @@ class ReportDetailTableConectorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ReportDetailTableConector $reportDetailTableConector)
+    public function edit(ReportDetailTableConnector $ReportDetailTableConnector)
     {
         //
     }
@@ -51,7 +51,7 @@ class ReportDetailTableConectorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateReportDetailTableConectorRequest $request, ReportDetailTableConector $reportDetailTableConector)
+    public function update(UpdateReportDetailTableConnectorRequest $request, ReportDetailTableConnector $ReportDetailTableConnector)
     {
         //
     }
@@ -59,7 +59,7 @@ class ReportDetailTableConectorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ReportDetailTableConector $reportDetailTableConector)
+    public function destroy(ReportDetailTableConnector $ReportDetailTableConnector)
     {
         //
     }

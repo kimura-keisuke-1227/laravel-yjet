@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ReportDetailTableConector>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ReportDetailTableConnector>
  */
-class ReportDetailTableConectorFactory extends Factory
+class ReportDetailTableConnectorFactory extends Factory
 {
     /**
      * Define the model's default state.

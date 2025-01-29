@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\ReportDetailTableConector;
+use App\Models\ReportDetailTableConnector;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class ReportDetailTableConectorPolicy
+class ReportDetailTableConnectorPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class ReportDetailTableConectorPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, ReportDetailTableConector $reportDetailTableConector): bool
+    public function view(User $user, ReportDetailTableConnector $ReportDetailTableConnector): bool
     {
         return false;
     }
@@ -35,7 +35,7 @@ class ReportDetailTableConectorPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ReportDetailTableConector $reportDetailTableConector): bool
+    public function update(User $user, ReportDetailTableConnector $ReportDetailTableConnector): bool
     {
         return false;
     }
@@ -43,7 +43,7 @@ class ReportDetailTableConectorPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, ReportDetailTableConector $reportDetailTableConector): bool
+    public function delete(User $user, ReportDetailTableConnector $ReportDetailTableConnector): bool
     {
         return false;
     }
@@ -51,7 +51,7 @@ class ReportDetailTableConectorPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, ReportDetailTableConector $reportDetailTableConector): bool
+    public function restore(User $user, ReportDetailTableConnector $ReportDetailTableConnector): bool
     {
         return false;
     }
@@ -59,7 +59,7 @@ class ReportDetailTableConectorPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, ReportDetailTableConector $reportDetailTableConector): bool
+    public function forceDelete(User $user, ReportDetailTableConnector $ReportDetailTableConnector): bool
     {
         return false;
     }
