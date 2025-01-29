@@ -288,7 +288,7 @@ class WorkController extends Controller
         if ($start_date === null && $end_date === null && $user_id == 0 && $subcontractor_id == 0) {
             Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' No filters specified.');
             // 検索条件が指定されていない場合、特定の処理（例: 空データを返す等）を実行
-            return redirect()->route('show_compute_detailed_summary_form')->with('success', '検索条件が指定されていません。');
+            return redirect(Route('show_compute_detailed_summary_form'))-> with('error','検索条件が指定されていません');
         } else {
             Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' filters provided, proceeding to query.');
             // 検索条件が指定されている場合、次の処理へ
