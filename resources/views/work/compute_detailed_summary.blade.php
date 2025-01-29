@@ -80,6 +80,7 @@
         @elseif ($weekly->isEmpty())
             <p class="text-warning">該当データが存在しません</p>
         @else
+            <h3>作業記録</h3>
             <table class='table table-striped'>
                 <tr>
                     <th>発注者</th>
@@ -101,7 +102,7 @@
                         </td>
                         <td>{{ $work ->subcontractor-> subcontractor_code }}</td>
                         <td><a href="{{Route('subcontractor.show',['subcontractor' => $work->subcontractor_id])}}">{{ $work ->subcontractor-> subcontractor_name }}</a></td>
-                        <td>{{ $work->task->project->project_name }}</td>
+                        <td><a href="{{Route('project.edit',['project' => $work->task->project->id])}}">{{ $work ->task-> project-> project_name }}</td>
                         <td>{{ $work->task->task_name }}</td>
                         <td>{{ $work->date }}</td>
                         <td>{{ $work->scheduled_time }}</td>
