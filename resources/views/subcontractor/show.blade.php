@@ -59,7 +59,7 @@
                     </tr>
                     @foreach ($works as $work)
                         <tr>
-                            <td>{{ $work -> task-> project -> project_name}}</td>
+                            <td><a href="{{Route('project.edit',['project' => $work->task->project->id])}}">{{ $work ->task-> project-> project_name }}</td>
                             <td>{{ $work -> task-> task_name }}</td>
                             <td>{{ $work->user ? $work->user->name : '未選択' }}</td>
                             <td>{{ $work -> date  }}</td>

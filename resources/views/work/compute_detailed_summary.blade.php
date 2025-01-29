@@ -4,7 +4,7 @@
         <h2 class="mb-4">詳細</h2>
 
         <div class="card p-4 mb-4">
-            <form action="{{ Route('compute_detailed_summary_form') }}" method="POST" enctype="multipart/form-work">
+            <form action="{{ Route('compute_detailed_summary') }}" method="POST" enctype="multipart/form-work">
                 @csrf
 
                 <table class="table">
