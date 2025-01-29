@@ -26,13 +26,13 @@
     </table>
         <br>
         <br>
-        <h3>{{$start_date}}から{{$base_date}}までの{{$days}}日間の集計</h3>
+        <h3>{{$start_date}}から{{$base_date}}までの{{$days}}日間の集計(発注先コード昇順)</h3>
         <table class='table table-striped'>
             <tr>
                 <th>発注先コード</th>
                 <th>発注先</th>
-                <th>予定時間(分)</th>
-                <th>実際時間(分)</th>
+                <th>予定時間合計(分)</th>
+                <th>実際時間合計(分)</th>
             </tr>
             @foreach ($weekly as $data)
                 <tr>
