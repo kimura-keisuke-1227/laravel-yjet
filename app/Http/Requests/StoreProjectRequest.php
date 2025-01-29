@@ -27,7 +27,8 @@ class StoreProjectRequest extends FormRequest
             Project::CLM_NAME_OF_PROJECT_NAME => "required",
             Project::CLM_NAME_OF_START_DATE => "required::date",
             Project::CLM_NAME_OF_END_DATE => "",
-            Project::CLM_NAME_OF_USER_ID => "required"
+            Project::CLM_NAME_OF_USER_ID => "required",
+            Project::CLM_NAME_OF_REMARK => "",
         ];
     }
 }
