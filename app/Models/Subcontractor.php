@@ -24,4 +24,8 @@ class Subcontractor extends Model
         self::CLM_NAME_OF_SUBCONTRACTOR_ABBREVIATION,
         self::CLM_NAME_OF_IS_ACTIVE,
     ];
+
+    public function works(){
+        return $this -> hasMany('App\Models\Work');
+    }
 }

@@ -40,4 +40,7 @@ class Work extends Model
     public function user(){
         return $this -> belongsTo('App\Models\User');
     }
+    public function subcontractor(){
+        return $this -> belongsTo('App\Models\Subcontractor');
+    }
 }
