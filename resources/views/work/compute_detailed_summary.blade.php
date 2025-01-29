@@ -57,10 +57,10 @@
                             <div class="form-group mb-3">
                                 <label for="order_by" class="form-label">並び順</label>
                                 <select id="order_by" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="order_by">
-                                    <option value="1" @if ($order_by==1) selected @endif>発注者</option>
-                                    <option value="2" @if ($order_by==2) selected @endif>発注先</option>
-                                    <option value="3" @if ($order_by==3) selected @endif>タスク</option>
-                                    <option value="4" @if ($order_by==4) selected @endif>日付</option>
+                                    <option value="1" @if ($order_by==1) selected @endif>発注者(ID昇順)</option>
+                                    <option value="2" @if ($order_by==2) selected @endif>発注先(コード昇順)</option>
+                                    <option value="3" @if ($order_by==3) selected @endif>タスク(ID昇順)</option>
+                                    <option value="4" @if ($order_by==4) selected @endif>日付(古い順)</option>
                                 </select>
                             </div>
                         </td>
