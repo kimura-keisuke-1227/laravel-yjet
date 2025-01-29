@@ -29,12 +29,14 @@
         <h3>{{$start_date}}から{{$base_date}}までの{{$days}}日間の集計</h3>
         <table class='table table-striped'>
             <tr>
+                <th>発注先コード</th>
                 <th>発注先</th>
                 <th>予定時間(分)</th>
                 <th>実際時間(分)</th>
             </tr>
             @foreach ($weekly as $data)
                 <tr>
+                    <td>{{ $data -> subcontractor_code}}</td>
                     <td><a href="{{Route('subcontractor.show',['subcontractor' => $data->subcontractor_id])}}">{{ $data -> subcontractor_name }}</a></td>
                     <td>{{ $data -> total_scheduled_time}}</td>
                     <td>{{ $data -> total_actual_time}}</td>
