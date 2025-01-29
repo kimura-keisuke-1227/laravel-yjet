@@ -102,7 +102,7 @@
                                 class="py-2 px-3 text-xs text-white font-semibold bg-indigo-500 rounded-md">作業データ保存</button>
                         </div>
                     </div>
-                    @foreach ($project->tasks as $task)
+                    @foreach ($tasks as $task)
                         <!-- Accordion Header -->
                         <h3 class="accordion-header" style="cursor: pointer; display: flex; align-items: center;">
                             <span>{{ $task->task_name }}</span>

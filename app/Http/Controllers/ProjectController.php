@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\Subcontractor;
-
+use App\Models\Task;
 use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
@@ -74,11 +74,20 @@ class ProjectController extends Controller
         $subcontractors = Subcontractor::query()
             ->orderBy(Subcontractor::CLM_NAME_OF_SUBCONTRACTOR_CODE)
             ->get();
+
+        $tasks = Task::query()
+            ->where(Task::CLM_NAME_OF_PROJECT_ID,$project->id);
+
+        $tasks = $tasks->where(Task::CLM_NAME_OF_IS_EXPIRE,false);
+
+        $tasks = $tasks->get();
+
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('projects.edit',[
             'project' => $project,
             'subcontractors' => $subcontractors,
-            'users' => $users
+            'users' => $users,
+            'tasks' => $tasks
         ]);
     }
 
