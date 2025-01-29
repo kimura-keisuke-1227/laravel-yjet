@@ -38,3 +38,6 @@ Route::get('/compute_detailed_summary',[WorkController::class,'show_compute_deta
 Route::post('/compute_detailed_summary',[WorkController::class,'compute_detailed_summary_form'])
     ->name('compute_detailed_summary');
 
+Route::get('/test',[ReportHeaderController::class,'show'])
+    ->name('test');
+

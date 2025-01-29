@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreReportHeaderRequest;
 use App\Http\Requests\UpdateReportHeaderRequest;
 use App\Models\ReportHeader;
+use App\Models\ReportDetailTableConnector;
 
 use Illuminate\Support\Facades\Log;
 
@@ -56,6 +57,13 @@ class ReportHeaderController extends Controller
     public function show(ReportHeader $reportHeader)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $report_header = 1;
+
+        $connectors = ReportDetailTableConnector::query()
+            ->where(ReportDetailTableConnector::CLM_NAME_OF_REPORT_HEADER_ID,$report_header)
+        ;
+
+        $connectors = $connectors->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return 'fuga';
     }

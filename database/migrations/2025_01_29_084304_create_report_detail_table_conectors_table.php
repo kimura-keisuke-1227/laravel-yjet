@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('report_detail_table_conectors');
+        Schema::dropIfExists(ReportDetailTableConnector::TABLE_NAME_OF_REPORT_TABLE_CONNECTOR);
     }
 };
