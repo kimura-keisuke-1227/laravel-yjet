@@ -10,7 +10,7 @@ class ReportDetailTableConnector extends Model
     /** @use HasFactory<\Database\Factories\ReportDetailTableConnectorFactory> */
     use HasFactory;
 
-    const TABLE_NAME_OF_REPORT_TABLE_CONNECTOR = 'report_table_connectors';
+    const TABLE_NAME_OF_REPORT_TABLE_CONNECTOR = 'report_detail_table_connectors';
 
     const CLM_NAME_OF_ID = 'id';
     const CLM_NAME_OF_REPORT_HEADER_ID = 'report_header_id';
