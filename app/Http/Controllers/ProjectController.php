@@ -18,8 +18,11 @@ class ProjectController extends Controller
     public function index()
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
-        $projects = Project::query()
-            ->get();
+        $projects = Project::query();
+
+        $projects = $projects->where(Project::CLM_NAME_OF_IS_EXPIRE,false);
+
+        $projects = $projects ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('projects.index',[
             'projects' => $projects
