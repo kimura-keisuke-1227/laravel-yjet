@@ -5,17 +5,21 @@
     <title>管理画面</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
-    <link rel="stylesheet" href="{{ asset('/css/admin/tailwind/tailwind.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('/css/admin/select2.min.css')}}">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+    <link rel="stylesheet" href="{{ asset('/css/admin/tailwind/tailwind.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/admin/select2.min.css') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png">
-    <script src="{{ asset('/js/main.js')}}"></script>
-    <script src="{{ asset('/js/admin/jquery-3.6.0.slim.min.js')}}"></script>
-    <script src="{{ asset('/js/admin/select2.min.js')}}"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('/css/style.css')}}" >
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
+    <script src="{{ asset('/js/main.js') }}"></script>
+    <script src="{{ asset('/js/admin/jquery-3.6.0.slim.min.js') }}"></script>
+    <script src="{{ asset('/js/admin/select2.min.js') }}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </head>
@@ -49,7 +53,7 @@
                     <ul class="mb-8 text-sm font-medium">
                         <li>
                             <a class="flex items-center pl-3 py-3 pr-4 text-gray-50 hover:bg-gray-900 rounded"
-                                href="{{Route('project.index')}}">
+                                href="{{ Route('project.index') }}">
                                 <span class="inline-block mr-3">
                                     <svg class="text-gray-600 w-5 h-5" viewbox="0 0 18 18" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -63,7 +67,7 @@
                         </li>
                         <li>
                             <a class="flex items-center pl-3 py-3 pr-4 text-gray-50 hover:bg-gray-900 rounded"
-                                href="{{Route('user.index')}}">
+                                href="{{ Route('user.index') }}">
                                 <span class="inline-block mr-3">
                                     <svg class="text-gray-600 w-5 h-5" viewbox="0 0 18 10" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -77,7 +81,7 @@
                         </li>
                         <li>
                             <a class="flex items-center pl-3 py-3 pr-4 text-gray-50 hover:bg-gray-900 rounded"
-                                href="{{Route('subcontractor.index')}}">
+                                href="{{ Route('subcontractor.index') }}">
                                 <span class="inline-block mr-3">
                                     <svg class="text-gray-600 w-5 h-5" viewbox="0 0 18 10" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +95,7 @@
                         </li>
                         <li>
                             <a class="flex items-center pl-3 py-3 pr-4 text-gray-50 hover:bg-gray-900 rounded"
-                                href="{{Route('weekly')}}">
+                                href="{{ Route('weekly') }}">
                                 <span class="inline-block mr-3">
                                     <svg class="text-gray-600 w-5 h-5" viewbox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -149,47 +153,46 @@
             <!-- ▲▲▲▲共通ヘッダー(PC)▲▲▲▲　-->
 
             <main class="py-4 px-6">
-                @if(session()->has('success'))
-                {{--
+                @if (session()->has('success'))
+                    {{--
                     <!-- ▼▼▼▼登録完了メッセージ(全ページで共通)▼▼▼▼　-->
                  --}}
-                <div class="mb-4 text-right">
-                    <div class="pl-6 pr-16 py-4 bg-white border-l-4 border-green-500 shadow-md rounded-r-lg inline-block ml-auto">
-                        <div class="flex items-center">
-                            <span class="inline-block mr-2">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10 0C4.5 0 0 4.5 0 10C0 15.5 4.5 20 10 20C15.5 20 20 15.5 20 10C20 4.5 15.5 0 10 0ZM14.2 8.3L9.4 13.1C9 13.5 8.4 13.5 8 13.1L5.8 10.9C5.4 10.5 5.4 9.9 5.8 9.5C6.2 9.1 6.8 9.1 7.2 9.5L8.7 11L12.8 6.9C13.2 6.5 13.8 6.5 14.2 6.9C14.6 7.3 14.6 7.9 14.2 8.3Z" fill="#17BB84"></path>
-                                </svg>
-                            </span>
-                            <p class="text-green-800 font-medium">{{ session('success') }}</p>
+                    <div class="mb-4 text-right">
+                        <div
+                            class="pl-6 pr-16 py-4 bg-white border-l-4 border-green-500 shadow-md rounded-r-lg inline-block ml-auto">
+                            <div class="flex items-center">
+                                <span class="inline-block mr-2">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M10 0C4.5 0 0 4.5 0 10C0 15.5 4.5 20 10 20C15.5 20 20 15.5 20 10C20 4.5 15.5 0 10 0ZM14.2 8.3L9.4 13.1C9 13.5 8.4 13.5 8 13.1L5.8 10.9C5.4 10.5 5.4 9.9 5.8 9.5C6.2 9.1 6.8 9.1 7.2 9.5L8.7 11L12.8 6.9C13.2 6.5 13.8 6.5 14.2 6.9C14.6 7.3 14.6 7.9 14.2 8.3Z"
+                                            fill="#17BB84"></path>
+                                    </svg>
+                                </span>
+                                <p class="text-green-800 font-medium">{{ session('success') }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {{--
+                    {{--
                     <!-- ▲▲▲▲登録完了メッセージ▲▲▲▲　-->
                 --}}
                 @endif
-                @if(session()->has('error'))
-
-                {{--
-                            <!-- ▼▼▼▼エラーメッセージ(全ページで共通)▼▼▼▼　-->
-                --}}
-                <div class="mb-4 text-right">
-                    <div class="pl-6 pr-16 py-4 bg-white border-l-4 border-red-500 shadow-md rounded-r-lg inline-block ml-auto">
-                        <div class="flex items-center">
-                            <span class="inline-block mr-2">
-                                <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="20" cy="20" r="20" fill="#FF0000"/>
-                                    <path d="M14 14L26 26M26 14L14 26" stroke="white" stroke-width="4"/>
-                                </svg>
-                            </span>
-                            <p class="text-green-800 font-medium">{{ session('error') }}</p>
+                @if (session()->has('error'))
+                    <div class="mb-4 text-right">
+                        <div
+                            class="pl-6 pr-16 py-4 bg-white border-l-4 border-red-500 shadow-md rounded-r-lg inline-block ml-auto">
+                            <div class="flex items-center">
+                                <span class="inline-block mr-2">
+                                    <svg width="40" height="40" viewBox="0 0 40 40"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="20" cy="20" r="20" fill="#FF0000" />
+                                        <path d="M14 14L26 26M26 14L14 26" stroke="white" stroke-width="4" />
+                                    </svg>
+                                </span>
+                                <p class="text-red-800 font-medium">{{ session('error') }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {{--
-                    <!-- ▲▲▲▲エラーメッセージ(全ページで共通)▲▲▲▲　-->
-                --}}
                 @endif
 
                 <div class="pc_container ml-80">
@@ -198,10 +201,16 @@
             </main>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
 
 </body>
 
