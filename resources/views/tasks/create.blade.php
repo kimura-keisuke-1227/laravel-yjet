@@ -46,6 +46,10 @@
                         <input id="project_name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
                             type="text" name="task_name">
                     </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2" for="title">メモ</label>
+                        <textarea  rea id="remark" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" name="remark" rows=10>{{$work->remark}}</textarea>
+                    </div>
 
                     <div class="flex px-6 pb-4 border-b">
                         <div class="ml-auto">
