@@ -284,9 +284,18 @@ class WorkController extends Controller
         $user_id           = $request['user_id'];
         $subcontractor_id = $request['subcontractor_id'];
 
+        // 条件に基づいて処理を分岐
+        if ($start_date === null && $end_date === null && $user_id == 0 && $subcontractor_id == 0) {
+            Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' No filters specified.');
+            // 検索条件が指定されていない場合、特定の処理（例: 空データを返す等）を実行
+            return redirect()->route('show_compute_detailed_summary_form')->with('success', '検索条件が指定されていません。');
+        } else {
+            Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' filters provided, proceeding to query.');
+            // 検索条件が指定されている場合、次の処理へ
+            return self::show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractor_id);
+        }
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return self::show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractor_id);
     }
 
     private function show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractor_id)
@@ -329,7 +338,7 @@ class WorkController extends Controller
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
         // 検索条件が1つも指定されていない場合はnull
-        $hasFilters = $user_id != 0 || $subcontractor_id != 0 || ($start_date !== null && $end_date !== null);
+        $hasFilters = $user_id == 0 || $subcontractor_id != 0 || ($start_date !== null && $end_date !== null);
         if (!$hasFilters) {
             Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end! return [] ');
             return null;
