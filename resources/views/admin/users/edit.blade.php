@@ -42,6 +42,44 @@
             </form>
         </div>
     </div>
+    <div class="container px-4 mx-auto">
+        <div class="py-4 bg-white rounded">
+            <form action="{{Route("user.update",['user' => $user->id])}}" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="flex px-6 pb-4 border-b">
+                    <h3 class="text-xl font-bold">担当プロジェクト一覧</h3>
+                </div>
+
+                <div class="pt-4 px-6">
+                    <table class='table table-striped'>
+                        <tr>
+                            <th>ID</th>
+                            <th>プロジェクト名</th>
+                            <th>開始日</th>
+                            <th>終了日</th>
+                            <th>非表示</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        @foreach ($projects as $project)
+                            <tr>
+                                <td>{{ $project -> id}}</td>
+                                <td>{{ $project -> project_name }}</td>
+                                <td>{{ $project -> start_date }}</td>
+                                <td>{{ $project -> end_date }}</td>
+                                <td>@if ($project->is_expire)
+                                        非表示
+                                @endif</td>
+                                <td><td><a href="{{Route('project.edit',[ 'project' => $project -> id])}}">詳細・修正</a></td></td>
+                            </tr>
+                        @endforeach
+                    </table>
+
+                </div>
+            </form>
+        </div>
+    </div>
 </section>
 
 <script>
