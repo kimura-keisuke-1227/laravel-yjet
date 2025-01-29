@@ -271,18 +271,24 @@ class WorkController extends Controller
         $user_id = 0;
         $subcontractors_id = 0;
 
+        $order_by = 1;
+
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return self::show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractors_id);
+        return self::show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractors_id,$order_by);
     }
 
     public function compute_detailed_summary_form(Request $request)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
+        //検索条件
         $start_date        = $request['start_date'];
         $end_date          = $request['end_date'];
         $user_id           = $request['user_id'];
-        $subcontractor_id = $request['subcontractor_id'];
+        $subcontractor_id  = $request['subcontractor_id'];
+
+        //並び順
+        $order_by = $request['order_by'];
 
         // 条件に基づいて処理を分岐
         if ($start_date === null && $end_date === null && $user_id == 0 && $subcontractor_id == 0) {
@@ -292,13 +298,13 @@ class WorkController extends Controller
         } else {
             Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' filters provided, proceeding to query.');
             // 検索条件が指定されている場合、次の処理へ
-            return self::show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractor_id);
+            return self::show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractor_id,$order_by);
         }
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
     }
 
-    private function show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractor_id)
+    private function show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractor_id,$order_by)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
