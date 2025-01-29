@@ -45,7 +45,7 @@ class WorkController extends Controller
         $work->save();
         $project = $task->project;
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('project.edit', ['project' => $project->id]))-> with('success',$task->task_name.'　に作業データを追加しました。');
+        return redirect(Route('project.edit', ['project' => $project->id]))->with('success', $task->task_name . '　に作業データを追加しました。');
     }
 
     /**
@@ -57,7 +57,7 @@ class WorkController extends Controller
         $validated = $request->validated();
         Work::create($validated);
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('work.create'))-> with('success','作業データを登録しました。');
+        return redirect(Route('work.create'))->with('success', '作業データを登録しました。');
     }
 
     /**
@@ -98,7 +98,7 @@ class WorkController extends Controller
         $users = User::query()
             ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('project.edit',['project' => $work->task->project]))-> with('success','作業データを更新しました。');
+        return redirect(Route('project.edit', ['project' => $work->task->project]))->with('success', '作業データを更新しました。');
     }
 
 
@@ -130,7 +130,7 @@ class WorkController extends Controller
         }
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('project.edit', ['project' => $project->id]))-> with('success','プロジェクト内の作業データを一括更新しました。');
+        return redirect(Route('project.edit', ['project' => $project->id]))->with('success', 'プロジェクト内の作業データを一括更新しました。');
     }
 
     public function singleUpdate(UpdateWorkRequest $request, Work $work)
@@ -162,7 +162,8 @@ class WorkController extends Controller
     //     ]))-> with('success','作業データを削除しました。');
     // }
 
-    public function work_delete(Work $work){
+    public function work_delete(Work $work)
+    {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         $project = $work->task->project;
         $work->delete();
@@ -172,8 +173,7 @@ class WorkController extends Controller
         return redirect(Route('project.edit', [
             'project' => $project->id,
             'users' => $users
-        ]))-> with('success','作業データを削除しました。');
-
+        ]))->with('success', '作業データを削除しました。');
     }
 
     public function weekly()
@@ -187,7 +187,7 @@ class WorkController extends Controller
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
 
-        return self::get_weekly_view($weekly,date("Y-m-d"),7,$start_date);
+        return self::get_weekly_view($weekly, date("Y-m-d"), 7, $start_date);
     }
 
     public function weekly_with_base_date(Request $request)
@@ -207,10 +207,11 @@ class WorkController extends Controller
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
 
-        return self::get_weekly_view($weekly,$end_date,$days,$start_date);
+        return self::get_weekly_view($weekly, $end_date, $days, $start_date);
     }
 
-    private function get_weekly_data_by_sdate_edate($start_date, $end_date){
+    private function get_weekly_data_by_sdate_edate($start_date, $end_date)
+    {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         $weekly = DB::table('works')
             ->join('subcontractors', 'works.subcontractor_id', '=', 'subcontractors.id')
@@ -223,14 +224,15 @@ class WorkController extends Controller
             ->whereBetween('works.date', [$start_date, $end_date]) // $start_date と $end_date を条件に使用
             ->groupBy('subcontractors.id', 'subcontractors.subcontractor_name'); // id と name でグループ化
 
-            Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $weekly->toSql());
-            $weekly = $weekly->get();
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $weekly->toSql());
+        $weekly = $weekly->get();
 
-            Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-            return $weekly;
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return $weekly;
     }
 
-    private function get_weekly_view($weekly, $base_date, $days,$start_date){
+    private function get_weekly_view($weekly, $base_date, $days, $start_date)
+    {
         return view('work.weekly', [
             'weekly' => $weekly,
             'base_date' => $base_date,
@@ -256,10 +258,11 @@ class WorkController extends Controller
         $new_work->save();
         $project = $task->project;
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('project.edit', ['project' => $project->id]))-> with('success','作業データを複製しました。');
+        return redirect(Route('project.edit', ['project' => $project->id]))->with('success', '作業データを複製しました。');
     }
 
-    public function show_compute_detailed_summary_form(){
+    public function show_compute_detailed_summary_form()
+    {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
         $start_date = Carbon::now()->subDays(6)->toDateString();
@@ -269,10 +272,11 @@ class WorkController extends Controller
         $subcontractors_id = 0;
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return self::show_compute_detailed_summary_form_with_summary($start_date,$end_date,$user_id,$subcontractors_id);
+        return self::show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractors_id);
     }
 
-    public function compute_detailed_summary_form(Request $request){
+    public function compute_detailed_summary_form(Request $request)
+    {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
         $start_date        = $request['start_date'];
@@ -282,10 +286,11 @@ class WorkController extends Controller
 
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return self::show_compute_detailed_summary_form_with_summary($start_date,$end_date,$user_id,$subcontractor_id);
+        return self::show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractor_id);
     }
 
-    private function show_compute_detailed_summary_form_with_summary($start_date,$end_date,$user_id,$subcontractor_id){
+    private function show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractor_id)
+    {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
         // パラメータをまとめて配列形式でログに記録
@@ -296,21 +301,61 @@ class WorkController extends Controller
             'subcontractor_id' => $subcontractor_id,
         ]);
 
-        //発注者と外注先を取得
-        $users = User::query()
-            ->get();
-        $subcontractors = Subcontractor::query()
-            ->get();
+        // 発注者と外注先を取得
+        $users = User::all();
+        $subcontractors = Subcontractor::all();
+
+        // 週次集計データを取得（新しい関数を呼び出し）
+        $weekly = $this->compute_weekly_summary($start_date, $end_date, $user_id, $subcontractor_id);
+
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
 
-        return view('work.compute_detailed_summary',[
+        return view('work.compute_detailed_summary', [
             'start_date' => $start_date,
             'end_date' => $end_date,
-            'weekly' => [],
+            'weekly' => $weekly,
             'users' => $users,
             'subcontractors' => $subcontractors,
             'user_id' => $user_id,
             'subcontractor_id' => $subcontractor_id,
         ]);
+    }
+
+    /**
+     * 週次集計データを取得する関数
+     */
+    private function compute_weekly_summary($start_date, $end_date, $user_id, $subcontractor_id)
+    {
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+        // 検索条件が1つも指定されていない場合はnull
+        $hasFilters = $user_id != 0 || $subcontractor_id != 0 || ($start_date !== null && $end_date !== null);
+        if (!$hasFilters) {
+            Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end! return [] ');
+            return null;
+        }
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end! get from Database.');
+
+        $weekly = Work::query()
+            ->when($user_id != 0, function ($query) use ($user_id) {
+                Log::debug(__METHOD__ . '(' . __LINE__ . ') user_id:' . $user_id);
+                return $query->where('user_id', $user_id);
+            })
+            ->when($subcontractor_id != 0, function ($query) use ($subcontractor_id) {
+                Log::debug(__METHOD__ . '(' . __LINE__ . ') subcontractor_id:' . $subcontractor_id);
+                return $query->where('subcontractor_id', $subcontractor_id);
+            })
+            ->when($start_date !== null, function ($query) use ($start_date) {
+                Log::debug(__METHOD__ . '(' . __LINE__ . ') start_date:' . $start_date);
+                return $query->where('date', '>=', $start_date);
+            })
+            ->when($end_date !== null, function ($query) use ($end_date) {
+                Log::debug(__METHOD__ . '(' . __LINE__ . ') end_date:' . $end_date);
+                return $query->where('date', '<=', $end_date);
+            })
+            ->get();
+
+        return $weekly;
     }
 }
