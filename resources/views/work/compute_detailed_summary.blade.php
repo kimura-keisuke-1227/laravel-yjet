@@ -79,7 +79,7 @@
         @if (is_null($weekly))
             <p class="text-danger">検索条件が指定されていません</p>
         @elseif ($weekly->isEmpty())
-            <p class="text-warning">該当データが存在しません</p>
+            <p class="text-dark">該当データが存在しません</p>
         @else
             <h3>作業記録</h3>
             <table class='table table-striped'>
