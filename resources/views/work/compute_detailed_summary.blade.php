@@ -49,9 +49,10 @@
                     <select id="order_by"
                         class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded"
                         name="order_by">
-                        <option value="1">
-                            未選択
-                        </option>
+                        <option value="1" @if ($order_by==1)selected @endif>発注者</option>
+                        <option value="2" @if ($order_by==2)selected @endif>発注先</option>
+                        <option value="3" @if ($order_by==3)selected @endif>タスク</option>
+                        <option value="4" @if ($order_by==4)selected @endif>日付</option>
                     </select>
                 </div>
                 <div class="d-flex justify-content-end">
