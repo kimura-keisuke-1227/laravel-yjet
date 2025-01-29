@@ -27,7 +27,7 @@
           <img class="w-20 h-20 object-cover rounded-full" src="/images/index/foliage-plant.jpg" alt="">
           <div class="ml-4 w-56">
             <h3 class="mb-1 text-2xl font-heading text-left text-blue-500">清潔な環境</h3>
-            <p class="text-left text-gray-500 text-sm">2022年2月にリニューアル!! <br>24時間常に換気<br> 最新型空気清浄機を設置</p>
+            <p class="text-left text-gray-500 text-sm">2022年2月にリニューアル!! <br>24時間(分)常に換気<br> 最新型空気清浄機を設置</p>
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
           <img class="w-20 h-20 object-cover rounded-full" src="/images/index/sanitizer.jpg" alt="">
           <div class="ml-4 w-56">
             <h3 class="mb-1 text-2xl font-heading text-left text-blue-500">衛生管理</h3>
-            <p class="text-left text-gray-500 text-sm">店員・ゲストの検温<br> マスクの常時着用<br> 1時間毎に全ての設備を消毒</p>
+            <p class="text-left text-gray-500 text-sm">店員・ゲストの検温<br> マスクの常時着用<br> 1時間(分)毎に全ての設備を消毒</p>
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
 
 <section class="mt-24 container mx-auto">
   <p class="text-center text-2xl">お知らせ</p>
-  <h2 class="mt-2 font-bold font-heading text-center text-3xl">営業時間や新メンバーなど様々な情報をお届け</h2>
+  <h2 class="mt-2 font-bold font-heading text-center text-3xl">営業時間(分)や新メンバーなど様々な情報をお届け</h2>
 
   <ul class="mt-8">
     <li class="flex py-4 border-t border-b"><p class="font-bold w-40">2022. 3. 4（水）</p><p class="bg-gray-100 text-gray-400 px-3">カテゴリ</p><a href="#" class="ml-4 text-blue-500">キャットフードなどの販売をはじめました</a></li>
@@ -181,7 +181,7 @@
       <div class="text-left lg:ml-8 px-8">
         <p class="font-bold text-3xl pb-5">ねこカフェららべる</p>
         <dl>
-          <dt class="text-xl font-medium">営業時間</dt>
+          <dt class="text-xl font-medium">営業時間(分)</dt>
           <dd class="pl-12 text-lg"><span class="mr-6">平日</span>11:00〜20:00<span class="ml-6">（L.O. 19:15）</span></dd>
           <dd class="pl-12 text-lg"><span class="mr-1">土日祝 </span>11:00〜18:00<span class="ml-6">（L.O. 17:15）</span></dd>
           <dt class="mt-5 text-xl font-medium">住所</dt>

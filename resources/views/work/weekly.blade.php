@@ -30,8 +30,8 @@
         <table class='table table-striped'>
             <tr>
                 <th>発注先</th>
-                <th>予定時間</th>
-                <th>実際時間</th>
+                <th>予定時間(分)</th>
+                <th>実際時間(分)</th>
             </tr>
             @foreach ($weekly as $data)
                 <tr>

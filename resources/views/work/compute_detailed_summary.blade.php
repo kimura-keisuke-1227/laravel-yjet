@@ -91,8 +91,8 @@
                     <th>プロジェクト</th>
                     <th>タスク</th>
                     <th>日付</th>
-                    <th>予定時間</th>
-                    <th>実際時間</th>
+                    <th>予定時間(分)</th>
+                    <th>実際時間(分)</th>
                     <th>明細</th>
                 </tr>
                 @foreach ($weekly as $work)

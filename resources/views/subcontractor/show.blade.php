@@ -53,8 +53,8 @@
                         <th>タスク</th>
                         <th>発注者</th>
                         <th>日付</th>
-                        <th>予定時間</th>
-                        <th>実時間</th>
+                        <th>予定時間(分)</th>
+                        <th>実時間(分)</th>
                         <th></th>
                     </tr>
                     @foreach ($works as $work)
