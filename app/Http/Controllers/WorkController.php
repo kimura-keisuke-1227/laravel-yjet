@@ -274,7 +274,7 @@ class WorkController extends Controller
         $order_by = 1;
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return self::show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractors_id,$order_by);
+        return self::show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractors_id, $order_by);
     }
 
     public function compute_detailed_summary_form(Request $request)
@@ -294,17 +294,17 @@ class WorkController extends Controller
         if ($start_date === null && $end_date === null && $user_id == 0 && $subcontractor_id == 0) {
             Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' No filters specified.');
             // 検索条件が指定されていない場合、特定の処理（例: 空データを返す等）を実行
-            return redirect(Route('show_compute_detailed_summary_form'))-> with('error','検索条件が指定されていません');
+            return redirect(Route('show_compute_detailed_summary_form'))->with('error', '検索条件が指定されていません');
         } else {
             Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' filters provided, proceeding to query.');
             // 検索条件が指定されている場合、次の処理へ
-            return self::show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractor_id,$order_by);
+            return self::show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractor_id, $order_by);
         }
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
     }
 
-    private function show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractor_id,$order_by)
+    private function show_compute_detailed_summary_form_with_summary($start_date, $end_date, $user_id, $subcontractor_id, $order_by)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
@@ -321,7 +321,7 @@ class WorkController extends Controller
         $subcontractors = Subcontractor::all();
 
         // 週次集計データを取得（新しい関数を呼び出し）
-        $weekly = $this->compute_weekly_summary($start_date, $end_date, $user_id, $subcontractor_id,$order_by);
+        $weekly = $this->compute_weekly_summary($start_date, $end_date, $user_id, $subcontractor_id, $order_by);
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
 
@@ -340,7 +340,7 @@ class WorkController extends Controller
     /**
      * 週次集計データを取得する関数
      */
-    private function compute_weekly_summary($start_date, $end_date, $user_id, $subcontractor_id,$order_by)
+    private function compute_weekly_summary($start_date, $end_date, $user_id, $subcontractor_id, $order_by)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
@@ -367,11 +367,16 @@ class WorkController extends Controller
             ->when($end_date !== null, function ($query) use ($end_date) {
                 Log::debug(__METHOD__ . '(' . __LINE__ . ') end_date:' . $end_date);
                 return $query->where('date', '<=', $end_date);
-            });
-
-        $weekly = $weekly->orderBy(self::get_order_column($order_by));
+            })
+            ->join('subcontractors', 'subcontractors.id', '=', 'works.subcontractor_id') // subcontractorsテーブルを結合
+            ->select(
+                'works.*',
+                'subcontractors.subcontractor_code',
+                'subcontractors.subcontractor_name'
+            )
+            ->orderBy(self::get_order_column($order_by));
         Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $weekly->toSql());
-        $weekly = $weekly ->get();
+        $weekly = $weekly->get();
 
         Log::debug(__METHOD__ . '(' . __LINE__ . ')' . ' Weekly Data:', $weekly->toArray());
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end! get from Database.');
@@ -379,19 +384,20 @@ class WorkController extends Controller
         return $weekly;
     }
 
-    private function get_order_column($order_by){
+    private function get_order_column($order_by)
+    {
         switch ($order_by) {
             case 1:
-                $order_column = Work::CLM_NAME_OF_USER_ID;
+                $order_column = Work::TABLE_NAME_OF_WORK . '.' . Work::CLM_NAME_OF_USER_ID;
                 break;
             case 2:
-                $order_column =  Work::CLM_NAME_OF_OUT_SOURCE_ID;
+                $order_column =  Subcontractor::TABLE_NAME_OF_SUBCONTRACTOR . '.' . Subcontractor::CLM_NAME_OF_SUBCONTRACTOR_NAME;
                 break;
             case 3:
-                $order_column =  Work::CLM_NAME_OF_TASK_ID;
+                $order_column =  Work::TABLE_NAME_OF_WORK . '.' . Work::CLM_NAME_OF_TASK_ID;
                 break;
             case 4:
-                $order_column =  Work::CLM_NAME_OF_WORK_DATE;
+                $order_column = Work::TABLE_NAME_OF_WORK . '.' . Work::CLM_NAME_OF_WORK_DATE;
                 break;
         }
 
