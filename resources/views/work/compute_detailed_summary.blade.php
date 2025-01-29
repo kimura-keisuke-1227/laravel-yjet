@@ -44,6 +44,16 @@
                     <input id="end_date" class="form-control" type="date" name="end_date" value="{{ $end_date }}"
                         max="2382-12-31">
                 </div>
+                <div class="form-group mb-3">
+                    <label for="order_by" class="form-label">並び順</label>
+                    <select id="order_by"
+                        class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded"
+                        name="order_by">
+                        <option value="1">
+                            未選択
+                        </option>
+                    </select>
+                </div>
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">表示</button>
                 </div>
