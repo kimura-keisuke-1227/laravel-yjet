@@ -321,7 +321,7 @@ class WorkController extends Controller
         $subcontractors = Subcontractor::all();
 
         // 週次集計データを取得（新しい関数を呼び出し）
-        $weekly = $this->compute_weekly_summary($start_date, $end_date, $user_id, $subcontractor_id);
+        $weekly = $this->compute_weekly_summary($start_date, $end_date, $user_id, $subcontractor_id,$order_by);
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
 
@@ -340,7 +340,7 @@ class WorkController extends Controller
     /**
      * 週次集計データを取得する関数
      */
-    private function compute_weekly_summary($start_date, $end_date, $user_id, $subcontractor_id)
+    private function compute_weekly_summary($start_date, $end_date, $user_id, $subcontractor_id,$order_by)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
