@@ -267,8 +267,8 @@ class WorkController extends Controller
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('work.compute_detailed_summary',[
+            'start_date' => $start_date,
             'end_date' => $end_date,
-            'days' => 7,
             'weekly' => [],
         ]);
     }

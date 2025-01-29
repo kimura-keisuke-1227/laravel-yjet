@@ -7,12 +7,12 @@
             <form action="{{ Route('weekly.with_date') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group mb-3">
-                    <label for="base_date" class="form-label">基準日</label>
-                    <input id="base_date" class="form-control" type="date" name="base_date" value="{{ $end_date }}" max="2382-12-31">
+                    <label for="base_date" class="form-label">開始日</label>
+                    <input id="base_date" class="form-control" type="date" name="base_date" value="{{ $start_date }}" max="2382-12-31">
                 </div>
                 <div class="form-group mb-3">
-                    <label for="days_before" class="form-label">期間（日数）</label>
-                    <input id="days_before" class="form-control" type="number" name="days_before" value="{{ $days }}"> 日間
+                    <label for="base_date" class="form-label">終了日</label>
+                    <input id="base_date" class="form-control" type="date" name="base_date" value="{{ $end_date }}" max="2382-12-31">
                 </div>
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">表示</button>
