@@ -259,9 +259,13 @@ class WorkController extends Controller
         return redirect(Route('project.edit', ['project' => $project->id]))-> with('success','作業データを複製しました。');
     }
 
-    public function compute_detailed_summary(Request $request){
+    public function show_compute_detailed_summary_form(){
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return 'hoge';
+        return view('work.compute_detailed_summary',[
+            'base_date' => '2025-01-01',
+            'days' => 7,
+            'weekly' => [],
+        ]);
     }
 }

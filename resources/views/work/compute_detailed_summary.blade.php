@@ -1,32 +1,25 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
-    <h2>詳細</h2>
-    <table class='table table-striped'>
-    <form action="{{ Route('weekly.with_date')}}" method="POST"
-    enctype="multipart/form-data">
-            @csrf
-            <tr>
-                <td>
-                    <input id="base_date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="date" name="base_date" value="{{$base_date}}"  max="2382-12-31"></td>
-                </td>
-                <td>
-                    <input id="days_before" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="number" name="days_before" value="{{$days}}">日間
-                </td>
-                <td>
-                    <div class="flex px-6 pb-4 border-b">
-                        <div class="ml-auto">
-                            <button type="submit"
-                                class="py-2 px-3 text-xs text-white font-semibold bg-indigo-500 rounded-md">表示</button>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </form>
-    </table>
-        <br>
-        <br>
-        <h3>{{$start_date}}から{{$base_date}}までの{{$days}}日間の集計</h3>
+        <h2 class="mb-4">詳細</h2>
+
+        <div class="card p-4 mb-4">
+            <form action="{{ Route('weekly.with_date') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group mb-3">
+                    <label for="base_date" class="form-label">基準日</label>
+                    <input id="base_date" class="form-control" type="date" name="base_date" value="{{ $base_date }}" max="2382-12-31">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="days_before" class="form-label">期間（日数）</label>
+                    <input id="days_before" class="form-control" type="number" name="days_before" value="{{ $days }}"> 日間
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">表示</button>
+                </div>
+            </form>
+        </div>
+
         <table class='table table-striped'>
             <tr>
                 <th>発注先</th>
@@ -35,9 +28,11 @@
             </tr>
             @foreach ($weekly as $data)
                 <tr>
-                    <td><a href="{{Route('subcontractor.show',['subcontractor' => $data->subcontractor_id])}}">{{ $data -> subcontractor_name }}</a></td>
-                    <td>{{ $data -> total_scheduled_time}}</td>
-                    <td>{{ $data -> total_actual_time}}</td>
+                    <td><a
+                            href="{{ Route('subcontractor.show', ['subcontractor' => $data->subcontractor_id]) }}">{{ $data->subcontractor_name }}</a>
+                    </td>
+                    <td>{{ $data->total_scheduled_time }}</td>
+                    <td>{{ $data->total_actual_time }}</td>
                 </tr>
             @endforeach
         </table>

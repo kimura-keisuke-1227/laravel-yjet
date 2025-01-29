@@ -31,6 +31,6 @@ Route::post('/weekly_with_base_date',[WorkController::class,'weekly_with_base_da
 
 Route::post('/work/delete/{work}',[WorkController::class,'work_delete'])->name('work.delete');
 
-Route::get('/compute_detailed_summary',[WorkController::class,'compute_detailed_summary'])
+Route::get('/compute_detailed_summary',[WorkController::class,'show_compute_detailed_summary_form'])
     ->name('compute_detailed_summary');
 
