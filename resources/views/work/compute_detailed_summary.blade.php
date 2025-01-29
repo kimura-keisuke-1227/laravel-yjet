@@ -8,7 +8,7 @@
                 @csrf
 
                 <div class="form-group mb-3">
-                    <label for="base_date" class="form-label">発注者</label>
+                    <label for="user" class="form-label">発注者</label>
                     <select id="user" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded"
                         name="user_id">
                         <option value="0">
@@ -21,7 +21,7 @@
                     </select>
                 </div>
                 <div class="form-group mb-3">
-                    <label for="base_date" class="form-label">外注先</label>
+                    <label for="subcontractor" class="form-label">外注先</label>
                     <select id="subcontractor"
                         class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded"
                         name="subcontractor_id">
@@ -35,13 +35,13 @@
                     </select>
                 </div>
                 <div class="form-group mb-3">
-                    <label for="base_date" class="form-label">開始日</label>
-                    <input id="base_date" class="form-control" type="date" name="start_date" value="{{ $start_date }}"
+                    <label for="start_data" class="form-label">開始日</label>
+                    <input id="start_data" class="form-control" type="date" name="start_date" value="{{ $start_date }}"
                         max="2382-12-31">
                 </div>
                 <div class="form-group mb-3">
-                    <label for="base_date" class="form-label">終了日</label>
-                    <input id="base_date" class="form-control" type="date" name="end_date" value="{{ $end_date }}"
+                    <label for="end_date" class="form-label">終了日</label>
+                    <input id="end_date" class="form-control" type="date" name="end_date" value="{{ $end_date }}"
                         max="2382-12-31">
                 </div>
                 <div class="d-flex justify-content-end">
