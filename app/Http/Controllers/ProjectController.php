@@ -99,7 +99,14 @@ class ProjectController extends Controller
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
+        // リクエストの内容をログに出力
+        Log::debug('Request Data: ' . json_encode($request->all()));
+
+
         $validated = $request -> validated();
+        if (!isset($data['is_expire'])) {
+            $project['is_expire'] = 0; // チェックボックスが外れている場合は 0 をセット
+        }
         $project ->update($validated);
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
