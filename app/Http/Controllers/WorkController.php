@@ -309,6 +309,8 @@ class WorkController extends Controller
             'weekly' => [],
             'users' => $users,
             'subcontractors' => $subcontractors,
+            'user_id' => $user_id,
+            'subcontractor_id' => $subcontractor_id,
         ]);
     }
 }

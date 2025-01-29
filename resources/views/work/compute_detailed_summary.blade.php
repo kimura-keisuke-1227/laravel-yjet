@@ -15,7 +15,9 @@
                         </option>
                         @foreach($users as $user)
                         <option value="{{$user -> id}}"
-
+                            @if ($user_id == $user->id)
+                                selected
+                            @endif
                             >{{ $user->name }}</option>
                         @endforeach
                     </select>
@@ -28,7 +30,9 @@
                         </option>
                         @foreach($subcontractors as $subcontractor)
                         <option value="{{$subcontractor -> id}}"
-
+                            @if ($subcontractor_id == $subcontractor->id)
+                                selected
+                            @endif
                             >{{ $subcontractor->subcontractor_code . '_' . $subcontractor->subcontractor_name }}</option>
                         @endforeach
                     </select>
