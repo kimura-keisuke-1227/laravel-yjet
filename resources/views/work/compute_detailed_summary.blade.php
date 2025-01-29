@@ -8,7 +8,7 @@
                 @csrf
                 <div class="form-group mb-3">
                     <label for="base_date" class="form-label">基準日</label>
-                    <input id="base_date" class="form-control" type="date" name="base_date" value="{{ $base_date }}" max="2382-12-31">
+                    <input id="base_date" class="form-control" type="date" name="base_date" value="{{ $end_date }}" max="2382-12-31">
                 </div>
                 <div class="form-group mb-3">
                     <label for="days_before" class="form-label">期間（日数）</label>

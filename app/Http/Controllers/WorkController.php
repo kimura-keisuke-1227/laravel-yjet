@@ -261,9 +261,13 @@ class WorkController extends Controller
 
     public function show_compute_detailed_summary_form(){
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+        $start_date = Carbon::now()->subDays(6)->toDateString();
+        $end_date   = Carbon::now()->toDateString();
+
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('work.compute_detailed_summary',[
-            'base_date' => '2025-01-01',
+            'end_date' => $end_date,
             'days' => 7,
             'weekly' => [],
         ]);
