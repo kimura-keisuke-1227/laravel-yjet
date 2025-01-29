@@ -223,11 +223,12 @@ class WorkController extends Controller
                 DB::raw('SUM(works.scheduled_time) as total_scheduled_time')
             )
             ->whereBetween('works.date', [$start_date, $end_date]) // $start_date と $end_date を条件に使用
-            ->groupBy('subcontractors.id', 'subcontractors.subcontractor_name')
-            ->orderBy('subcontractor_code'); // id と name でグループ化
+            ->groupBy('subcontractors.id', 'subcontractors.subcontractor_code', 'subcontractors.subcontractor_name') // subcontracor_code を追加
+            ->orderBy('subcontractor_code');
 
         Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $weekly->toSql());
         $weekly = $weekly->get();
+
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return $weekly;
