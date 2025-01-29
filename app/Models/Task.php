@@ -14,6 +14,8 @@ class Task extends Model
 
     const CLM_NAME_OF_PROJECT_ID = 'project_id';
     const CLM_NAME_OF_TASK_NAME = 'task_name';
+    const CLM_NAME_OF_REMARK = 'remark';
+    const CLM_NAME_OF_IS_EXPIRE = 'is_expire';
 
     protected $fillable = [
         self::CLM_NAME_OF_PROJECT_ID,
