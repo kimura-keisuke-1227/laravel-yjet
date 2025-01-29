@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string(ReportHeader::CLM_NAME_OF_REPORT_CODE);
             $table->string(ReportHeader::CLM_NAME_OF_REPORT_NAME);
-            $table->string(ReportHeader::CLM_NAME_OF_IS_ACTIVE);
+            $table->text(ReportHeader::CLM_NAME_OF_REPORT_REMARK);
+            $table->boolean(ReportHeader::CLM_NAME_OF_IS_ACTIVE);
             $table->timestamps();
         });
     }
