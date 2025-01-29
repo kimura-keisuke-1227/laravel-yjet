@@ -55,7 +55,9 @@ class ReportHeaderController extends Controller
      */
     public function show(ReportHeader $reportHeader)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return 'fuga';
     }
 
     /**
