@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Project;
+use App\Models\Subcontractor;
 
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -41,18 +43,29 @@ class UserController extends Controller
 {
     Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
-    // Validate the incoming request data
+    // バリデーション
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
-        // 'password' => 'required|string|min:8|confirmed', // Use 'password_confirmation' for confirmation
     ]);
 
-    // // Add the hashed password to the validated data
-    // $validatedData['password'] = bcrypt($validatedData['password']);
+    DB::transaction(function () use ($request, &$user) {
+        // Userの作成
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
 
-    // Create the user
-    User::create($validatedData);
+        // Subcontractorの作成
+        $subcontractor = Subcontractor::create([
+            Subcontractor::CLM_NAME_OF_SUBCONTRACTOR_NAME => $request->name,
+            Subcontractor::CLM_NAME_OF_SUBCONTRACTOR_CODE => $request[Subcontractor::CLM_NAME_OF_SUBCONTRACTOR_CODE],
+        ]);
+
+        // Userにsubcontractor_idを設定して保存
+        $user->subcontractor_id = $subcontractor->id;
+        $user->save();
+    });
 
     Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
 
