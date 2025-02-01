@@ -13,7 +13,7 @@
                 <th>担当者</th>
                 <th>開始日</th>
                 <th>終了日</th>
-                <th></th>
+                <th>金額</th>
                 <th></th>
             </tr>
             @foreach ($projects as $project)
@@ -28,7 +28,8 @@
                     @endif</td>
                     <td>{{ $project -> start_date }}</td>
                     <td>{{ $project -> end_date }}</td>
-                    <td><td><a href="{{Route('project.edit',[ 'project' => $project -> id])}}">詳細・修正</a></td></td>
+                    <td>{{ number_format($project->amount) }}円</td>
+                    <td><a href="{{Route('project.edit',[ 'project' => $project -> id])}}">詳細・修正</a></td>
                 </tr>
             @endforeach
         </table>
