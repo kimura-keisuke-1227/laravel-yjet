@@ -32,6 +32,13 @@
                         </option>
                         @endforeach
                     </select>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2" for="title">金額</label>
+                        <input id="amount" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
+                            type="number" name="amount" value="0">
+                    </div>
+
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title"> 開始日</label>
                         <input id="start_date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
