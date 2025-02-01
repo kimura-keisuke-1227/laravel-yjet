@@ -44,29 +44,30 @@
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title">金額</label>
                         <input id="amount" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
-                            type="number" name="amount" value="{{$project->amount}}">
+                            type="number" name="amount" value="{{ $project->amount }}">
                     </div>
 
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title"> 開始日</label>
                         <input id="start_date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
-                            type="date" name="start_date" value="{{ $project->start_date }}"  max="2382-12-31">
+                            type="date" name="start_date" value="{{ $project->start_date }}" max="2382-12-31">
                     </div>
 
 
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title"> 終了日</label>
                         <input id="end_date" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
-                            type="date" name="end_date" value="{{ $project->end_date }}"  max="2382-12-31">
+                            type="date" name="end_date" value="{{ $project->end_date }}" max="2382-12-31">
                     </div>
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title">メモ</label>
-                        <textarea  rea id="remark" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" name="remark" rows=10>{{$project->remark}}</textarea>
+                        <textarea rea id="remark" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" name="remark" rows=10>{{ $project->remark }}</textarea>
                     </div>
 
                     <div class="mb-6">
                         <label class="inline-flex items-center">
-                            <input it="is_expire" type="checkbox" name="is_expire" class="form-checkbox" value="1" @if ($project->is_expire) checked @endif>
+                            <input it="is_expire" type="checkbox" name="is_expire" class="form-checkbox" value="1"
+                                @if ($project->is_expire) checked @endif>
                             <span class="ml-2 text-sm">非表示にする</span>
                         </label>
                     </div>
@@ -133,6 +134,7 @@
                                     <th>日付</th>
                                     <th>予定時間(分)</th>
                                     <th>実際時間(分)</th>
+                                    <th>金額(円)</th>
                                     <th>メモ</th>
                                     <th></th>
                                     <th></th>
@@ -167,7 +169,7 @@
                                         </td>
                                         <td><input id="date"
                                                 class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
-                                                type="date" name="date_{{ $work->id }}"  max="2382-12-31"
+                                                type="date" name="date_{{ $work->id }}" max="2382-12-31"
                                                 value="{{ $work->date }}"></td>
                                         <td><input id="scheduled_time"
                                                 class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
@@ -177,6 +179,10 @@
                                                 class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
                                                 type="number" name="actual_time_{{ $work->id }}"
                                                 value="{{ $work->actual_time }}"></td>
+                                        <td><input id="amount{{ $work->id }}"
+                                                class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
+                                                type="number" name="amount_{{ $work->id }}"
+                                                value="{{ $work->amount }}"></td>
                                         <td>
                                             <a href="{{ Route('work.edit', ['work' => $work]) }}">
                                                 @if ($work->remark == '')
@@ -188,7 +194,7 @@
                                         </td>
                                         <td><a href="{{ Route('work.copy', ['work' => $work->id]) }}">コピー</a></td>
                                         <td>
-                                            <a href="{{Route('work.delete',['work' => $work->id])}}">[削除]</a>
+                                            <a href="{{ Route('work.delete', ['work' => $work->id]) }}">[削除]</a>
                                         </td>
                                     </tr>
                                 @endforeach
