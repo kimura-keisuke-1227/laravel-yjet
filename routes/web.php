@@ -39,3 +39,6 @@ Route::post('/compute_detailed_summary',[WorkController::class,'compute_detailed
 Route::get('/calculateWorkCostsByUser',[WorkController::class,'calculateWorkCostsByUserAndSubcontractors'])
     ->name('calculateWorkCostsByUser');
 
+Route::get('/annual',[WorkController::class,'showAnnualSalesSummaryView'])
+    ->name('annual.show');
+
