@@ -52,6 +52,9 @@
                 </div>
 
                 <div class="pt-4 px-6">
+                    @if ($projects->isEmpty())
+                        担当プロジェクトなし
+                    @else
                     <table class='table table-striped'>
                         <tr>
                             {{-- <th>ID</th> --}}
@@ -79,6 +82,7 @@
                             </tr>
                         @endforeach
                     </table>
+                    @endif
 
                 </div>
             </form>
