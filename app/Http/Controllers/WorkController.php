@@ -408,4 +408,45 @@ class WorkController extends Controller
 
         return $order_column;
     }
+
+    public function calculateWorkCostsByUser()
+    {
+        $start_date = date('Y-m-d');
+
+        $end_date = date('Y-m-d');
+
+        $weekly = self::getSummaryDataForUsersSubcontractors($start_date, $end_date);
+
+        return view('work.calculateWorkCostsByClient', [
+            'weekly' => $weekly,
+            'base_date' => '2025-01-01',
+            'days' => 7,
+            'start_date' => '2025-01-01'
+        ]);
+    }
+
+    private function getSummaryDataForUsersSubcontractors($start_date, $end_date)
+    {
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+        $results = DB::table('works')
+            ->select(
+                'users.name as user_name',  // ユーザー名にエイリアスを付ける
+                'users.id as user_id',  // ユーザーIDにエイリアスを付ける
+                'subcontractors.subcontractor_code as subcontractor_code',  // 発注先コードにエイリアスを付ける
+                'subcontractors.subcontractor_name as subcontractor_name',  // 発注先名にエイリアスを付ける
+                'subcontractors.id as subcontractor_id',  // 発注先IDにエイリアスを付ける
+                DB::raw('SUM(works.scheduled_time) AS total_scheduled_time'),  // 予定時間の合計にエイリアスを付ける
+                DB::raw('SUM(works.actual_time) AS total_actual_time')  // 実績時間の合計にエイリアスを付ける
+            )
+            ->leftJoin('users', 'users.id', '=', 'works.user_id')
+            ->leftJoin('subcontractors', 'works.subcontractor_id', '=', 'subcontractors.id')
+            ->whereBetween('works.date', [$start_date, $end_date])
+            ->groupBy('users.id', 'users.name', 'subcontractors.subcontractor_code', 'subcontractors.subcontractor_name', 'subcontractors.id')  // GROUP BYに必要なカラムを追加
+            ->get();
+
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return $results;
+    }
 }
