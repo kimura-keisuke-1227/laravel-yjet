@@ -31,6 +31,10 @@
                         <label class="block text-sm font-medium mb-2" for="name">名前</label>
                         <input id="name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" name="name" value="{{ old('name') }}">
                     </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2" for="subcontractor_code">外注先コード</label>
+                        <input id="name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" name="subcontractor_code" value="{{ old('subcontractor_code') }}">
+                    </div>
 
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="email">メールアドレス</label>
