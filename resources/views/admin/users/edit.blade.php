@@ -44,9 +44,6 @@
     </div>
     <div class="container px-4 mx-auto">
         <div class="py-4 bg-white rounded">
-            <form action="{{Route("user.update",['user' => $user->id])}}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
                 <div class="flex px-6 pb-4 border-b">
                     <h3 class="text-xl font-bold">担当プロジェクト一覧</h3>
                 </div>
@@ -85,7 +82,6 @@
                     @endif
 
                 </div>
-            </form>
         </div>
     </div>
 </section>
