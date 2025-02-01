@@ -317,6 +317,7 @@ class WorkController extends Controller
             'end_date' => $end_date,
             'user_id' => $user_id,
             'subcontractor_id' => $subcontractor_id,
+            'order_by' => $order_by,
         ]);
 
         // 発注者と発注先を取得
