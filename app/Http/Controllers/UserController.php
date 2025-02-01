@@ -69,7 +69,7 @@ class UserController extends Controller
 
     Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
 
-    return redirect()->route('user.index');
+    return redirect()->route('user.index') ->with('success','ユーザーを登録しました。また、作業者としても追加しています。');
 }
 
     /**
