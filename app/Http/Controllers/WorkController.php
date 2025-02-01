@@ -409,7 +409,7 @@ class WorkController extends Controller
         return $order_column;
     }
 
-    public function calculateWorkCostsByUser()
+    public function calculateWorkCostsByUserAndSubcontractors()
     {
         $start_date = date('Y-m-d');
 
@@ -443,6 +443,8 @@ class WorkController extends Controller
             ->leftJoin('subcontractors', 'works.subcontractor_id', '=', 'subcontractors.id')
             ->whereBetween('works.date', [$start_date, $end_date])
             ->groupBy('users.id', 'users.name', 'subcontractors.subcontractor_code', 'subcontractors.subcontractor_name', 'subcontractors.id')  // GROUP BYに必要なカラムを追加
+            ->orderBy('user_id','asc')
+            ->orderBy('subcontractor_code','asc')
             ->get();
 
 
