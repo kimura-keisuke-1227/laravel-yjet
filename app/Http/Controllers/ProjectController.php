@@ -121,7 +121,7 @@ class ProjectController extends Controller
         //
     }
 
-    private function summaryProjectData($user)
+    public function summaryProjectData($user)
     {
         $projects = DB::table('projects')
             ->select(
