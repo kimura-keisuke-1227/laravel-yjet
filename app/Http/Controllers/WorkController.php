@@ -114,6 +114,7 @@ class WorkController extends Controller
             Work::CLM_NAME_OF_WORK_DATE,
             Work::CLM_NAME_OF_SCHEDULED_TIME,
             Work::CLM_NAME_OF_ACTUAL_TIME,
+            Work::CLM_NAME_OF_AMOUNT,
         ];
 
         foreach ($project->tasks as $task) {
