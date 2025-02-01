@@ -19,6 +19,7 @@ class Project extends Model
     const CLM_NAME_OF_USER_ID = 'user_id';
     const CLM_NAME_OF_REMARK = 'remark';
     const CLM_NAME_OF_IS_EXPIRE = 'is_expire';
+    const CLM_NAME_OF_AMOUNT = 'amount';
 
 
     protected $fillable = [
@@ -28,6 +29,7 @@ class Project extends Model
         self::CLM_NAME_OF_USER_ID,
         self::CLM_NAME_OF_REMARK,
         self::CLM_NAME_OF_IS_EXPIRE,
+        self::CLM_NAME_OF_AMOUNT,
     ];
 
     public function tasks()
