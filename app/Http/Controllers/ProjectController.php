@@ -121,26 +121,39 @@ class ProjectController extends Controller
         //
     }
 
-    public function summaryProjectData($user)
+    public static function summaryProjectData($user)
     {
         $projects = DB::table('projects')
             ->select(
-                'projects.id as project_id',  // 主キーを選択
+                'projects.id as project_id',
                 'projects.project_name',
                 DB::raw("IFNULL(users.name, '未選択') AS user_name"),
                 'projects.start_date',
                 'projects.end_date',
                 'projects.amount',
+                'projects.is_expire',
                 DB::raw("IFNULL(SUM(works.amount), 0) AS total_work_amount"),
-                'users.id AS user_id'
+                'users.id as user_id'
             )
             ->leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
             ->leftJoin('works', 'tasks.id', '=', 'works.task_id')
             ->leftJoin('users', 'projects.user_id', '=', 'users.id')
-            ->groupBy('projects.id', 'projects.project_name', 'users.id', 'users.name', 'projects.start_date', 'projects.end_date', 'projects.amount');
+            ->where('projects.user_id', 1)  // projectsテーブルのuser_idを指定
+            ->groupBy(
+                'projects.id',
+                'projects.project_name',
+                'projects.start_date',
+                'projects.end_date',
+                'projects.amount',
+                'projects.is_expire'
+            )
+            ->orderBy('is_expire', 'asc')
+            ->orderBy('start_date', 'desc');
 
-        if($user){
-            $projects = $projects ->where('user_id', $user->id);
+        if ($user) {
+            $projects = $projects->where('projects.user_id', $user->id);
+        } else{
+            $projects = $projects->groupBy('users.id','users.name');
         }
         return $projects;
     }

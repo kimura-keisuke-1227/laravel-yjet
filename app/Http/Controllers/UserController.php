@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Project;
 use App\Models\Subcontractor;
 
+use App\Http\Controllers\ProjectController;
+
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
@@ -87,10 +89,7 @@ class UserController extends Controller
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
-        $projects = Project::query()
-            ->where(Project::CLM_NAME_OF_USER_ID,$user->id);
-        $projects = $projects->orderBy(Project::CLM_NAME_OF_IS_EXPIRE);
-        $projects = $projects->orderBy(Project::CLM_NAME_OF_START_DATE,'desc');
+        $projects = ProjectController::summaryProjectData($user);
 
         Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $projects->toSql());
         $projects = $projects->get();

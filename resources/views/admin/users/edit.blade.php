@@ -54,24 +54,28 @@
                 <div class="pt-4 px-6">
                     <table class='table table-striped'>
                         <tr>
-                            <th>ID</th>
+                            {{-- <th>ID</th> --}}
                             <th>プロジェクト名</th>
                             <th>開始日</th>
                             <th>終了日</th>
+                            <th>受注額</th>
+                            <th>外注費</th>
                             <th>非表示</th>
                             <th></th>
                             <th></th>
                         </tr>
                         @foreach ($projects as $project)
                             <tr>
-                                <td>{{ $project -> id}}</td>
+                                {{-- <td>{{ $project -> project_id}}</td> --}}
                                 <td>{{ $project -> project_name }}</td>
                                 <td>{{ $project -> start_date }}</td>
                                 <td>{{ $project -> end_date }}</td>
+                                <td>{{ $project -> amount }}</td>
+                                <td>{{ $project -> total_work_amount }}</td>
                                 <td>@if ($project->is_expire)
                                         非表示
                                 @endif</td>
-                                <td><td><a href="{{Route('project.edit',[ 'project' => $project -> id])}}">詳細・修正</a></td></td>
+                                <td><td><a href="{{Route('project.edit',[ 'project' => $project -> project_id])}}">詳細・修正</a></td></td>
                             </tr>
                         @endforeach
                     </table>
