@@ -122,39 +122,40 @@ class ProjectController extends Controller
     }
 
     public static function summaryProjectData($user)
-    {
-        $projects = DB::table('projects')
-            ->select(
-                'projects.id as project_id',
-                'projects.project_name',
-                DB::raw("IFNULL(users.name, '未選択') AS user_name"),
-                'projects.start_date',
-                'projects.end_date',
-                'projects.amount',
-                'projects.is_expire',
-                DB::raw("IFNULL(SUM(works.amount), 0) AS total_work_amount"),
-                'users.id as user_id'
-            )
-            ->leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
-            ->leftJoin('works', 'tasks.id', '=', 'works.task_id')
-            ->leftJoin('users', 'projects.user_id', '=', 'users.id')
-            ->where('projects.user_id', 1)  // projectsテーブルのuser_idを指定
-            ->groupBy(
-                'projects.id',
-                'projects.project_name',
-                'projects.start_date',
-                'projects.end_date',
-                'projects.amount',
-                'projects.is_expire'
-            )
-            ->orderBy('is_expire', 'asc')
-            ->orderBy('start_date', 'desc');
+{
+    $projects = DB::table('projects')
+        ->select(
+            'projects.id as project_id',
+            'projects.project_name',
+            DB::raw("IFNULL(users.name, '未選択') AS user_name"),
+            'projects.start_date',
+            'projects.end_date',
+            'projects.amount',
+            'projects.is_expire',
+            DB::raw("IFNULL(SUM(works.amount), 0) AS total_work_amount"),
+            'users.id as user_id'
+        )
+        ->leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
+        ->leftJoin('works', 'tasks.id', '=', 'works.task_id')
+        ->leftJoin('users', 'projects.user_id', '=', 'users.id') // Changed back to leftJoin for users
+        ->where('projects.user_id', '>=', 0)  // This ensures we include user_id 0 or valid user_id
+        ->groupBy(
+            'projects.id',
+            'projects.project_name',
+            'projects.start_date',
+            'projects.end_date',
+            'projects.amount',
+            'projects.is_expire'
+        )
+        ->orderBy('is_expire', 'asc')
+        ->orderBy('start_date', 'desc');
 
-        if ($user) {
-            $projects = $projects->where('projects.user_id', $user->id);
-        } else{
-            $projects = $projects->groupBy('users.id','users.name');
-        }
-        return $projects;
+    if ($user) {
+        $projects = $projects->where('projects.user_id', $user->id);
+    } else {
+        $projects = $projects->groupBy('users.id', 'users.name');
     }
+
+    return $projects;
+}
 }
