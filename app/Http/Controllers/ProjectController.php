@@ -19,21 +19,7 @@ class ProjectController extends Controller
     public function index()
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
-        $projects = DB::table('projects')
-            ->select(
-                'projects.id as project_id',  // 主キーを選択
-                'projects.project_name',
-                DB::raw("IFNULL(users.name, '未選択') AS user_name"),
-                'projects.start_date',
-                'projects.end_date',
-                'projects.amount',
-                DB::raw("IFNULL(SUM(works.amount), 0) AS total_work_amount"),
-                'users.id AS user_id'
-            )
-            ->leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
-            ->leftJoin('works', 'tasks.id', '=', 'works.task_id')
-            ->leftJoin('users', 'projects.user_id', '=', 'users.id')
-            ->groupBy('projects.id', 'projects.project_name', 'users.id', 'users.name', 'projects.start_date', 'projects.end_date', 'projects.amount')
+        $projects = self::summaryProjectData(null)
             ->get();
 
 
@@ -133,5 +119,29 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         //
+    }
+
+    private function summaryProjectData($user)
+    {
+        $projects = DB::table('projects')
+            ->select(
+                'projects.id as project_id',  // 主キーを選択
+                'projects.project_name',
+                DB::raw("IFNULL(users.name, '未選択') AS user_name"),
+                'projects.start_date',
+                'projects.end_date',
+                'projects.amount',
+                DB::raw("IFNULL(SUM(works.amount), 0) AS total_work_amount"),
+                'users.id AS user_id'
+            )
+            ->leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
+            ->leftJoin('works', 'tasks.id', '=', 'works.task_id')
+            ->leftJoin('users', 'projects.user_id', '=', 'users.id')
+            ->groupBy('projects.id', 'projects.project_name', 'users.id', 'users.name', 'projects.start_date', 'projects.end_date', 'projects.amount');
+
+        if($user){
+            $projects = $projects ->where('user_id', $user->id);
+        }
+        return $projects;
     }
 }
