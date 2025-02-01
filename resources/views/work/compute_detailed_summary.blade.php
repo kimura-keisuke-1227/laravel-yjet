@@ -4,7 +4,7 @@
         <h2 class="mb-4">作業検索(条件指定)</h2>
 
         <div class="card p-4 mb-4">
-            <h3>検索条件</h3> 最低１つは指定が必要
+            <h3>検索条件</h3> 最低１つ指定が必要
             <form action="{{ Route('compute_detailed_summary') }}" method="POST" enctype="multipart/form-work">
                 @csrf
 
