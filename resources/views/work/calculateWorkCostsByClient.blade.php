@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
-    <h2>発注先別週次集計</h2>
+    <h2>発注先・作業者別集計</h2>
     <hr>
     <h3>検索条件</h3>
     <table class='table table-striped'>
@@ -28,7 +28,7 @@
     </table>
         <br>
         <br>
-        <h3>{{$start_date}}から{{$base_date}}までの{{$days}}日間の集計(発注先コード昇順)</h3>
+        <h3>{{$start_date}}から{{$base_date}}までの{{$days}}日間の集計(作業者、発注先コード昇順)</h3>
         <table class='table table-striped'>
             <tr>
                 <th>発注者</th>
