@@ -147,8 +147,8 @@ class ProjectController extends Controller
             'projects.amount',
             'projects.is_expire'
         )
-        ->orderBy('is_expire', 'asc')
-        ->orderBy('start_date', 'desc');
+        ->orderBy('is_expire', 'asc') //終了フラグが1のものを後ろに。
+        ->orderBy('start_date', 'asc');
 
     if ($user) {
         $projects = $projects->where('projects.user_id', $user->id);
