@@ -41,4 +41,6 @@ Route::get('/calculateWorkCostsByUser',[WorkController::class,'calculateWorkCost
 
 Route::get('/annual',[WorkController::class,'showAnnualSalesSummaryView'])
     ->name('annual.show');
+Route::get('/annual/{year}',[WorkController::class,'showAnnualSalesSummaryViewOfSelectedYear'])
+    ->name('annual.show.year');
 
