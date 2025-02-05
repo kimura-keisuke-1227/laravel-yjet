@@ -454,24 +454,25 @@ class WorkController extends Controller
     }
 
     public function showAnnualSalesSummaryView()
-{
-    Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+    {
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
-    // 昨年の12月1日と当年の11月最終日を設定
-    $start_date = Carbon::now()->subYear()->startOfYear()->addMonths(11)->setDay(1)->toDateString();
-    $end_date = Carbon::now()->setMonth(11)->setDay(30)->toDateString();  // 修正：2025年11月30日を設定
+        // 昨年の12月1日と当年の11月最終日を設定
+        $start_date = Carbon::now()->subYear()->startOfYear()->addMonths(11)->setDay(1)->toDateString();
+        $end_date = Carbon::now()->setMonth(11)->setDay(30)->toDateString();  // 修正：2025年11月30日を設定
 
-    return self::showSalesSummaryIndexView($start_date, $end_date);
-}
+        return self::showSalesSummaryIndexView($start_date, $end_date);
+    }
 
-    private function showSalesSummaryIndexView($start_date, $end_date){
+    private function showSalesSummaryIndexView($start_date, $end_date)
+    {
         $sales = self::getQueryOfSummaryOfAmountOfSalesAndHelps($start_date, $end_date);
 
         Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $sales->toSql());
 
         $sales = $sales->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return view('salesSummary.index',[
+        return view('salesSummary.index', [
             'sales' => $sales,
             'start_date' => $start_date,
             'end_date' => $end_date
@@ -490,8 +491,8 @@ class WorkController extends Controller
                 'users.id as user_id',
                 'users.name',
                 DB::raw('COALESCE(SUM(projects.amount), 0) as total_project_amount'),
-                DB::raw('COALESCE(NULL, 0) as total_work_amount'),
-                DB::raw('COALESCE(NULL, 0) as total_subcontractor_work_amount')
+                DB::raw('COALESCE(NULL, 0) as subcontractor_expenses_total'),  // 外注費合計
+                DB::raw('COALESCE(NULL, 0) as help_sales_total')  // ヘルプ売上合計
             )
             ->groupBy('users.id', 'users.name');
 
@@ -505,8 +506,8 @@ class WorkController extends Controller
                 'users.id as user_id',
                 'users.name',
                 DB::raw('COALESCE(NULL, 0) as total_project_amount'),
-                DB::raw('COALESCE(SUM(works.amount), 0) as total_work_amount'),
-                DB::raw('COALESCE(NULL, 0) as total_subcontractor_work_amount')
+                DB::raw('COALESCE(SUM(works.amount), 0) as subcontractor_expenses_total'),  // 外注費合計
+                DB::raw('COALESCE(NULL, 0) as help_sales_total')  // ヘルプ売上合計
             )
             ->groupBy('users.id', 'users.name');
 
@@ -520,8 +521,8 @@ class WorkController extends Controller
                 'users.id as user_id',
                 'users.name',
                 DB::raw('COALESCE(NULL, 0) as total_project_amount'),
-                DB::raw('COALESCE(NULL, 0) as total_work_amount'),
-                DB::raw('COALESCE(SUM(works.amount), 0) as total_subcontractor_work_amount')
+                DB::raw('COALESCE(NULL, 0) as subcontractor_expenses_total'),  // 外注費合計
+                DB::raw('COALESCE(SUM(works.amount), 0) as help_sales_total')  // ヘルプ売上合計
             )
             ->groupBy('users.id', 'users.name');
 
@@ -537,8 +538,8 @@ class WorkController extends Controller
                 'user_id',
                 'name',
                 DB::raw('SUM(total_project_amount) as total_project_amount'),
-                DB::raw('SUM(total_work_amount) as total_work_amount'),
-                DB::raw('SUM(total_subcontractor_work_amount) as total_subcontractor_work_amount')
+                DB::raw('SUM(subcontractor_expenses_total) as subcontractor_expenses_total'),  // 外注費合計
+                DB::raw('SUM(help_sales_total) as help_sales_total')  // ヘルプ売上合計
             )
             ->groupBy('user_id', 'name');
 

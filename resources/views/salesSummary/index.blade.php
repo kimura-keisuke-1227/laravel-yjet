@@ -18,9 +18,9 @@
                 <tr>
                     <td><a href="{{ route('user.edit', ['user' => $sale->user_id]) }}">{{ $sale->name }}</a></td>
                     <td>{{ number_format($sale->total_project_amount) }}</td>
-                    <td>{{ number_format($sale->total_subcontractor_work_amount) }}</td>
-                    <td>{{ number_format($sale->total_work_amount) }}</td>
-                    <td>{{ number_format($sale->total_project_amount + $sale->total_work_amount - $sale->total_subcontractor_work_amount) }}
+                    <td>{{ number_format($sale->subcontractor_expenses_total) }}</td>
+                    <td>{{ number_format($sale->help_sales_total) }}</td>
+                    <td>{{ number_format($sale->total_project_amount - $sale->subcontractor_expenses_total + $sale->help_sales_total) }}
                     </td>
                 </tr>
             @endforeach
