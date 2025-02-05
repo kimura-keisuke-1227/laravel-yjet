@@ -456,6 +456,13 @@ class WorkController extends Controller
     public function showAnnualSalesSummaryView()
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $start_date = '2024-12-01';
+        $end_date = '2025-11-30';
+        $sales = self::getQueryOfSummaryOfAmountOfSalesAndHelps($start_date, $end_date);
+
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $sales->toSql());
+
+        $sales = $sales->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return 'hoge';
     }
@@ -468,7 +475,13 @@ class WorkController extends Controller
         $projectTotals = DB::table('projects')
             ->join('users', 'users.id', '=', 'projects.user_id')
             ->whereBetween('projects.end_date', [$start_date, $end_date])
-            ->select('users.id as user_id', 'users.name', DB::raw('SUM(projects.amount) as total_project_amount'))
+            ->select(
+                'users.id as user_id',
+                'users.name',
+                DB::raw('COALESCE(SUM(projects.amount), 0) as total_project_amount'),
+                DB::raw('COALESCE(NULL, 0) as total_work_amount'),
+                DB::raw('COALESCE(NULL, 0) as total_subcontractor_work_amount')
+            )
             ->groupBy('users.id', 'users.name');
 
         // Work totals
@@ -477,7 +490,13 @@ class WorkController extends Controller
             ->join('tasks', 'tasks.id', '=', 'works.task_id')
             ->join('projects', 'projects.id', '=', 'tasks.project_id')
             ->whereBetween('projects.end_date', [$start_date, $end_date])
-            ->select('users.id as user_id', 'users.name', DB::raw('SUM(works.amount) as total_work_amount'))
+            ->select(
+                'users.id as user_id',
+                'users.name',
+                DB::raw('COALESCE(NULL, 0) as total_project_amount'),
+                DB::raw('COALESCE(SUM(works.amount), 0) as total_work_amount'),
+                DB::raw('COALESCE(NULL, 0) as total_subcontractor_work_amount')
+            )
             ->groupBy('users.id', 'users.name');
 
         // Subcontractor work totals
@@ -485,8 +504,14 @@ class WorkController extends Controller
             ->join('users', 'users.subcontractor_id', '=', 'works.subcontractor_id')
             ->join('tasks', 'tasks.id', '=', 'works.task_id')
             ->join('projects', 'projects.id', '=', 'tasks.project_id')
-            ->whereBetween('projects.end_date', [$startDate, $endDate])
-            ->select('users.id as user_id', 'users.name', DB::raw('SUM(works.amount) as total_subcontractor_work_amount'))
+            ->whereBetween('projects.end_date', [$start_date, $end_date])
+            ->select(
+                'users.id as user_id',
+                'users.name',
+                DB::raw('COALESCE(NULL, 0) as total_project_amount'),
+                DB::raw('COALESCE(NULL, 0) as total_work_amount'),
+                DB::raw('COALESCE(SUM(works.amount), 0) as total_subcontractor_work_amount')
+            )
             ->groupBy('users.id', 'users.name');
 
         // UNIONでデータを統合
@@ -505,7 +530,6 @@ class WorkController extends Controller
                 DB::raw('SUM(total_subcontractor_work_amount) as total_subcontractor_work_amount')
             )
             ->groupBy('user_id', 'name');
-
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return $results;
