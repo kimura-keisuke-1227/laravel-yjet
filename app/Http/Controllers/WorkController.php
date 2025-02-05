@@ -444,8 +444,8 @@ class WorkController extends Controller
             ->leftJoin('subcontractors', 'works.subcontractor_id', '=', 'subcontractors.id')
             ->whereBetween('works.date', [$start_date, $end_date])
             ->groupBy('users.id', 'users.name', 'subcontractors.subcontractor_code', 'subcontractors.subcontractor_name', 'subcontractors.id')  // GROUP BYに必要なカラムを追加
-            ->orderBy('user_id','asc')
-            ->orderBy('subcontractor_code','asc')
+            ->orderBy('user_id', 'asc')
+            ->orderBy('subcontractor_code', 'asc')
             ->get();
 
 
@@ -453,9 +453,12 @@ class WorkController extends Controller
         return $results;
     }
 
-    public function showAnnualSalesSummaryView(){
+    public function showAnnualSalesSummaryView()
+    {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return 'hoge';
     }
+
+
 }
