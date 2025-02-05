@@ -9,7 +9,7 @@
         <table class='table table-striped'>
             <tr>
                 <th>担当者名</th>
-                <th>売上合計</th>
+                <th>受注分合計</th>
                 <th>外注費合計</th>
                 <th>ヘルプ売上</th>
                 <th>収益</th>
@@ -25,5 +25,6 @@
                 </tr>
             @endforeach
         </table>
+        <a href="{{Route('annual.show.year',['year'=> $year-1])}}">{{$year-1}}年へ</a>　　　<a href="{{Route('annual.show.year',['year'=> $year+1])}}">{{$year+1}}年へ</a>
     </div>
 @endsection

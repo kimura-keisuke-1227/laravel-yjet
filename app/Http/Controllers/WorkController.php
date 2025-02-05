@@ -467,8 +467,8 @@ class WorkController extends Controller
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         Log::debug(__METHOD__ . '(' . __LINE__ . ') year:' . $year);
         // 昨年の12月1日と当年の11月最終日を設定
-        $start_date = Carbon::now()->setYear($year-1)->setMonth(12)->setDay(1)->toDateString();
-        $end_date = Carbon::now()->setYear($year)->setMonth(11)->setDay(30)->toDateString();
+        $start_date = Carbon::now()->setYear(intval($year)-1)->setMonth(12)->setDay(1)->toDateString();
+        $end_date = Carbon::now()->setYear(intval($year))->setMonth(11)->setDay(30)->toDateString();
 
         return self::showSalesSummaryIndexView($start_date, $end_date,$year);
     }
