@@ -3,7 +3,7 @@
 @section('title', 'プロジェクト')
 
 @section('content')
-    <h2>プロジェクト一覧</h2>
+    <h2>売上集計({{$year}}年度)</h2>
     <div class="container">
         <h3>{{ $start_date }} から {{ $end_date }} までの集計</h3>
         <table class='table table-striped'>
