@@ -460,5 +460,53 @@ class WorkController extends Controller
         return 'hoge';
     }
 
+    private function getQueryOfSummaryOfAmountOfSalesAndHelps($start_date, $end_date)
+    {
+        $projectTotals = DB::table('projects')
+            ->join('users', 'users.id', '=', 'projects.user_id')
+            ->whereBetween('projects.end_date', [$start_date, $end_date])
+            ->select(
+                'users.id as user_id',
+                'users.name',
+                DB::raw('SUM(projects.amount) as total_project_amount')
+            )
+            ->groupBy('users.id', 'users.name');
 
+        $workTotals = DB::table('works')
+            ->join('users', 'users.id', '=', 'works.user_id')
+            ->join('tasks', 'tasks.id', '=', 'works.task_id')
+            ->join('projects', 'projects.id', '=', 'tasks.project_id')
+            ->whereBetween('projects.end_date', [$start_date, $end_date])
+            ->select(
+                'users.id as user_id',
+                'users.name',
+                DB::raw('SUM(works.amount) as total_work_amount')
+            )
+            ->groupBy('users.id', 'users.name');
+
+        // LEFT JOIN と RIGHT JOIN を UNION で結合（MySQL は FULL OUTER JOIN 非対応）
+        $query = $projectTotals
+            ->leftJoinSub($workTotals, 'wt', function ($join) {
+                $join->on('project_totals.user_id', '=', 'wt.user_id');
+            })
+            ->select(
+                DB::raw('COALESCE(project_totals.user_id, wt.user_id) as user_id'),
+                DB::raw('COALESCE(project_totals.name, wt.name) as name'),
+                DB::raw('COALESCE(project_totals.total_project_amount, 0) as total_project_amount'),
+                DB::raw('COALESCE(wt.total_work_amount, 0) as total_work_amount')
+            )
+            ->union(
+                $workTotals->rightJoinSub($projectTotals, 'pt', function ($join) {
+                    $join->on('work_totals.user_id', '=', 'pt.user_id');
+                })
+                    ->select(
+                        DB::raw('COALESCE(pt.user_id, work_totals.user_id) as user_id'),
+                        DB::raw('COALESCE(pt.name, work_totals.name) as name'),
+                        DB::raw('COALESCE(pt.total_project_amount, 0) as total_project_amount'),
+                        DB::raw('COALESCE(work_totals.total_work_amount, 0) as total_work_amount')
+                    )
+            );
+
+        return $query;
+    }
 }
