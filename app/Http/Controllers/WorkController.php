@@ -462,51 +462,52 @@ class WorkController extends Controller
 
     private function getQueryOfSummaryOfAmountOfSalesAndHelps($start_date, $end_date)
     {
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+        // Project totals
         $projectTotals = DB::table('projects')
             ->join('users', 'users.id', '=', 'projects.user_id')
             ->whereBetween('projects.end_date', [$start_date, $end_date])
-            ->select(
-                'users.id as user_id',
-                'users.name',
-                DB::raw('SUM(projects.amount) as total_project_amount')
-            )
+            ->select('users.id as user_id', 'users.name', DB::raw('SUM(projects.amount) as total_project_amount'))
             ->groupBy('users.id', 'users.name');
 
+        // Work totals
         $workTotals = DB::table('works')
             ->join('users', 'users.id', '=', 'works.user_id')
             ->join('tasks', 'tasks.id', '=', 'works.task_id')
             ->join('projects', 'projects.id', '=', 'tasks.project_id')
             ->whereBetween('projects.end_date', [$start_date, $end_date])
-            ->select(
-                'users.id as user_id',
-                'users.name',
-                DB::raw('SUM(works.amount) as total_work_amount')
-            )
+            ->select('users.id as user_id', 'users.name', DB::raw('SUM(works.amount) as total_work_amount'))
             ->groupBy('users.id', 'users.name');
 
-        // LEFT JOIN と RIGHT JOIN を UNION で結合（MySQL は FULL OUTER JOIN 非対応）
-        $query = $projectTotals
-            ->leftJoinSub($workTotals, 'wt', function ($join) {
-                $join->on('project_totals.user_id', '=', 'wt.user_id');
-            })
-            ->select(
-                DB::raw('COALESCE(project_totals.user_id, wt.user_id) as user_id'),
-                DB::raw('COALESCE(project_totals.name, wt.name) as name'),
-                DB::raw('COALESCE(project_totals.total_project_amount, 0) as total_project_amount'),
-                DB::raw('COALESCE(wt.total_work_amount, 0) as total_work_amount')
-            )
-            ->union(
-                $workTotals->rightJoinSub($projectTotals, 'pt', function ($join) {
-                    $join->on('work_totals.user_id', '=', 'pt.user_id');
-                })
-                    ->select(
-                        DB::raw('COALESCE(pt.user_id, work_totals.user_id) as user_id'),
-                        DB::raw('COALESCE(pt.name, work_totals.name) as name'),
-                        DB::raw('COALESCE(pt.total_project_amount, 0) as total_project_amount'),
-                        DB::raw('COALESCE(work_totals.total_work_amount, 0) as total_work_amount')
-                    )
-            );
+        // Subcontractor work totals
+        $subcontractorWorkTotals = DB::table('works')
+            ->join('users', 'users.subcontractor_id', '=', 'works.subcontractor_id')
+            ->join('tasks', 'tasks.id', '=', 'works.task_id')
+            ->join('projects', 'projects.id', '=', 'tasks.project_id')
+            ->whereBetween('projects.end_date', [$startDate, $endDate])
+            ->select('users.id as user_id', 'users.name', DB::raw('SUM(works.amount) as total_subcontractor_work_amount'))
+            ->groupBy('users.id', 'users.name');
 
-        return $query;
+        // UNIONでデータを統合
+        $combinedTotals = $projectTotals
+            ->unionAll($workTotals)
+            ->unionAll($subcontractorWorkTotals);
+
+        // 最終クエリ：ユーザーごとに合計を集計
+        $results = DB::table(DB::raw("({$combinedTotals->toSql()}) as combined_totals"))
+            ->mergeBindings($combinedTotals)
+            ->select(
+                'user_id',
+                'name',
+                DB::raw('SUM(total_project_amount) as total_project_amount'),
+                DB::raw('SUM(total_work_amount) as total_work_amount'),
+                DB::raw('SUM(total_subcontractor_work_amount) as total_subcontractor_work_amount')
+            )
+            ->groupBy('user_id', 'name');
+
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return $results;
     }
 }
