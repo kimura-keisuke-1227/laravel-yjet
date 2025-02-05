@@ -412,7 +412,7 @@ class WorkController extends Controller
 
     public function calculateWorkCostsByUserAndSubcontractors()
     {
-        $start_date = date('Y-m-d');
+        $start_date = Carbon::now()->subDays(6)->toDateString();
 
         $end_date = date('Y-m-d');
 
@@ -420,9 +420,9 @@ class WorkController extends Controller
 
         return view('work.calculateWorkCostsByClient', [
             'weekly' => $weekly,
-            'base_date' => '2025-01-01',
+            'base_date' => $end_date ,
             'days' => 7,
-            'start_date' => '2025-01-01'
+            'start_date' => $start_date
         ]);
     }
 
