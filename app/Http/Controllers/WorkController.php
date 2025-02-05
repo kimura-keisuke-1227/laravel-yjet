@@ -457,14 +457,23 @@ class WorkController extends Controller
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
-        // 昨年の12月1日と当年の11月最終日を設定
-        $start_date = Carbon::now()->subYear()->startOfYear()->addMonths(11)->setDay(1)->toDateString();
-        $end_date = Carbon::now()->setMonth(11)->setDay(30)->toDateString();  // 修正：2025年11月30日を設定
+        $year = Carbon::now()->year;
 
-        return self::showSalesSummaryIndexView($start_date, $end_date);
+        return self::showAnnualSalesSummaryViewOfSelectedYear($year);
     }
 
-    private function showSalesSummaryIndexView($start_date, $end_date)
+    public function showAnnualSalesSummaryViewOfSelectedYear($year)
+    {
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::debug(__METHOD__ . '(' . __LINE__ . ') year:' . $year);
+        // 昨年の12月1日と当年の11月最終日を設定
+        $start_date = Carbon::now()->setYear($year-1)->setMonth(12)->setDay(1)->toDateString();
+        $end_date = Carbon::now()->setYear($year)->setMonth(11)->setDay(30)->toDateString();
+
+        return self::showSalesSummaryIndexView($start_date, $end_date,$year);
+    }
+
+    private function showSalesSummaryIndexView($start_date, $end_date,$year)
     {
         $sales = self::getQueryOfSummaryOfAmountOfSalesAndHelps($start_date, $end_date);
 
@@ -475,7 +484,8 @@ class WorkController extends Controller
         return view('salesSummary.index', [
             'sales' => $sales,
             'start_date' => $start_date,
-            'end_date' => $end_date
+            'end_date' => $end_date,
+            'year' => $year
         ]);
     }
 
