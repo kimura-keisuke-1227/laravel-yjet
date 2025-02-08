@@ -1,24 +1,24 @@
 @extends('layouts.admin')
 
-@section('title', 'プロジェクト')
+@section('title', '顧客')
 
 @section('content')
-<h2>発注先一覧</h2>
+<h2>顧客一覧</h2>
     <div class="container">
-        <a href="{{Route('subcontractor.create')}}">発注先登録</a>
+        <a href="{{Route('customer.create')}}">customer顧客登録</a>
         <table class='table table-striped'>
             <tr>
                 <th>ID</th>
-                <th>発注先コード</th>
-                <th>発注先名</th>
+                <th>顧客コード</th>
+                <th>顧客名</th>
                 <th></th>
             </tr>
-            @foreach ($subcontractors as $subcontractor)
+            @foreach ($customers as $customer)
                 <tr>
-                    <td>{{ $subcontractor -> id}}</td>
-                    <td>{{ $subcontractor -> subcontractor_code }}</td>
-                    <td>{{ $subcontractor -> subcontractor_name }}</td>
-                    <td><a href="{{Route('subcontractor.edit',[ 'subcontractor' => $subcontractor])}}">詳細・修正</a></td>
+                    <td>{{ $customer -> id}}</td>
+                    <td>{{ $customer -> customer_code }}</td>
+                    <td>{{ $customer -> customer_name }}</td>
+                    <td><a href="{{Route('customer.edit',[ 'customer' => $customer])}}">詳細・修正</a></td>
 
                 </tr>
             @endforeach

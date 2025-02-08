@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Customer;
-
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Log;
 
 class CustomerController extends Controller
@@ -16,7 +16,12 @@ class CustomerController extends Controller
     public function index()
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $customers = Customer::query()
+            ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('customer.index',[
+            'customers' => $customers,
+        ]);
     }
 
     /**
@@ -35,7 +40,10 @@ class CustomerController extends Controller
     public function store(StoreCustomerRequest $request)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $validated = $request->validated();
+        Customer::create($validated);
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return redirect(Route('customer.create'))->with('success','顧客を登録しました。');
     }
 
     /**
