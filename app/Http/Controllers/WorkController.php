@@ -77,9 +77,12 @@ class WorkController extends Controller
         $subcontractors = Subcontractor::query()
             ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        $users = User::query()
+            ->get();
         return view('work.edit', [
             'work' => $work,
-            'subcontractors' => $subcontractors
+            'subcontractors' => $subcontractors,
+            'users' => $users,
         ]);
     }
 
@@ -93,10 +96,6 @@ class WorkController extends Controller
 
         $validated = $request->validated();
         $work->update($validated);
-        $subcontractors = Subcontractor::query()
-            ->get();
-        $users = User::query()
-            ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return redirect(Route('project.edit', ['project' => $work->task->project]))->with('success', '作業データを更新しました。');
     }

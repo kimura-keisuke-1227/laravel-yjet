@@ -29,7 +29,9 @@ class UpdateWorkRequest extends FormRequest
             'canceled_at' => '',
             'out_source_id' => '',
             'remark' => '',
-            'amount' => ''
+            'amount' => '',
+            'user_id' => '',
+            'subcontractor_id' => '',
         ];
     }
 }
