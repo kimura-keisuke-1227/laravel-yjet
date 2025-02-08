@@ -39,6 +39,14 @@
                             @endforeach
                         </select>
                     </div>
+                    <label class="block text-sm font-medium mb-2" for="customer_id">顧客</label>
+                    <select id="customer_id" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="customer_id">
+                        <option value="0">未選択</option>
+                        @foreach ($customers as $customer)
+                        <option value="{{ $customer->id }}" @if ($customer->id == $project->customer_id) selected @endif>
+                            {{$customer->customer_code}}_{{$customer->customer_name}}</option>
+                        @endforeach
+                    </select>
 
 
                     <div class="mb-6">

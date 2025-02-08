@@ -77,6 +77,8 @@ class ProjectController extends Controller
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         $users = User::query()
             ->get();
+        $customers = Customer::query()
+            ->get();
         $subcontractors = Subcontractor::query()
             ->orderBy(Subcontractor::CLM_NAME_OF_SUBCONTRACTOR_CODE)
             ->get();
@@ -93,7 +95,8 @@ class ProjectController extends Controller
             'project' => $project,
             'subcontractors' => $subcontractors,
             'users' => $users,
-            'tasks' => $tasks
+            'tasks' => $tasks,
+            'customers' => $customers,
         ]);
     }
 
