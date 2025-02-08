@@ -9,6 +9,7 @@
         <table class='table table-striped'>
             <tr>
                 <th>プロジェクト名</th>
+                <th>顧客</th>
                 <th>担当者</th>
                 <th>開始日</th>
                 <th>終了日</th>
@@ -19,6 +20,13 @@
             @foreach ($projects as $project)
                 <tr>
                     <td>{{ $project -> project_name }}</td>
+                    <td>
+                        @if ($project->customer_id == 0)
+                            顧客未登録
+                        @else
+                        <a href="{{Route('customer.edit',['customer' => $project->customer_id])}}">{{ $project->customer_name ? $project->customer_name : '顧客情報なし' }}</a>
+                        @endif
+                    </td>
                     <td>@if (!is_null($project->user_id))
                         <a href="{{ route('user.edit', ['user' => $project->user_id]) }}">{{ $project->user_name }}</a>
                     @else

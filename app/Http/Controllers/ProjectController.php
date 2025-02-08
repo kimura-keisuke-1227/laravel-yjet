@@ -131,40 +131,44 @@ class ProjectController extends Controller
     }
 
     public static function summaryProjectData($user)
-{
-    $projects = DB::table('projects')
-        ->select(
-            'projects.id as project_id',
-            'projects.project_name',
-            DB::raw("IFNULL(users.name, '未選択') AS user_name"),
-            'projects.start_date',
-            'projects.end_date',
-            'projects.amount',
-            'projects.is_expire',
-            DB::raw("IFNULL(SUM(works.amount), 0) AS total_work_amount"),
-            'users.id as user_id'
-        )
-        ->leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
-        ->leftJoin('works', 'tasks.id', '=', 'works.task_id')
-        ->leftJoin('users', 'projects.user_id', '=', 'users.id') // Changed back to leftJoin for users
-        ->where('projects.user_id', '>=', 0)  // This ensures we include user_id 0 or valid user_id
-        ->groupBy(
-            'projects.id',
-            'projects.project_name',
-            'projects.start_date',
-            'projects.end_date',
-            'projects.amount',
-            'projects.is_expire'
-        )
-        ->orderBy('is_expire', 'asc') //終了フラグが1のものを後ろに。
-        ->orderBy('start_date', 'asc');
+    {
+        $projects = DB::table('projects')
+            ->select(
+                'projects.id as project_id',
+                'projects.project_name',
+                DB::raw("IFNULL(users.name, '未選択') AS user_name"),
+                'projects.start_date',
+                'projects.end_date',
+                'projects.amount',
+                'projects.is_expire',
+                DB::raw("IFNULL(SUM(works.amount), 0) AS total_work_amount"),
+                'users.id as user_id',
+                'customers.customer_name',  // ここでcustomer_nameを選択
+                'customers.id as customer_id'  // ここでcustomer_nameを選択
+            )
+            ->leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
+            ->leftJoin('works', 'tasks.id', '=', 'works.task_id')
+            ->leftJoin('users', 'projects.user_id', '=', 'users.id')
+            ->leftJoin('customers', 'projects.customer_id', '=', 'customers.id')  // customerテーブルを結合
+            ->where('projects.user_id', '>=', 0)
+            ->groupBy(
+                'projects.id',
+                'projects.project_name',
+                'projects.start_date',
+                'projects.end_date',
+                'projects.amount',
+                'projects.is_expire',
+                'customers.customer_name'  // customer_nameをgroup byに追加
+            )
+            ->orderBy('is_expire', 'asc')
+            ->orderBy('start_date', 'asc');
 
-    if ($user) {
-        $projects = $projects->where('projects.user_id', $user->id);
-    } else {
-        $projects = $projects->groupBy('users.id', 'users.name');
+        if ($user) {
+            $projects = $projects->where('projects.user_id', $user->id);
+        } else {
+            $projects = $projects->groupBy('users.id', 'users.name');
+        }
+
+        return $projects;
     }
-
-    return $projects;
-}
 }
