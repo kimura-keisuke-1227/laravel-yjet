@@ -159,7 +159,7 @@ class ProjectController extends Controller
                 'projects.amount',
                 'projects.is_expire',
                 'customers.customer_name',  // customer_nameをgroup byに追加
-                'customers.id as customer_id'  // customer_nameをgroup byに追加
+                'customers.id'  // customer_nameをgroup byに追加
             )
             ->orderBy('is_expire', 'asc')
             ->orderBy('start_date', 'asc');
