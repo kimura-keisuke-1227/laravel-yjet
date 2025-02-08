@@ -438,7 +438,8 @@ class WorkController extends Controller
                 'subcontractors.subcontractor_name as subcontractor_name',  // 発注先名にエイリアスを付ける
                 'subcontractors.id as subcontractor_id',  // 発注先IDにエイリアスを付ける
                 DB::raw('SUM(works.scheduled_time) AS total_scheduled_time'),  // 予定時間の合計にエイリアスを付ける
-                DB::raw('SUM(works.actual_time) AS total_actual_time')  // 実績時間の合計にエイリアスを付ける
+                DB::raw('SUM(works.actual_time) AS total_actual_time'),  // 実績時間の合計にエイリアスを付ける
+                DB::raw('SUM(works.amount) AS total_amount')  // 実績時間の合計にエイリアスを付ける
             )
             ->leftJoin('users', 'users.id', '=', 'works.user_id')
             ->leftJoin('subcontractors', 'works.subcontractor_id', '=', 'subcontractors.id')

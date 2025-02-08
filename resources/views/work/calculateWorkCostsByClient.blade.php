@@ -36,6 +36,7 @@
                 <th>発注先</th>
                 <th>予定時間合計(分)</th>
                 <th>実際時間合計(分)</th>
+                <th>合計金額</th>
             </tr>
             @foreach ($weekly as $data)
                 <tr>
@@ -44,6 +45,8 @@
                     <td><a href="{{Route('subcontractor.show',['subcontractor' => $data->subcontractor_id])}}">{{ $data -> subcontractor_name }}</a></td>
                     <td>{{ $data -> total_scheduled_time}}</td>
                     <td>{{ $data -> total_actual_time}}</td>
+                    <td>{{ number_format($data->total_amount) }}</td>
+
                 </tr>
             @endforeach
         </table>

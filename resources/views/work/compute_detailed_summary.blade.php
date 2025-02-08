@@ -94,6 +94,7 @@
                     <th>日付</th>
                     <th>予定時間(分)</th>
                     <th>実際時間(分)</th>
+                    <th>発注金額</th>
                     <th>明細</th>
                 </tr>
                 @foreach ($weekly as $work)
@@ -118,6 +119,7 @@
                         <td>{{ $work->date }}</td>
                         <td>{{ $work->scheduled_time }}</td>
                         <td>{{ $work->actual_time }}</td>
+                        <td>{{ number_format($work->amount) }}</td>
                         <td><a href="{{ Route('work.edit', ['work' => $work]) }}">
                             @if ($work->remark == '')
                                 [編集]
