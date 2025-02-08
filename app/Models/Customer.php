@@ -29,8 +29,8 @@ class Customer extends Model
             self::CLM_NAME_OF_TRANSFER_DAY,
         ];
 
-        public function tasks()
+        public function projects()
         {
-            return $this->hasMany('App\Models\Task');
+            return $this->hasMany('App\Models\Proect');
         }
 }
