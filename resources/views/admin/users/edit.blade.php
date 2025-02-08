@@ -75,7 +75,7 @@
                                 <td>@if ($project->is_expire)
                                         非表示
                                 @endif</td>
-                                <td><td><a href="{{Route('project.edit',[ 'project' => $project -> project_id])}}">詳細・修正</a></td></td>
+                                <td><a href="{{Route('project.edit',[ 'project' => $project -> project_id])}}">詳細・修正</a></td></td>
                             </tr>
                         @endforeach
                     </table>
@@ -89,33 +89,28 @@
                 </div>
 
                 <div class="pt-4 px-6">
-                    @if ($projects->isEmpty())
-                        担当プロジェクトなし
+                    @if ($helps->isEmpty())
+                        ヘルプ実績
                     @else
                     <table class='table table-striped'>
                         <tr>
                             {{-- <th>ID</th> --}}
                             <th>プロジェクト名</th>
-                            <th>開始日</th>
-                            <th>終了日</th>
-                            <th>受注額</th>
-                            <th>外注費</th>
-                            <th>非表示</th>
-                            <th></th>
-                            <th></th>
+                            <th>タスク名</th>
+                            <th>日付</th>
+                            <th>売上</th>
+                            <th>予定時間</th>
+                            <th>実績時間</th>
                         </tr>
-                        @foreach ($projects as $project)
+                        @foreach ($helps as $help)
                             <tr>
                                 {{-- <td>{{ $project -> project_id}}</td> --}}
-                                <td>{{ $project -> project_name }}</td>
-                                <td>{{ $project -> start_date }}</td>
-                                <td>{{ $project -> end_date }}</td>
-                                <td>{{ $project -> amount }}</td>
-                                <td>{{ $project -> total_work_amount }}</td>
-                                <td>@if ($project->is_expire)
-                                        非表示
-                                @endif</td>
-                                <td><td><a href="{{Route('project.edit',[ 'project' => $project -> project_id])}}">詳細・修正</a></td></td>
+                                <td><a href="{{Route('project.edit',[ 'project' => $help->task->project -> id])}}">{{$help->task->project->project_name}}</a></td></td>
+                                <td>{{ $help->task-> task_name }}</td>
+                                <td>{{ $help -> date }}</td>
+                                <td>{{ $help -> amount }}</td>
+                                <td>{{ $help -> scheduled_time }}</td>
+                                <td>{{ $help -> actual_time }}</td>
                             </tr>
                         @endforeach
                     </table>

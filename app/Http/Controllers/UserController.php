@@ -8,7 +8,7 @@ use App\Models\Project;
 use App\Models\Subcontractor;
 
 use App\Http\Controllers\ProjectController;
-
+use App\Models\Work;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
@@ -93,10 +93,16 @@ class UserController extends Controller
 
         Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $projects->toSql());
         $projects = $projects->get();
+        $helps = Work::query()
+            ->where(Work::CLM_NAME_OF_OUT_SOURCE_ID,$user->subcontractor_id)
+            ->orderBy(Work::CLM_NAME_OF_WORK_DATE,'desc');
+
+        $helps = $helps->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('admin.users.edit',[
             'user' => $user,
             'projects' => $projects,
+            'helps' => $helps
         ]);
     }
 
