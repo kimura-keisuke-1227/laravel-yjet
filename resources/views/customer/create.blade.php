@@ -20,18 +20,18 @@
                     @csrf
 
                     <div class="mb-6">
-                        <label class="block text-sm font-medium mb-2" for="customer_name">発注先名称</label>
+                        <label class="block text-sm font-medium mb-2" for="customer_name">顧客名称</label>
                         <input id="customer_name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
                             type="text" name="customer_name">
                     </div>
                     <div class="mb-6">
-                        <label class="block text-sm font-medium mb-2" for="customer_official_name">発注先公式名称</label>
+                        <label class="block text-sm font-medium mb-2" for="customer_official_name">顧客公式名称</label>
                         <input id="customer_official_name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
                             type="text" name="customer_official_name">
                     </div>
 
                     <div class="mb-6">
-                        <label class="block text-sm font-medium mb-2" for="customer_code">発注先コード</label>
+                        <label class="block text-sm font-medium mb-2" for="customer_code">顧客コード</label>
                         <input id="customer_code" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
                             type="text" name="customer_code">
                     </div>
