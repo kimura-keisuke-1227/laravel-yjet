@@ -28,6 +28,7 @@ class UpdateProjectRequest extends FormRequest
             Project::CLM_NAME_OF_START_DATE => "required::date",
             Project::CLM_NAME_OF_END_DATE => "",
             Project::CLM_NAME_OF_USER_ID => "",
+            Project::CLM_NAME_OF_CUSTOMER_ID => "",
             Project::CLM_NAME_OF_REMARK => "",
             Project::CLM_NAME_OF_IS_EXPIRE=> "",
             Project::CLM_NAME_OF_AMOUNT => "",

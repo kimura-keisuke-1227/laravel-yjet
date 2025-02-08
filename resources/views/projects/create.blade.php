@@ -23,7 +23,7 @@
                         <input id="project_name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
                             type="text" name="project_name">
                     </div>
-                    <label class="block text-sm font-medium mb-2" for="title">担当者</label>
+                    <label class="block text-sm font-medium mb-2" for="user_id">担当者</label>
                     <select id="user_id" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="user_id">
                         <option value="0">未選択</option>
                         @foreach ($users as $user)
@@ -32,8 +32,8 @@
                         </option>
                         @endforeach
                     </select>
-                    <label class="block text-sm font-medium mb-2" for="title">顧客</label>
-                    <select id="user_id" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="user_id">
+                    <label class="block text-sm font-medium mb-2" for="customer_id">顧客</label>
+                    <select id="customer_id" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="customer_id">
                         <option value="0">未選択</option>
                         @foreach ($customers as $customer)
                         <option value="{{$customer -> id}}">

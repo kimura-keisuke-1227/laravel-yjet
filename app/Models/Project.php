@@ -28,6 +28,7 @@ class Project extends Model
         self::CLM_NAME_OF_END_DATE,
         self::CLM_NAME_OF_PROJECT_NAME,
         self::CLM_NAME_OF_USER_ID,
+        self::CLM_NAME_OF_CUSTOMER_ID,
         self::CLM_NAME_OF_REMARK,
         self::CLM_NAME_OF_IS_EXPIRE,
         self::CLM_NAME_OF_AMOUNT,
