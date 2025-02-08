@@ -26,6 +26,7 @@ class CustomerController extends Controller
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('customer.create');
     }
 
     /**
