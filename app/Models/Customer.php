@@ -15,6 +15,7 @@ class Customer extends Model
 
         const CLM_NAME_OF_ID = 'id';
         const CLM_NAME_OF_CUSTOMER_ID  = 'customer_id';
+        const CLM_NAME_OF_CUSTOMER_CODE  = 'customer_code';
         const CLM_NAME_OF_CUSTOMER_NAME  = 'customer_name';
         const CLM_NAME_OF_CUSTOMER_OFFICIAL_NAME  = 'customer_official_name';
         const CLM_NAME_OF_TRANSFER_MONTH  = 'bTRANSFER_MONT';
