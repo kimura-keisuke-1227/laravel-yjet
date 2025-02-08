@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Customer as Customer;
 
 return new class extends Migration
 {
@@ -11,9 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create(Customer::TABLE_NAME_OF_CUSTOMER, function (Blueprint $table) {
+            $table->id(); // IDカラム
+            $table->string(Customer::CLM_NAME_OF_CUSTOMER_NAME); // 顧客名
+            $table->string(Customer::CLM_NAME_OF_CUSTOMER_OFFICIAL_NAME)->nullable(); // 公式名（NULL可）
+            $table->integer(Customer::CLM_NAME_OF_TRANSFER_MONTH)->nullable(); // 振込月（NULL可）
+            $table->integer(Customer::CLM_NAME_OF_TRANSFER_DAY)->nullable(); // 振込日（NULL可）
+            $table->timestamps(); // created_at, updated_at
         });
     }
 
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists(Customer::TABLE_NAME_OF_CUSTOMER);
     }
 };
