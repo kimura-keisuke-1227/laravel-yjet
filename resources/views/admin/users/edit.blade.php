@@ -88,7 +88,7 @@
 
                 <div class="pt-4 px-6">
                     @if ($helps->isEmpty())
-                        ヘルプ実績
+                        ヘルプ実績なし
                     @else
                     <table class='table table-striped'>
                         <tr>
