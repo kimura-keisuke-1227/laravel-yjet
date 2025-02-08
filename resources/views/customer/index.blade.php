@@ -5,7 +5,7 @@
 @section('content')
 <h2>顧客一覧</h2>
     <div class="container">
-        <a href="{{Route('customer.create')}}">customer顧客登録</a>
+        <a href="{{Route('customer.create')}}">顧客登録</a>
         <table class='table table-striped'>
             <tr>
                 <th>ID</th>
