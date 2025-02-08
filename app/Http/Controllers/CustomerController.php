@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Customer;
+use App\Models\Project;
+use App\Http\Controllers\ProjectController;
+
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Log;
 
@@ -60,9 +63,12 @@ class CustomerController extends Controller
     public function edit(Customer $customer)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $projects = ProjectController::summaryProjectData(null,$customer);
+        $projects = $projects->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('customer.edit',[
             'customer' => $customer,
+            'projects' => $projects,
         ]);
     }
 
