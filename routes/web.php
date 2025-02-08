@@ -6,6 +6,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\SubcontractorController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,6 +17,7 @@ Route::resource('project', ProjectController::class);
 Route::resource('task', TaskController::class);
 Route::resource('subcontractor', SubcontractorController::class);
 Route::resource('user', UserController::class);
+Route::resource('customer', CustomerController::class);
 
 
 Route::get('task/create/{project}',[TaskController::class,'createTaskForProject'])->name('task.create');
