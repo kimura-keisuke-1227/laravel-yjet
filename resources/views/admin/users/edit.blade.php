@@ -60,6 +60,8 @@
                             <th>終了日</th>
                             <th>受注額</th>
                             <th>外注費</th>
+                            <th>内部委託費</th>
+                            <th>担当者収益</th>
                             <th>非表示</th>
                         </tr>
                         @foreach ($projects as $project)
@@ -69,7 +71,9 @@
                                 <td>{{ $project -> start_date }}</td>
                                 <td>{{ $project -> end_date }}</td>
                                 <td>{{ number_format($project->amount) }}</td>
-                                <td>{{ number_format($project -> total_work_amount) }}</td>
+                                <td>{{ number_format($project -> outside) }}</td>
+                                <td>{{ number_format($project -> inside) }}</td>
+                                <td>{{ number_format($project->amount - $project -> inside - $project -> outside) }}</td>
                                 <td>@if ($project->is_expire)
                                         非表示
                                 @endif</td>

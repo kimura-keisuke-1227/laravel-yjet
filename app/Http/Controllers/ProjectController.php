@@ -130,49 +130,63 @@ class ProjectController extends Controller
         //
     }
 
-    public static function summaryProjectData($user,$customer=null)
-    {
-        $projects = DB::table('projects')
-            ->select(
-                'projects.id as project_id',
-                'projects.project_name',
-                DB::raw("IFNULL(users.name, '未選択') AS user_name"),
-                'projects.start_date',
-                'projects.end_date',
-                'projects.amount',
-                'projects.is_expire',
-                DB::raw("IFNULL(SUM(works.amount), 0) AS total_work_amount"),
-                'users.id as user_id',
-                'customers.customer_name',  // ここでcustomer_nameを選択
-                'customers.id as customer_id'  // ここでcustomer_nameを選択
+    public static function summaryProjectData($user, $customer = null)
+{
+    $projects = DB::table('projects as p')
+        ->leftJoin(DB::raw('(
+            SELECT
+                p.id AS project_id,
+                SUM(w.amount) AS inside
+            FROM works w
+            JOIN tasks t ON t.id = w.task_id
+            JOIN projects p ON p.id = t.project_id
+            WHERE w.subcontractor_id IN (
+                SELECT subcontractor_id FROM users
             )
-            ->leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
-            ->leftJoin('works', 'tasks.id', '=', 'works.task_id')
-            ->leftJoin('users', 'projects.user_id', '=', 'users.id')
-            ->leftJoin('customers', 'projects.customer_id', '=', 'customers.id')  // customerテーブルを結合
-            ->where('projects.user_id', '>=', 0)
-            ->groupBy(
-                'projects.id',
-                'projects.project_name',
-                'projects.start_date',
-                'projects.end_date',
-                'projects.amount',
-                'projects.is_expire',
-                'customers.customer_name',  // customer_nameをgroup byに追加
-                'customers.id'  // customer_nameをgroup byに追加
+            GROUP BY p.id
+        ) as inside'), 'inside.project_id', '=', 'p.id')
+
+        ->leftJoin(DB::raw('(
+            SELECT
+                p.id AS project_id,
+                SUM(w.amount) AS outside
+            FROM works w
+            JOIN tasks t ON t.id = w.task_id
+            JOIN projects p ON p.id = t.project_id
+            WHERE w.subcontractor_id NOT IN (
+                SELECT subcontractor_id FROM users
             )
-            ->orderBy('is_expire', 'asc')
-            ->orderBy('start_date', 'asc');
+            GROUP BY p.id
+        ) as outside'), 'outside.project_id', '=', 'p.id')
 
-        if ($user) {
-            $projects = $projects->where('projects.user_id', $user->id);
-        } else {
-            $projects = $projects->groupBy('users.id', 'users.name');
-        }
+        ->leftJoin('users as u', 'u.id', '=', 'p.user_id')
+        ->leftJoin('customers as c', 'c.id', '=', 'p.customer_id')
 
-        if($customer){
-            $projects = $projects->where('projects.customer_id', $customer->id);
-        }
-        return $projects;
+        ->select(
+            'p.id as project_id',
+            'p.project_name as project_name',
+            'p.is_expire as is_expire',
+            DB::raw('COALESCE(u.id, 0) as user_id'),
+            DB::raw('COALESCE(u.name, "未選択") as user_name'),
+            DB::raw('COALESCE(c.id, 0) as customer_id'),
+            DB::raw('COALESCE(c.customer_name, "未選択") as customer_name'),
+            'p.start_date',
+            'p.end_date',
+            'p.amount',
+            DB::raw('COALESCE(inside.inside, 0) as inside'),
+            DB::raw('COALESCE(outside.outside, 0) as outside'),
+            DB::raw('p.amount - COALESCE(outside.outside, 0) as profit')
+        )
+        ->groupBy('p.id', 'p.is_expire','p.project_name', 'u.id', 'u.name', 'c.id', 'c.customer_name', 'p.start_date', 'p.end_date', 'p.amount', 'inside.inside', 'outside.outside');
+
+    if ($user) {
+        $projects = $projects->where('p.user_id', $user->id);
     }
+
+    if ($customer) {
+        $projects = $projects->where('p.customer_id', $customer->id);
+    }
+
+    return $projects;
+}
 }
