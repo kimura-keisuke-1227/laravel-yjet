@@ -130,7 +130,7 @@ class ProjectController extends Controller
         //
     }
 
-    public static function summaryProjectData($user)
+    public static function summaryProjectData($user,$customer=null)
     {
         $projects = DB::table('projects')
             ->select(
@@ -169,6 +169,9 @@ class ProjectController extends Controller
             $projects = $projects->groupBy('users.id', 'users.name');
         }
 
+        if($customer){
+            $projects = $projects->where('projects.customer_id', $customer->id);
+        }
         return $projects;
     }
 }

@@ -65,6 +65,57 @@
         </div>
     </section>
 
+
+    <div class="py-4 bg-white rounded">
+        <div class="flex px-6 pb-4 border-b">
+            <h3 class="text-xl font-bold">受注プロジェクト一覧</h3>
+        </div>
+
+        <div class="pt-4 px-6">
+            @if ($projects->isEmpty())
+                担当プロジェクトなし
+            @else
+                <table class='table table-striped'>
+                    <tr>
+                        {{-- <th>ID</th> --}}
+                        <th>プロジェクト名</th>
+                        <th>担当者</th>
+                        <th>開始日</th>
+                        <th>終了日</th>
+                        <th>受注額</th>
+                        <th>外注費</th>
+                        <th>非表示</th>
+                    </tr>
+                    @foreach ($projects as $project)
+                        <tr>
+                            {{-- <td>{{ $project -> project_id}}</td> --}}
+                            <td><a
+                                    href="{{ Route('project.edit', ['project' => $project->project_id]) }}">{{ $project->project_name }}</a>
+                            </td>
+                            <td>
+                                @if ($project->user_id == 0)
+                                    担当者未選択
+                                @else
+                                    <a href="{{Route('user.edit',['user'=>$project->user_id])}}">{{ $project->user_name }}</a>
+                                @endif
+                            </td>
+                            <td>{{ $project->start_date }}</td>
+                            <td>{{ $project->end_date }}</td>
+                            <td>{{ number_format($project->amount) }}</td>
+                            <td>{{ number_format($project->total_work_amount) }}</td>
+                            <td>
+                                @if ($project->is_expire)
+                                    非表示
+                                @endif
+                            </td>
+
+                        </tr>
+                    @endforeach
+                </table>
+            @endif
+
+        </div>
+    </div>
     <script>
         // 現在の日付を取得してフォーマット
         const today = new Date();
