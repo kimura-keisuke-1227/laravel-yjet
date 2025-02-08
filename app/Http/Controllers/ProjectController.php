@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\User;
 use App\Models\Subcontractor;
 use App\Models\Task;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
@@ -37,8 +38,13 @@ class ProjectController extends Controller
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         $users = User::query()
             ->get();
+        $customers = Customer::query()
+            ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return view('projects.create', ['users' => $users]);
+        return view('projects.create', [
+            'users' => $users,
+            'customers' => $customers,
+        ]);
     }
 
     /**

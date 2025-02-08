@@ -32,6 +32,15 @@
                         </option>
                         @endforeach
                     </select>
+                    <label class="block text-sm font-medium mb-2" for="title">顧客</label>
+                    <select id="user_id" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="user_id">
+                        <option value="0">未選択</option>
+                        @foreach ($customers as $customer)
+                        <option value="{{$customer -> id}}">
+                            {{$customer->customer_code}}_{{$customer->customer_name}}
+                        </option>
+                        @endforeach
+                    </select>
 
                     <div class="mb-6">
                         <label class="block text-sm font-medium mb-2" for="title">金額</label>
