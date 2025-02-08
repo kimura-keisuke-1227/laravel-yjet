@@ -69,7 +69,7 @@
                                 <td>{{ $project -> start_date }}</td>
                                 <td>{{ $project -> end_date }}</td>
                                 <td>{{ number_format($project->amount) }}</td>
-                                <td>{{ $project -> total_work_amount }}</td>
+                                <td>{{ number_format($project -> total_work_amount) }}</td>
                                 <td>@if ($project->is_expire)
                                         非表示
                                 @endif</td>
@@ -95,20 +95,24 @@
                             {{-- <th>ID</th> --}}
                             <th>プロジェクト名</th>
                             <th>タスク名</th>
+                            <th>依頼者</th>
                             <th>日付</th>
                             <th>売上</th>
                             <th>予定時間</th>
                             <th>実績時間</th>
+                            <th>作業明細</th>
                         </tr>
                         @foreach ($helps as $help)
                             <tr>
                                 {{-- <td>{{ $project -> project_id}}</td> --}}
                                 <td><a href="{{Route('project.edit',[ 'project' => $help->task->project -> id])}}">{{$help->task->project->project_name}}</a></td></td>
                                 <td>{{ $help->task-> task_name }}</td>
+                                <td><a href="{{Route('user.edit',[ 'user' => $help -> user_id])}}">{{$help->user->name}}</a></td>
                                 <td>{{ $help -> date }}</td>
                                 <td>{{ number_format($help->amount) }}</td>
                                 <td>{{ $help -> scheduled_time }}</td>
                                 <td>{{ $help -> actual_time }}</td>
+                                <td><a href="{{ route('work.edit', ['work' => $help->id]) }}">明細</a></td>
                             </tr>
                         @endforeach
                     </table>
