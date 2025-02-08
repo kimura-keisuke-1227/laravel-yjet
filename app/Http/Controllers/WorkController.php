@@ -220,7 +220,8 @@ class WorkController extends Controller
                 'subcontractors.subcontractor_code as subcontractor_code',
                 'subcontractors.subcontractor_name as subcontractor_name',
                 DB::raw('SUM(works.actual_time) as total_actual_time'),
-                DB::raw('SUM(works.scheduled_time) as total_scheduled_time')
+                DB::raw('SUM(works.scheduled_time) as total_scheduled_time'),
+                DB::raw('SUM(works.amount) as total_amount'),
             )
             ->whereBetween('works.date', [$start_date, $end_date]) // $start_date と $end_date を条件に使用
             ->groupBy('subcontractors.id', 'subcontractors.subcontractor_code', 'subcontractors.subcontractor_name') // subcontracor_code を追加
