@@ -43,7 +43,7 @@ class CustomerController extends Controller
         $validated = $request->validated();
         Customer::create($validated);
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('customer.create'))->with('success','顧客を登録しました。');
+        return redirect(Route('customer.index'))->with('success','顧客を登録しました。');
     }
 
     /**
@@ -61,6 +61,9 @@ class CustomerController extends Controller
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return view('customer.edit',[
+            'customer' => $customer,
+        ]);
     }
 
     /**
@@ -69,7 +72,10 @@ class CustomerController extends Controller
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $validated = $request->validated();
+        $customer->update($validated);
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return redirect(Route('customer.index'))->with('success','顧客情報を修正しました。');
     }
 
     /**
