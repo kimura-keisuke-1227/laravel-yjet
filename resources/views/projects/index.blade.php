@@ -22,7 +22,7 @@
                     <td>{{ $project -> project_name }}</td>
                     <td>
                         @if ($project->customer_id == 0)
-                            顧客未登録
+                            顧客未選択
                         @else
                         <a href="{{Route('customer.edit',['customer' => $project->customer_id])}}">{{ $project->customer_name ? $project->customer_name : '顧客情報なし' }}</a>
                         @endif
