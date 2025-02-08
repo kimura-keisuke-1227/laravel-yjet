@@ -420,7 +420,7 @@ class WorkController extends Controller
 
         return view('work.calculateWorkCostsByClient', [
             'weekly' => $weekly,
-            'base_date' => $end_date ,
+            'base_date' => $end_date,
             'days' => 7,
             'start_date' => $start_date
         ]);
@@ -467,13 +467,13 @@ class WorkController extends Controller
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         Log::debug(__METHOD__ . '(' . __LINE__ . ') year:' . $year);
         // 昨年の12月1日と当年の11月最終日を設定
-        $start_date = Carbon::now()->setYear(intval($year)-1)->setMonth(12)->setDay(1)->toDateString();
+        $start_date = Carbon::now()->setYear(intval($year) - 1)->setMonth(12)->setDay(1)->toDateString();
         $end_date = Carbon::now()->setYear(intval($year))->setMonth(11)->setDay(30)->toDateString();
 
-        return self::showSalesSummaryIndexView($start_date, $end_date,$year);
+        return self::showSalesSummaryIndexView($start_date, $end_date, $year);
     }
 
-    private function showSalesSummaryIndexView($start_date, $end_date,$year)
+    private function showSalesSummaryIndexView($start_date, $end_date, $year)
     {
         $sales = self::getQueryOfSummaryOfAmountOfSalesAndHelps($start_date, $end_date);
 
@@ -491,23 +491,23 @@ class WorkController extends Controller
 
     private function getQueryOfSummaryOfAmountOfSalesAndHelps($start_date, $end_date)
     {
-        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start!');
 
-        // Project totals
-        $projectTotals = DB::table('projects')
+        // プロジェクトの売上
+        $projectSales = DB::table('projects')
             ->join('users', 'users.id', '=', 'projects.user_id')
             ->whereBetween('projects.end_date', [$start_date, $end_date])
             ->select(
                 'users.id as user_id',
                 'users.name',
                 DB::raw('COALESCE(SUM(projects.amount), 0) as total_project_amount'),
-                DB::raw('COALESCE(NULL, 0) as subcontractor_expenses_total'),  // 外注費合計
-                DB::raw('COALESCE(NULL, 0) as help_sales_total')  // ヘルプ売上合計
+                DB::raw('0 as total_work_expense'),
+                DB::raw('0 as total_subcontractor_work_amount')
             )
             ->groupBy('users.id', 'users.name');
 
-        // Work totals
-        $workTotals = DB::table('works')
+        // 外注費の支出合計
+        $workExpenses = DB::table('works')
             ->join('users', 'users.id', '=', 'works.user_id')
             ->join('tasks', 'tasks.id', '=', 'works.task_id')
             ->join('projects', 'projects.id', '=', 'tasks.project_id')
@@ -515,14 +515,14 @@ class WorkController extends Controller
             ->select(
                 'users.id as user_id',
                 'users.name',
-                DB::raw('COALESCE(NULL, 0) as total_project_amount'),
-                DB::raw('COALESCE(SUM(works.amount), 0) as subcontractor_expenses_total'),  // 外注費合計
-                DB::raw('COALESCE(NULL, 0) as help_sales_total')  // ヘルプ売上合計
+                DB::raw('0 as total_project_amount'),
+                DB::raw('COALESCE(SUM(works.amount), 0) as total_work_expense'),
+                DB::raw('0 as total_subcontractor_work_amount')
             )
             ->groupBy('users.id', 'users.name');
 
-        // Subcontractor work totals
-        $subcontractorWorkTotals = DB::table('works')
+        // ヘルプ売上の集計
+        $subcontractorSales = DB::table('works')
             ->join('users', 'users.subcontractor_id', '=', 'works.subcontractor_id')
             ->join('tasks', 'tasks.id', '=', 'works.task_id')
             ->join('projects', 'projects.id', '=', 'tasks.project_id')
@@ -530,30 +530,30 @@ class WorkController extends Controller
             ->select(
                 'users.id as user_id',
                 'users.name',
-                DB::raw('COALESCE(NULL, 0) as total_project_amount'),
-                DB::raw('COALESCE(NULL, 0) as subcontractor_expenses_total'),  // 外注費合計
-                DB::raw('COALESCE(SUM(works.amount), 0) as help_sales_total')  // ヘルプ売上合計
+                DB::raw('0 as total_project_amount'),
+                DB::raw('0 as total_work_expense'),
+                DB::raw('COALESCE(SUM(works.amount), 0) as total_subcontractor_work_amount')
             )
             ->groupBy('users.id', 'users.name');
 
-        // UNIONでデータを統合
-        $combinedTotals = $projectTotals
-            ->unionAll($workTotals)
-            ->unionAll($subcontractorWorkTotals);
+        // UNION ALL で統合
+        $combinedQuery = $projectSales
+            ->unionAll($workExpenses)
+            ->unionAll($subcontractorSales);
 
-        // 最終クエリ：ユーザーごとに合計を集計
-        $results = DB::table(DB::raw("({$combinedTotals->toSql()}) as combined_totals"))
-            ->mergeBindings($combinedTotals)
+        // 統合データをユーザーごとに集計
+        $summary = DB::table(DB::raw("({$combinedQuery->toSql()}) as combined_totals"))
+            ->mergeBindings($combinedQuery)
             ->select(
                 'user_id',
                 'name',
                 DB::raw('SUM(total_project_amount) as total_project_amount'),
-                DB::raw('SUM(subcontractor_expenses_total) as subcontractor_expenses_total'),  // 外注費合計
-                DB::raw('SUM(help_sales_total) as help_sales_total')  // ヘルプ売上合計
+                DB::raw('SUM(total_work_expense) as subcontractor_expenses_total'),
+                DB::raw('SUM(total_subcontractor_work_amount) as help_sales_total')
             )
             ->groupBy('user_id', 'name');
 
-        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return $results;
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end!');
+        return $summary;
     }
 }
