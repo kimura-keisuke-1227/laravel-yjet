@@ -61,21 +61,19 @@
                             <th>受注額</th>
                             <th>外注費</th>
                             <th>非表示</th>
-                            <th></th>
-                            <th></th>
                         </tr>
                         @foreach ($projects as $project)
                             <tr>
                                 {{-- <td>{{ $project -> project_id}}</td> --}}
-                                <td>{{ $project -> project_name }}</td>
+                                <td><a href="{{Route('project.edit',[ 'project' => $project -> project_id])}}">{{$project->project_name}}</a></td></td>
                                 <td>{{ $project -> start_date }}</td>
                                 <td>{{ $project -> end_date }}</td>
-                                <td>{{ $project -> amount }}</td>
+                                <td>{{ number_format($project->amount) }}</td>
                                 <td>{{ $project -> total_work_amount }}</td>
                                 <td>@if ($project->is_expire)
                                         非表示
                                 @endif</td>
-                                <td><a href="{{Route('project.edit',[ 'project' => $project -> project_id])}}">詳細・修正</a></td></td>
+
                             </tr>
                         @endforeach
                     </table>
@@ -108,7 +106,7 @@
                                 <td><a href="{{Route('project.edit',[ 'project' => $help->task->project -> id])}}">{{$help->task->project->project_name}}</a></td></td>
                                 <td>{{ $help->task-> task_name }}</td>
                                 <td>{{ $help -> date }}</td>
-                                <td>{{ $help -> amount }}</td>
+                                <td>{{ number_format($help->amount) }}</td>
                                 <td>{{ $help -> scheduled_time }}</td>
                                 <td>{{ $help -> actual_time }}</td>
                             </tr>
