@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create(Customer::TABLE_NAME_OF_CUSTOMER, function (Blueprint $table) {
             $table->id(); // IDカラム
+            $table->string(Customer::CLM_NAME_OF_CUSTOMER_CODE); // 顧客コード
             $table->string(Customer::CLM_NAME_OF_CUSTOMER_NAME); // 顧客名
             $table->string(Customer::CLM_NAME_OF_CUSTOMER_OFFICIAL_NAME)->nullable(); // 公式名（NULL可）
             $table->integer(Customer::CLM_NAME_OF_TRANSFER_MONTH)->nullable(); // 振込月（NULL可）
