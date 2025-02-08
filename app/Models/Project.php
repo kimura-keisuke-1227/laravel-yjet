@@ -15,6 +15,7 @@ class Project extends Model
     const CLM_NAME_OF_ID = 'id';
     const CLM_NAME_OF_START_DATE = 'start_date';
     const CLM_NAME_OF_END_DATE = 'end_date';
+    const CLM_NAME_OF_CUSTOMER_ID = 'customer_id';
     const CLM_NAME_OF_PROJECT_NAME = 'project_name';
     const CLM_NAME_OF_USER_ID = 'user_id';
     const CLM_NAME_OF_REMARK = 'remark';
