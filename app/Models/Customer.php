@@ -11,10 +11,9 @@ class Customer extends Model
         /** @use HasFactory<\Database\Factories\ProjectFactory> */
         use HasFactory;
 
-        const TABLE_NAME_OF_CUSTOMER = 'customer';
+        const TABLE_NAME_OF_CUSTOMER = 'customers';
 
         const CLM_NAME_OF_ID = 'id';
-        const CLM_NAME_OF_CUSTOMER_ID  = 'customer_id';
         const CLM_NAME_OF_CUSTOMER_CODE  = 'customer_code';
         const CLM_NAME_OF_CUSTOMER_NAME  = 'customer_name';
         const CLM_NAME_OF_CUSTOMER_OFFICIAL_NAME  = 'customer_official_name';
@@ -23,7 +22,7 @@ class Customer extends Model
 
 
         protected $fillable = [
-            self::CLM_NAME_OF_CUSTOMER_ID,
+            self::CLM_NAME_OF_CUSTOMER_CODE,
             self::CLM_NAME_OF_CUSTOMER_NAME,
             self::CLM_NAME_OF_CUSTOMER_OFFICIAL_NAME,
             self::CLM_NAME_OF_TRANSFER_MONTH,
