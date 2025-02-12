@@ -19,7 +19,7 @@
                     <!-- ▲▲▲▲エラーメッセージ▲▲▲▲ -->
                     @csrf
                     <div class="mb-6">
-                        <label class="block text-sm font-medium mb-2" for="project_name">プロジェクト名</label>
+                        <label class="block text-sm font-medium mb-2" for="project_name">プロジェクト名(部分一致検索)</label>
                         <input id="project_name" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
                             type="text" name="project_name"
                             value="{{ old('project_name', $search_conditions['project_name'] ?? '') }}">
