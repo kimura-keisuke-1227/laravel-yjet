@@ -34,8 +34,15 @@ class ProjectController extends Controller
 
     public function project_detail_search(Request $request){
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $users = User::query()
+            ->get();
+        $customers = Customer::query()
+            ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return 'hoge';
+        return view('projects.detail', [
+            'users' => $users,
+            'customers' => $customers,
+        ]);
     }
 
     private function show_project_index($is_expire=false){
