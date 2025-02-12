@@ -12,6 +12,7 @@
     </h2>
     <div class="container">
         [<a href="{{ Route('project.create') }}">プロジェクト作成</a>]
+        [<a href="{{ Route('project_detail_search') }}">プロジェクト詳細検索</a>]
         @if ($is_expire)
         [<a href="{{ Route('project.index') }}">プロジェクト一覧</a>]
         @else

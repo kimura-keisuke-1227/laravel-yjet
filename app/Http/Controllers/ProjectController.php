@@ -32,7 +32,29 @@ class ProjectController extends Controller
         return self::show_project_index($is_expire=true);
     }
 
-    public function project_detail_search(Request $request){
+    public function project_detail_search(){
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return self::show_project_search_index([]);
+    }
+    public function project_detail_search_execute(Request $request){
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+
+        $projects = self::summaryProjectData(null);
+
+        $user_id = $request['user_id'];
+        Log::debug(__METHOD__ . '(' . __LINE__ . ') user_id;' . $user_id);
+        if($user_id){
+            Log::debug(__METHOD__ . '(' . __LINE__ . ')' . 'user_id is set.');
+            $projects = $projects->where('user_id',$user_id);
+        }
+
+        $projects= $projects -> get();
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return self::show_project_search_index($projects);
+    }
+
+    private function show_project_search_index($projects){
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         $users = User::query()
             ->get();
@@ -42,6 +64,7 @@ class ProjectController extends Controller
         return view('projects.detail', [
             'users' => $users,
             'customers' => $customers,
+            'projects' => $projects,
         ]);
     }
 

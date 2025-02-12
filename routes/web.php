@@ -46,6 +46,8 @@ Route::get('/expire_project',[ProjectController::class,'index_expire_projects'])
 
 Route::get('/project_detail_search',[ProjectController::class,'project_detail_search'])
     ->name('project_detail_search');
+Route::post('/project_detail_search',[ProjectController::class,'project_detail_search_execute'])
+    ->name('project_detail_search_execute');
 
 Route::get('/annual',[WorkController::class,'showAnnualSalesSummaryView'])
     ->name('annual.show');
