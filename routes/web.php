@@ -9,7 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(Route('project.index'));
 });
 
 Route::resource('work', WorkController::class);
