@@ -416,7 +416,8 @@ class WorkController extends Controller
 
         $end_date = date('Y-m-d');
 
-        $weekly = self::getSummaryDataForUsersSubcontractors($start_date, $end_date);
+        $weekly = self::getSummaryDataForUsersSubcontractors($start_date, $end_date)
+        ->get();
 
         return view('work.calculateWorkCostsByClient', [
             'weekly' => $weekly,
@@ -446,8 +447,7 @@ class WorkController extends Controller
             ->whereBetween('works.date', [$start_date, $end_date])
             ->groupBy('users.id', 'users.name', 'subcontractors.subcontractor_code', 'subcontractors.subcontractor_name', 'subcontractors.id')  // GROUP BYに必要なカラムを追加
             ->orderBy('user_id', 'asc')
-            ->orderBy('subcontractor_code', 'asc')
-            ->get();
+            ->orderBy('subcontractor_code', 'asc');
 
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
