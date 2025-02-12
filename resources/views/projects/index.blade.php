@@ -16,7 +16,7 @@
                 <th>受注金額</th>
                 <th>外注費合計</th>
                 <th>内部委託費</th>
-                <th>利益</th>
+                <th>会社利益</th>
                 <th></th>
             </tr>
             @foreach ($projects as $project)
@@ -43,9 +43,9 @@
                     <td>{{ $project->start_date }}</td>
                     <td>{{ $project->end_date }}</td>
                     <td>{{ number_format($project->amount) }}</td>
-                    <td>{{ number_format($project->inside + $project->outside) }}</td> <!-- 外注費合計 -->
-                    <td>{{ number_format($project->inside + $project->inside) }}</td> <!-- 外注費合計 -->
-                    <td>{{ number_format($project->inside + $project->profit) }}</td> <!-- 外注費合計 -->
+                    <td>{{ number_format($project->outside) }}</td> <!-- 外注費合計 -->
+                    <td>{{ number_format($project->inside) }}</td> <!-- 内部委託費合計 -->
+                    <td>{{ number_format($project->profit) }}</td> <!-- 会社としての利益額 -->
                     <td>
                         <a href="{{ Route('project.edit', ['project' => $project->project_id]) }}">詳細・修正</a>
                     </td>
