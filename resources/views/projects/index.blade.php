@@ -12,11 +12,11 @@
     </h2>
     <div class="container">
         [<a href="{{ Route('project.create') }}">プロジェクト作成</a>]
-        [@if ($is_expire)
+        @if ($is_expire)
         [<a href="{{ Route('project.index') }}">プロジェクト一覧</a>]
         @else
         [<a href="{{ Route('expire_project') }}">非表示プロジェクト一覧</a>]
-        @endif]
+        @endif
 
         <table class='table table-striped'>
             <tr>
