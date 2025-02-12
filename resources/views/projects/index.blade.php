@@ -24,7 +24,7 @@
                     <td>{{ $project->project_name }}</td>
                     <td>
                         @if ($project->customer_id == 0)
-                            顧客未選択
+                            未選択
                         @else
                             <a href="{{ Route('customer.edit', ['customer' => $project->customer_id]) }}">
                                 {{ $project->customer_name ? $project->customer_name : '顧客情報なし' }}
@@ -32,7 +32,7 @@
                         @endif
                     </td>
                     <td>
-                        @if (!is_null($project->user_id))
+                        @if (!($project->user_id)==0)
                             <a href="{{ route('user.edit', ['user' => $project->user_id]) }}">
                                 {{ $project->user_name }}
                             </a>
