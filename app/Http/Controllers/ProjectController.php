@@ -164,6 +164,7 @@ class ProjectController extends Controller
 
         ->select(
             'p.id as project_id',
+            'c.customer_name as customer_name',
             'p.project_name as project_name',
             'p.is_expire as is_expire',
             DB::raw('COALESCE(u.id, 0) as user_id'),

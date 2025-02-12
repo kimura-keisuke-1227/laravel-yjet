@@ -56,6 +56,7 @@
                         <tr>
                             {{-- <th>ID</th> --}}
                             <th>プロジェクト名</th>
+                            <th>顧客名</th>
                             <th>開始日</th>
                             <th>終了日</th>
                             <th>受注額</th>
@@ -68,6 +69,7 @@
                             <tr>
                                 {{-- <td>{{ $project -> project_id}}</td> --}}
                                 <td><a href="{{Route('project.edit',[ 'project' => $project -> project_id])}}">{{$project->project_name}}</a></td></td>
+                                <td>{{ $project -> customer_name }}</td>
                                 <td>{{ $project -> start_date }}</td>
                                 <td>{{ $project -> end_date }}</td>
                                 <td>{{ number_format($project->amount) }}</td>
