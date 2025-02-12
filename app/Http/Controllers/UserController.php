@@ -89,7 +89,7 @@ class UserController extends Controller
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
-        $projects = ProjectController::summaryProjectData($user);
+        $projects = ProjectController::summaryProjectData($user->id);
 
         Log::debug(__METHOD__ . '(' . __LINE__ . ')' . $projects->toSql());
         $projects = $projects->get();

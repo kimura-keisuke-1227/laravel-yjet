@@ -37,17 +37,13 @@ class ProjectController extends Controller
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return self::show_project_search_index([]);
     }
+
     public function project_detail_search_execute(Request $request){
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
 
-        $projects = self::summaryProjectData(null);
-
         $user_id = $request['user_id'];
-        Log::debug(__METHOD__ . '(' . __LINE__ . ') user_id;' . $user_id);
-        if($user_id){
-            Log::debug(__METHOD__ . '(' . __LINE__ . ')' . 'user_id is set.');
-            $projects = $projects->where('user_id',$user_id);
-        }
+        $customer_id = $request['customer_id'];
+        $projects = self::summaryProjectData($user_id,$customer_id);
 
         $projects= $projects -> get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
@@ -70,7 +66,8 @@ class ProjectController extends Controller
 
     private function show_project_index($is_expire=false){
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
-        $projects = self::summaryProjectData($user=null, $customer = null,$is_expire=$is_expire)
+        $projects = self::summaryProjectData($user_id=null, $customer_id = null)
+            ->where(Project::CLM_NAME_OF_IS_EXPIRE,$is_expire)
             ->get();
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
@@ -180,7 +177,7 @@ class ProjectController extends Controller
         //
     }
 
-    public static function summaryProjectData($user, $customer = null,$is_expire=false)
+    public static function summaryProjectData($user_id, $customer_id = null)
 {
     $projects = DB::table('projects as p')
         ->leftJoin(DB::raw('(
@@ -228,15 +225,14 @@ class ProjectController extends Controller
             DB::raw('COALESCE(outside.outside, 0) as outside'),
             DB::raw('p.amount - COALESCE(outside.outside, 0) as profit')
         )
-        ->where(Project::CLM_NAME_OF_IS_EXPIRE,$is_expire) // 非表示フラグで絞る
         ->groupBy('p.id', 'p.is_expire','p.project_name', 'u.id', 'u.name', 'c.id', 'c.customer_name', 'p.start_date', 'p.end_date', 'p.amount', 'inside.inside', 'outside.outside');
 
-    if ($user) {
-        $projects = $projects->where('p.user_id', $user->id);
+    if ($user_id) {
+        $projects = $projects->where('p.user_id', $user_id);
     }
 
-    if ($customer) {
-        $projects = $projects->where('p.customer_id', $customer->id);
+    if ($customer_id) {
+        $projects = $projects->where('p.customer_id', $customer_id);
     }
 
     return $projects;
