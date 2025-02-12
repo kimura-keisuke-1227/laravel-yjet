@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -17,8 +20,14 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot()
     {
-        //
+        DB::listen(function ($query) {
+            Log::debug(
+                'SQL: ' . $query->sql .
+                    ' [Bindings: ' . implode(', ', $query->bindings) . ']' .
+                    ' [Time: ' . $query->time . ' ms]'
+            );
+        });
     }
 }
