@@ -74,6 +74,9 @@
                         <th>発注者</th>
                         <th>発注先</th>
                         <th>作業日</th>
+                        <th>予定作業時間</th>
+                        <th>実作業時間</th>
+                        <th>金額</th>
                         <th>明細</th>
                     </tr>
                     @foreach ($works as $work)
@@ -94,6 +97,9 @@
                                 @endif
                             </td>
                             <td>{{ $work -> date }}</td>
+                            <td>{{ $work -> scheduled_time }}</td>
+                            <td>{{ $work -> actual_time }}</td>
+                            <td>{{ $work -> amount }}</td>
                             <td><a href="{{Route('work.edit',[ 'work' => $work -> id])}}">
                                 @if ($work->remark == '')
                                 [編集]
