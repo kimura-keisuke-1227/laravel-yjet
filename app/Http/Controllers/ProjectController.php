@@ -130,7 +130,7 @@ class ProjectController extends Controller
         //
     }
 
-    public static function summaryProjectData($user, $customer = null)
+    public static function summaryProjectData($user, $customer = null,$is_expire=false)
 {
     $projects = DB::table('projects as p')
         ->leftJoin(DB::raw('(
@@ -178,7 +178,7 @@ class ProjectController extends Controller
             DB::raw('COALESCE(outside.outside, 0) as outside'),
             DB::raw('p.amount - COALESCE(outside.outside, 0) as profit')
         )
-        ->where(Project::CLM_NAME_OF_IS_EXPIRE,false) // 非表示となっていないもののみ
+        ->where(Project::CLM_NAME_OF_IS_EXPIRE,$is_expire) // 非表示フラグで絞る
         ->groupBy('p.id', 'p.is_expire','p.project_name', 'u.id', 'u.name', 'c.id', 'c.customer_name', 'p.start_date', 'p.end_date', 'p.amount', 'inside.inside', 'outside.outside');
 
     if ($user) {
