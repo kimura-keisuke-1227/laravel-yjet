@@ -42,10 +42,10 @@
                     </td>
                     <td>{{ $project->start_date }}</td>
                     <td>{{ $project->end_date }}</td>
-                    <td>{{ number_format($project->amount) }}円</td>
-                    <td>{{ number_format($project->inside + $project->outside) }}円</td> <!-- 外注費合計 -->
-                    <td>{{ number_format($project->inside + $project->inside) }}円</td> <!-- 外注費合計 -->
-                    <td>{{ number_format($project->inside + $project->profit) }}円</td> <!-- 外注費合計 -->
+                    <td>{{ number_format($project->amount) }}</td>
+                    <td>{{ number_format($project->inside + $project->outside) }}</td> <!-- 外注費合計 -->
+                    <td>{{ number_format($project->inside + $project->inside) }}</td> <!-- 外注費合計 -->
+                    <td>{{ number_format($project->inside + $project->profit) }}</td> <!-- 外注費合計 -->
                     <td>
                         <a href="{{ Route('project.edit', ['project' => $project->project_id]) }}">詳細・修正</a>
                     </td>
