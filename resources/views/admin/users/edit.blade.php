@@ -75,9 +75,13 @@
                                             href="{{ Route('project.edit', ['project' => $project->project_id]) }}">{{ $project->project_name }}</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('customer.edit', ['customer' => $project->customer_id]) }}">
-                                            {{ $project->customer_name }}
-                                        </a>
+                                        @if ($project->customer_id == 0)
+                                            顧客未選択
+                                        @else
+                                            <a href="{{ route('customer.edit', ['customer' => $project->customer_id]) }}">
+                                                {{ $project->customer_name }}
+                                            </a>
+                                        @endif
                                     </td>
                                     <td>{{ $project->start_date }}</td>
                                     <td>{{ $project->end_date }}</td>
