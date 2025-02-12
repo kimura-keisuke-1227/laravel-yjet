@@ -44,6 +44,9 @@ Route::get('/calculateWorkCostsByUser',[WorkController::class,'calculateWorkCost
 Route::get('/expire_project',[ProjectController::class,'index_expire_projects'])
     ->name('expire_project');
 
+Route::get('/project_detail_search',[ProjectController::class,'project_detail_search'])
+    ->name('project_detail_search');
+
 Route::get('/annual',[WorkController::class,'showAnnualSalesSummaryView'])
     ->name('annual.show');
 Route::get('/annual/{year}',[WorkController::class,'showAnnualSalesSummaryViewOfSelectedYear'])

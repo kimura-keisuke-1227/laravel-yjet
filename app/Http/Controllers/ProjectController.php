@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
@@ -29,6 +30,12 @@ class ProjectController extends Controller
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return self::show_project_index($is_expire=true);
+    }
+
+    public function project_detail_search(Request $request){
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return 'hoge';
     }
 
     private function show_project_index($is_expire=false){
