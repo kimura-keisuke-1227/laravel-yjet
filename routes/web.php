@@ -31,7 +31,7 @@ Route::put('project/multipleWorkUpdate/{project}', [WorkController::class,'multi
 Route::get('/weekly',[WorkController::class,'weekly'])->name('weekly');
 Route::post('/weekly_with_base_date',[WorkController::class,'weekly_with_base_date'])->name('weekly.with_date');
 
-Route::post('/work/delete/{work}',[WorkController::class,'work_delete'])->name('work.delete');
+Route::get('/work/delete/{work}',[WorkController::class,'work_delete'])->name('work.delete');
 
 Route::get('/compute_detailed_summary',[WorkController::class,'show_compute_detailed_summary_form'])
     ->name('show_compute_detailed_summary_form');
