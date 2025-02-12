@@ -3,9 +3,21 @@
 @section('title', 'プロジェクト')
 
 @section('content')
-    <h2>プロジェクト一覧</h2>
+    <h2>
+        @if ($is_expire)
+            非表示プロジェクト一覧
+        @else
+            プロジェクト一覧
+        @endif
+    </h2>
     <div class="container">
-        <a href="{{ Route('project.create') }}">プロジェクト作成</a>
+        [<a href="{{ Route('project.create') }}">プロジェクト作成</a>]
+        [@if ($is_expire)
+        [<a href="{{ Route('project.index') }}">プロジェクト一覧</a>]
+        @else
+        [<a href="{{ Route('expire_project') }}">非表示プロジェクト一覧</a>]
+        @endif]
+
         <table class='table table-striped'>
             <tr>
                 <th>プロジェクト名</th>
@@ -32,7 +44,7 @@
                         @endif
                     </td>
                     <td>
-                        @if (!($project->user_id)==0)
+                        @if (!$project->user_id == 0)
                             <a href="{{ route('user.edit', ['user' => $project->user_id]) }}">
                                 {{ $project->user_name }}
                             </a>

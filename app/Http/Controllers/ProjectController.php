@@ -20,13 +20,26 @@ class ProjectController extends Controller
     public function index()
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
-        $projects = self::summaryProjectData(null)
-            ->get();
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return self::show_project_index($is_expire=false);
+    }
 
+    public function index_expire_projects()
+    {
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
+        return self::show_project_index($is_expire=true);
+    }
+
+    private function show_project_index($is_expire=false){
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $projects = self::summaryProjectData($user=null, $customer = null,$is_expire=$is_expire)
+            ->get();
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('projects.index', [
-            'projects' => $projects
+            'projects' => $projects,
+            'is_expire' => $is_expire
         ]);
     }
 
