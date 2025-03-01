@@ -81,7 +81,7 @@ class CustomerController extends Controller
         $validated = $request->validated();
         $customer->update($validated);
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return redirect(Route('customer.index'))->with('success','顧客情報を修正しました。');
+        return redirect(Route('customer.index'))->with('success','顧客情報を更新しました。');
     }
 
     /**

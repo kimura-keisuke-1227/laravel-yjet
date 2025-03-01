@@ -116,9 +116,8 @@ class UserController extends Controller
         $user['email'] = $request['email'];
         $user->save();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
-        return view('admin.users.edit',[
-            'user' => $user
-        ]);
+        return redirect(Route('user.index'))
+            ->with('success','ユーザー情報を更新しました。');
     }
 
     /**

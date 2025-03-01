@@ -109,7 +109,7 @@ class TaskController extends Controller
 
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return redirect()->route('project.edit', ['project' => $task->project->id])
-        ->with('success', 'タスクを修正しました。');
+        ->with('success', 'タスクを更新しました。');
     }
 
     /**
