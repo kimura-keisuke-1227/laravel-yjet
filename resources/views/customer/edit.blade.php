@@ -73,7 +73,7 @@
 
         <div class="pt-4 px-6">
             @if ($projects->isEmpty())
-                担当プロジェクトなし
+                受注プロジェクトなし
             @else
                 <table class='table table-striped'>
                     <tr>
