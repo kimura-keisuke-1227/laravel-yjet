@@ -63,7 +63,7 @@ class CustomerController extends Controller
     public function edit(Customer $customer)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
-        $projects = ProjectController::summaryProjectData(null,$customer);
+        $projects = ProjectController::summaryProjectData(null,$customer->id);
         $projects = $projects->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('customer.edit',[

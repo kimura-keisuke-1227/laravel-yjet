@@ -256,10 +256,12 @@ class ProjectController extends Controller
 
         if ($user_id) {
             $projects = $projects->where('p.user_id', $user_id);
+            Log::debug(__METHOD__ . '(' . __LINE__ . ') user_id:' . $user_id);
         }
 
         if ($customer_id) {
             $projects = $projects->where('p.customer_id', $customer_id);
+            Log::debug(__METHOD__ . '(' . __LINE__ . ') customer_id:' . $customer_id);
         }
 
         return $projects;
