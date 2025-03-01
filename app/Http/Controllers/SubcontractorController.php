@@ -73,9 +73,14 @@ class SubcontractorController extends Controller
     public function edit(Subcontractor $subcontractor)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        $works = Work::query()
+            ->where(Work::CLM_NAME_OF_OUT_SOURCE_ID,$subcontractor->id)
+            ->orderBy(Work::CLM_NAME_OF_WORK_DATE,'desc')
+            ->get();
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return view('subcontractor.edit',[
-            'subcontractor' => $subcontractor
+            'subcontractor' => $subcontractor,
+            'works' => $works
         ]);
     }
 
