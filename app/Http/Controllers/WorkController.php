@@ -65,7 +65,8 @@ class WorkController extends Controller
      */
     public function show(Work $work)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');       
     }
 
     /**
