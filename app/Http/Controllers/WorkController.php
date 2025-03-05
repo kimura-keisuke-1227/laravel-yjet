@@ -23,6 +23,7 @@ class WorkController extends Controller
     public function index()
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' start!');
+        
         Log::info(__METHOD__ . '(' . __LINE__ . ')' . ' end!');
         return 'hoge';
     }
